@@ -75,7 +75,7 @@
     background-color: #808080;
     text-align: center;
 }
-/* ripple effect*/
+/* ripple effect
 body {
     overflow: hidden;
   }
@@ -102,5 +102,17 @@ body {
       transform: scale(100);
     }
   }
+   */
   
+/* matrix code effect */
+.matrix-code {
+    position: absolute;
+    color: #00ff41;
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 20px;
+    pointer-events: none;
+    opacity: 0.8;
+    user-select: none;
+  }
   

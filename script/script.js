@@ -18,23 +18,45 @@ navLinks.forEach((l) => {
     l.addEventListener('click', () => { new bootstrap.Collapse(menuToggle).toggle() })
 })
 
-//Adding ripple effect on mouse move.
+// //Adding ripple effect on mouse move.
+// document.addEventListener('mousemove', function (event) {
+//     // Create a ripple element
+//     const ripple = document.createElement('div');
+//     ripple.classList.add('ripple');
+  
+//     // Set ripple element's position
+//     ripple.style.left = `${event.clientX}px`;
+//     ripple.style.top = `${event.clientY}px`;
+  
+//     // Add the ripple element to the DOM
+//     document.body.appendChild(ripple);
+  
+//     // Remove the ripple element after the animation ends
+//     setTimeout(() => {
+//       ripple.remove();
+//     }, 2000);
+//   });
+
+//MAtrix code effect
+const matrixChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890';
+const matrixLength = matrixChars.length;
+
+function randomMatrixChar() {
+  return matrixChars[Math.floor(Math.random() * matrixLength)];
+}
+
 document.addEventListener('mousemove', function (event) {
-    // Create a ripple element
-    const ripple = document.createElement('div');
-    ripple.classList.add('ripple');
-  
-    // Set ripple element's position
-    ripple.style.left = `${event.clientX}px`;
-    ripple.style.top = `${event.clientY}px`;
-  
-    // Add the ripple element to the DOM
-    document.body.appendChild(ripple);
-  
-    // Remove the ripple element after the animation ends
-    setTimeout(() => {
-      ripple.remove();
-    }, 2000);
-  });
-  
+  const matrixCode = document.createElement('span');
+  matrixCode.classList.add('matrix-code');
+  matrixCode.innerText = randomMatrixChar();
+  matrixCode.style.left = `${event.clientX}px`;
+  matrixCode.style.top = `${event.clientY}px`;
+
+  document.body.appendChild(matrixCode);
+
+  setTimeout(() => {
+    matrixCode.remove();
+  }, 800);
+});
+
   
