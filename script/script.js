@@ -77,15 +77,24 @@ const codeSamples = [
     return codeSamples[Math.floor(Math.random() * codeSamples.length)];
   }
   
-  document.addEventListener("mousemove", function (event) {
-    const codeLine = document.createElement("span");
-    codeLine.classList.add("matrix-code");
+  document.addEventListener('mousemove', function (event) {
+    // Create a ripple element
+    const ripple = document.createElement('div');
+    ripple.classList.add('ripple');
+    ripple.style.left = `${event.clientX}px`;
+    ripple.style.top = `${event.clientY}px`;
+    document.body.appendChild(ripple);
+    setTimeout(() => {
+      ripple.remove();
+    }, 2000);
+  
+    // Create a code line element
+    const codeLine = document.createElement('span');
+    codeLine.classList.add('matrix-code');
     codeLine.innerText = randomCodeLine();
     codeLine.style.left = `${event.clientX}px`;
     codeLine.style.top = `${event.clientY}px`;
-  
     document.body.appendChild(codeLine);
-  
     setTimeout(() => {
       codeLine.remove();
     }, 800);
