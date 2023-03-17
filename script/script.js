@@ -86,7 +86,7 @@ const codeSamples = [
     document.body.appendChild(ripple);
     setTimeout(() => {
       ripple.remove();
-    }, 2000);
+    }, 500);
   
     // Create a code line element
     const codeLine = document.createElement('span');
@@ -97,7 +97,7 @@ const codeSamples = [
     document.body.appendChild(codeLine);
     setTimeout(() => {
       codeLine.remove();
-    }, 800);
+    }, 200);
   });
   
   
