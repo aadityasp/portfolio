@@ -41,11 +41,10 @@ document.getElementById('contact-form').addEventListener('submit', function(even
     from_email: fromEmail,
     subject: subject,
     message: message,
-  })
-  .then(function(response) {
+  }).then(function(response) {
     alert('Your message has been sent!');
   }, function(error) {
-    alert('Failed to send the message. ' + error);
+    alert('Failed to send the message. ' + JSON.stringify(error));
   });
 });
 
