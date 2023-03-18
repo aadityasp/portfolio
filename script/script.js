@@ -21,34 +21,34 @@ navLinks.forEach((l) => {
 //emailjs
 // Replace 'your_user_id' with your EmailJS User ID
 emailjs.init('ghT20476Zcl43zo1U');
-
-//code to handle form submission
+// code to handle form submission
 document.getElementById('contact-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-  
-    // Replace these values with your Service ID and Template ID
-    const serviceID = 'service_yvg59sy';
-    const templateID = 'template_9boqmz2';
-  
-    // Get form data
-    const fromName = document.querySelector('input[name="name"]').value;
-    const fromEmail = document.querySelector('input[name="email"]').value;
-    const subject = document.querySelector('input[name="subject"]').value;
-    const message = document.querySelector('textarea[name="message"]').value;
-  
-    // Send the email using EmailJS
-    emailjs.send(serviceID, templateID, {
-      from_name: fromName,
-      from_email: fromEmail,
-      subject: subject,
-      message: message,
-    })
-    .then(function(response) {
-      alert('Your message has been sent!');
-    }, function(error) {
-      alert('Failed to send the message. ' + error);
-    });
+  event.preventDefault();
+
+  // Replace these values with your Service ID and Template ID
+  const serviceID = 'service_yvg59sy';
+  const templateID = 'template_9boqmz2';
+
+  // Get form data
+  const fromName = document.querySelector('input[name="name"]').value;
+  const fromEmail = document.querySelector('input[name="email"]').value;
+  const subject = document.querySelector('input[name="subject"]').value;
+  const message = document.querySelector('textarea[name="message"]').value;
+
+  // Send the email using EmailJS
+  emailjs.send(serviceID, templateID, {
+    from_name: fromName,
+    from_email: fromEmail,
+    subject: subject,
+    message: message,
+  })
+  .then(function(response) {
+    alert('Your message has been sent!');
+  }, function(error) {
+    alert('Failed to send the message. ' + error);
   });
+});
+
   
 
 const codeSamples = [
