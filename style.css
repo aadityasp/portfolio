@@ -544,6 +544,11 @@ body {
     margin-top: auto;
 }
 
+/* Sensorium image - adjust position to show person */
+.sensorium-img {
+    object-position: center top;
+}
+
 /* ---------- Timeline Styles ---------- */
 .timeline {
     position: relative;
