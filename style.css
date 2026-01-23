@@ -3,6 +3,12 @@
     background-color: black;
 }
 
+/* Navbar text shadow for readability over hero image */
+.navbar-dark .nav-link,
+.navbar-dark .navbar-brand {
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
 /* hero background image */
 .bgimage {
     height:100vh;
@@ -10,12 +16,27 @@
     background-size:cover;
     position:relative;
 }
+
+/* Dark overlay for better text readability */
+.bgimage::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
 /* text css above hero image*/
 .hero_title {
     font-size: 4.5rem;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
 }
 .hero_desc {
     font-size: 2rem;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
 }
 .hero-text {
     text-align: center;
@@ -24,6 +45,11 @@
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;
+    z-index: 2;
+}
+
+.hero-subtitle {
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
 }
 
 /* spacing on all sections */
