@@ -673,6 +673,12 @@ body {
     object-fit: cover;
 }
 
+.company-logo-wide {
+    height: 40px;
+    width: auto;
+    max-width: 150px;
+}
+
 .company-logo-placeholder {
     width: 50px;
     height: 50px;
@@ -925,12 +931,14 @@ body {
     flex-shrink: 0;
 }
 
-.cert-icon.google {
+.cert-icon.google,
+.cert-icon.scrum {
     background: white;
-    padding: 10px;
+    padding: 5px;
 }
 
-.cert-icon.google img {
+.cert-icon.google img,
+.cert-icon.scrum img {
     width: 100%;
     height: 100%;
     object-fit: contain;
