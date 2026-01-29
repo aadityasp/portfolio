@@ -1031,6 +1031,23 @@ body {
     background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%) !important;
 }
 
+/* Ensure all sections have solid backgrounds so dark contact canvas doesn't bleed through */
+#about, #portfolio, #certifications {
+    background: #fff;
+    position: relative;
+    z-index: 1;
+}
+
+#experience, #skills {
+    position: relative;
+    z-index: 1;
+}
+
+#footer {
+    position: relative;
+    z-index: 1;
+}
+
 /* ---------- Logo Image Fix ---------- */
 .logo-img {
     width: 50px;
@@ -1083,5 +1100,264 @@ body {
     .about-image {
         width: 200px;
         height: 200px;
+    }
+
+}
+
+/* ---------- Contact Section (Dark + Canvas Art) ---------- */
+.contact-section-dark {
+    background: #08080c;
+}
+
+/* --- Interactive canvas zone --- */
+.canvas-zone {
+    position: relative;
+    width: 100%;
+    height: 420px;
+    overflow: hidden;
+    cursor: crosshair;
+}
+
+#contact-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.canvas-quote {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.quote-text {
+    font-size: 1rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.25);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+}
+
+.quote-hint {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.15);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: opacity 0.5s;
+}
+
+.canvas-zone:hover .quote-hint {
+    opacity: 0;
+}
+
+/* --- Contact content below canvas (light theme) --- */
+.contact-content-light {
+    background: #fff;
+    position: relative;
+    z-index: 1;
+}
+
+@media (max-width: 768px) {
+    .canvas-zone {
+        height: 280px;
+    }
+    .quote-text {
+        font-size: 0.8rem;
+        letter-spacing: 2px;
+    }
+}
+
+/* --- Dark contact info cards --- */
+.contact-card-dark {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.contact-card-dark i {
+    color: rgba(32, 201, 151, 0.7) !important;
+}
+
+.contact-card-dark h5 {
+    color: rgba(255, 255, 255, 0.4) !important;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.contact-card-dark p {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.contact-card-dark a {
+    color: rgba(32, 201, 151, 0.8) !important;
+}
+
+.contact-card-dark a:hover {
+    color: #20c997 !important;
+}
+
+.contact-card-dark:hover {
+    transform: translateX(5px);
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-color: rgba(32, 201, 151, 0.15);
+}
+
+/* --- Dark glass form --- */
+.contact-form-dark {
+    background: rgba(255, 255, 255, 0.03) !important;
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5) !important;
+}
+
+.contact-form-dark .form-control {
+    background: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    color: #fff !important;
+    border-radius: 8px;
+    transition: all 0.25s ease;
+}
+
+.contact-form-dark .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.contact-form-dark .form-control:focus {
+    border-color: rgba(32, 201, 151, 0.4) !important;
+    box-shadow: 0 0 0 2px rgba(32, 201, 151, 0.1) !important;
+    background: rgba(255, 255, 255, 0.06) !important;
+}
+
+.contact-form-dark .form-floating label {
+    color: rgba(255, 255, 255, 0.35);
+}
+
+.contact-form-dark .form-floating .form-control:focus ~ label,
+.contact-form-dark .form-floating .form-control:not(:placeholder-shown) ~ label {
+    color: rgba(32, 201, 151, 0.8);
+    background: transparent;
+}
+
+.contact-form-dark .btn-success {
+    background: linear-gradient(135deg, rgba(40, 167, 69, 0.8), rgba(32, 201, 151, 0.8));
+    border: 1px solid rgba(32, 201, 151, 0.2);
+    box-shadow: 0 4px 20px rgba(32, 201, 151, 0.2);
+    transition: all 0.3s ease;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.contact-form-dark .btn-success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(32, 201, 151, 0.35);
+    background: linear-gradient(135deg, #28a745, #20c997);
+}
+
+/* --- Small map container --- */
+.map-container-small {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+/* ---------- Certification line above Get In Touch ---------- */
+.cert-more-line {
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.cert-more-line-light {
+    color: #6c757d;
+}
+
+.cert-more-trigger-light {
+    color: #28a745;
+    border-bottom-color: rgba(40, 167, 69, 0.4);
+}
+
+.cert-more-trigger-light:hover {
+    color: #20c997;
+}
+
+/* ---------- "& 14 more" Certification Tooltip ---------- */
+.cert-more-trigger {
+    position: relative;
+    color: #20c997;
+    cursor: pointer;
+    border-bottom: 1px dashed rgba(32, 201, 151, 0.5);
+    transition: color 0.3s ease;
+}
+
+.cert-more-trigger:hover {
+    color: #28a745;
+}
+
+.cert-more-tooltip {
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(10, 10, 14, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(32, 201, 151, 0.2);
+    border-radius: 12px;
+    padding: 1rem 1.2rem;
+    min-width: 280px;
+    max-width: 340px;
+    z-index: 100;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+}
+
+.cert-more-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 8px solid transparent;
+    border-top-color: rgba(32, 201, 151, 0.2);
+}
+
+.cert-more-trigger:hover .cert-more-tooltip {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.cert-more-tooltip span {
+    display: block;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.7);
+    padding: 0.25rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    letter-spacing: 0.5px;
+    text-shadow: none;
+    white-space: nowrap;
+}
+
+.cert-more-tooltip span:last-child {
+    border-bottom: none;
+}
+
+@media (max-width: 768px) {
+    .cert-more-tooltip {
+        min-width: 220px;
+        left: 0;
+        transform: none;
+    }
+    .cert-more-tooltip::after {
+        left: 30px;
     }
 }

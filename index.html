@@ -488,85 +488,90 @@
                             </div>
                         </div>
                     </div>
+                    <p class="cert-more-line animate-on-scroll"><span class="cert-more-trigger">&amp; 14 more<span class="cert-more-tooltip"><span>AI-First Product Leader</span><span>Transformers for Computer Vision</span><span>Learning REST APIs</span><span>Camera &amp; Imaging (Computer Vision)</span><span>AWS Machine Learning</span><span>Visual Perception (Computer Vision)</span><span>AI Foundations: Machine Learning</span><span>Convolutional Neural Networks</span><span>Improving Deep Neural Networks</span><span>Structuring ML Projects</span><span>Neural Networks &amp; Deep Learning</span><span>Complete Python Bootcamp</span><span>Ethical Hacking</span><span>IP Addressing &amp; Subnetting</span></span></span></p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- contact section -->
-    <section id="contact" class="bg-light-custom">
-        <div class="container mt-3 pt-4 pb-4 contactContent">
-            <h1 class="text-center section-title">Get In Touch</h1>
-            <p class="text-center section-subtitle">Let's discuss how I can help with your product</p>
-            <p class="text-center section-subtitle" style="margin-top: -0.5rem;">It Works! Shoot me a message :)</p>
+    <section id="contact" class="contact-section-dark">
+        <!-- Interactive Art Zone -->
+        <div class="canvas-zone">
+            <canvas id="contact-canvas"></canvas>
+            <div class="canvas-quote">
+                <p class="quote-text">Build things. Break things. Ship things.</p>
+                <p class="quote-hint">move your cursor to interact</p>
+            </div>
+        </div>
 
-            <div class="row mt-4">
-                <div class="col-lg-6">
-                    <!-- Contact Info Cards -->
-                    <div class="contact-info-cards">
-                        <div class="contact-card animate-on-scroll">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div>
-                                <h5>Location</h5>
-                                <p>Huntsville, AL</p>
+        <!-- Contact Content (Light Theme) -->
+        <div class="contact-content-light">
+            <div class="container py-5">
+                <h1 class="text-center section-title animate-on-scroll">Get In Touch</h1>
+                <p class="text-center section-subtitle animate-on-scroll">Let's build something great together</p>
+
+                <div class="row mt-4">
+                    <div class="col-lg-5">
+                        <div class="contact-info-cards">
+                            <div class="contact-card animate-on-scroll">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div>
+                                    <h5>Location</h5>
+                                    <p>Huntsville, AL</p>
+                                </div>
+                            </div>
+                            <div class="contact-card animate-on-scroll">
+                                <i class="fas fa-envelope"></i>
+                                <div>
+                                    <h5>Email</h5>
+                                    <p>aadityasp@gmail.com</p>
+                                </div>
+                            </div>
+                            <div class="contact-card animate-on-scroll">
+                                <i class="fas fa-phone"></i>
+                                <div>
+                                    <h5>Phone</h5>
+                                    <p>(256) 520-6671</p>
+                                </div>
+                            </div>
+                            <div class="contact-card animate-on-scroll">
+                                <i class="fab fa-linkedin"></i>
+                                <div>
+                                    <h5>LinkedIn</h5>
+                                    <a href="https://linkedin.com/in/aadityasp" target="_blank">linkedin.com/in/aadityasp</a>
+                                </div>
                             </div>
                         </div>
-                        <div class="contact-card animate-on-scroll">
-                            <i class="fas fa-envelope"></i>
-                            <div>
-                                <h5>Email</h5>
-                                <p>aadityasp@gmail.com</p>
-                            </div>
-                        </div>
-                        <div class="contact-card animate-on-scroll">
-                            <i class="fas fa-phone"></i>
-                            <div>
-                                <h5>Phone</h5>
-                                <p>(256) 520-6671</p>
-                            </div>
-                        </div>
-                        <div class="contact-card animate-on-scroll">
-                            <i class="fab fa-linkedin"></i>
-                            <div>
-                                <h5>LinkedIn</h5>
-                                <a href="https://linkedin.com/in/aadityasp" target="_blank">linkedin.com/in/aadityasp</a>
-                            </div>
+                        <!-- Small Map -->
+                        <div class="map-container map-container-small mt-3 animate-on-scroll">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d207478.26828815847!2d-86.78246!3d34.71454!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88626b67618e1de7%3A0x9fa2e7e9f6d2a6b6!2sHuntsville%2C%20AL!5e0!3m2!1sen!1sus!4v1" width="100%" height="160" style="border:0; border-radius: 12px;" allowfullscreen="" loading="lazy"></iframe>
                         </div>
                     </div>
 
-                    <!-- Google Maps - Huntsville -->
-                    <div class="map-container mt-4">
-                        <iframe
-                            style="height:250px;width:100%;border:0;border-radius:10px;"
-                            frameborder="0"
-                            src="https://www.google.com/maps?q=Huntsville,+AL,+USA&output=embed">
-                        </iframe>
+                    <div class="col-lg-7">
+                        <form id="contact-form" class="contact-form animate-on-scroll">
+                            <div class="form-floating mb-3">
+                                <input type="text" name="name" class="form-control" id="floatingName" placeholder="Name" required>
+                                <label for="floatingName">Your Name</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="email" name="email" class="form-control" id="floatingEmail" placeholder="Email" required>
+                                <label for="floatingEmail">Email Address</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" name="subject" class="form-control" id="floatingSubject" placeholder="Subject">
+                                <label for="floatingSubject">Subject</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <textarea class="form-control" name="message" id="floatingMessage" placeholder="Message" style="height: 150px" required></textarea>
+                                <label for="floatingMessage">Your Message</label>
+                            </div>
+                            <button type="submit" class="btn btn-success btn-lg w-100">
+                                <i class="fas fa-paper-plane me-2"></i>Send Message
+                            </button>
+                        </form>
                     </div>
-                </div>
-
-                <div class="col-lg-6">
-                    <!-- Contact Form -->
-                    <form id="contact-form" class="contact-form animate-on-scroll">
-                        <div class="form-floating mb-3">
-                            <input type="text" name="name" class="form-control" id="floatingName" placeholder="Name" required>
-                            <label for="floatingName">Your Name</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="email" name="email" class="form-control" id="floatingEmail" placeholder="Email" required>
-                            <label for="floatingEmail">Email Address</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="text" name="subject" class="form-control" id="floatingSubject" placeholder="Subject">
-                            <label for="floatingSubject">Subject</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <textarea class="form-control" name="message" id="floatingMessage" placeholder="Message" style="height: 150px" required></textarea>
-                            <label for="floatingMessage">Your Message</label>
-                        </div>
-                        <button type="submit" class="btn btn-success btn-lg w-100">
-                            <i class="fas fa-paper-plane me-2"></i>Send Message
-                        </button>
-                    </form>
                 </div>
             </div>
         </div>
