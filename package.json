@@ -8,7 +8,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview --port 8765",
-    "deploy": "vite build && gh-pages -d dist -b gh-pages -t true"
+    "deploy": "vite build && gh-pages -d dist -b gh-pages --dotfiles"
   },
   "dependencies": {
     "framer-motion": "^11.11.0",
