@@ -14,8 +14,8 @@ export default function Signature() {
   useEffect(() => {
     if (!inView) return
     const controls = animate(count, TARGET, {
-      duration: 2.8,
-      ease: [0.16, 1, 0.3, 1],
+      duration: 6,
+      ease: [0.1, 0.7, 0.2, 1], // strong deceleration so the last stretch is readable
       onComplete: () => setDone(true),
     })
     return () => controls.stop()

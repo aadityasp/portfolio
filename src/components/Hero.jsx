@@ -25,7 +25,7 @@ export default function Hero() {
               <span className="absolute inline-flex w-full h-full rounded-full bg-accent animate-pulseDot" />
               <span className="relative inline-flex w-2.5 h-2.5 rounded-full bg-accent" />
             </span>
-            <span className="eyebrow text-soft">Product Manager &middot; AI Builder</span>
+            <span className="eyebrow text-soft">AI Product Manager who ships</span>
           </motion.div>
 
           <h1 className="display font-medium leading-[0.95] text-[clamp(2.5rem,6.5vw,5rem)] text-ink">
@@ -44,8 +44,8 @@ export default function Hero() {
             initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.45, ease }}
             className="mt-7 max-w-lg text-lg text-soft leading-relaxed"
           >
-            Product manager at CStoreIQ with an MS in AI. I ship across retail, health and
-            fintech, AI-first. Most of this took days, not months.
+            Product manager at CStoreIQ with an MS in AI. I turn ideas into shipped products
+            in days across retail, health and fintech, then bring the metrics.
           </motion.p>
 
           <motion.div

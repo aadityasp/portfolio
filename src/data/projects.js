@@ -161,32 +161,9 @@ export const research = [
   },
 ]
 
-export const enterprise = [
-  {
-    name: 'Loyalty Server',
-    desc: 'Led an AI-driven Python to Go rewrite with parity verification, 74 commits.',
-    stack: 'Go, Python',
-  },
-  {
-    name: 'Fiscal Back-Office',
-    desc: 'Entity Framework query-batching performance work across .NET services.',
-    stack: 'Angular, C#/.NET',
-  },
-  {
-    name: '.NET Microservices (20+)',
-    desc: 'Auth, Invoice, Lottery, Fuel, Report and Sync services for the platform.',
-    stack: 'C#, .NET 6',
-  },
-  {
-    name: 'CStoreIQ Mobile',
-    desc: 'Mobile POS with offline data, Bluetooth peripherals and barcode capture.',
-    stack: 'React Native, Realm',
-  },
-]
-
 export const stats = [
-  { value: '17+', label: 'Products shipped' },
-  { value: '2 to 5 days', label: 'Typical build' },
-  { value: '6+', label: 'Domains' },
-  { value: 'AI-first', label: 'Always' },
+  { value: '$700K', label: 'New revenue influenced at CStoreIQ' },
+  { value: '17+', label: 'Products shipped, idea to live' },
+  { value: '2 to 5 days', label: 'From idea to working build' },
+  { value: 'MS in AI', label: 'Northeastern University' },
 ]

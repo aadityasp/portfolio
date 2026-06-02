@@ -18,15 +18,16 @@ export default function About() {
           <Reveal>
             <p className="eyebrow text-accent mb-3">About</p>
             <h2 className="display text-3xl sm:text-5xl font-semibold tracking-tight text-ink leading-[1.05]">
-              A product manager who ships the code.
+              An AI PM who actually ships.
             </h2>
             <div className="text-soft mt-6 space-y-4 text-lg leading-relaxed">
               <p>
-                Engineer turned product manager. I lead product at CStoreIQ, and I still
-                build the thing myself, AI-first.
+                MS in AI, product manager at CStoreIQ. I don’t wait for engineering capacity
+                to prove an idea. I prototype it, ship it, measure it, and bring the data.
               </p>
               <p>
-                Give me a problem and a weekend, and you’ll usually get a working product back.
+                That’s how 15+ features and $700K in new revenue happened, and how the
+                projects on this page went from idea to working product in days.
               </p>
             </div>
           </Reveal>
