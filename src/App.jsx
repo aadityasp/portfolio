@@ -5,6 +5,7 @@ import Projects from './components/Projects'
 import Timeline from './components/Timeline'
 import Enterprise from './components/Enterprise'
 import About from './components/About'
+import Signature from './components/Signature'
 import Contact from './components/Contact'
 
 export default function App() {
@@ -18,6 +19,7 @@ export default function App() {
         <Timeline />
         <Enterprise />
         <About />
+        <Signature />
         <Contact />
       </main>
     </div>
