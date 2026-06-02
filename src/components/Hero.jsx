@@ -1,83 +1,70 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
-import { ArrowDown, Github, Mail } from 'lucide-react'
+import { ArrowDown } from 'lucide-react'
+import { MaskText } from './Reveal'
 
 const ease = [0.22, 1, 0.36, 1]
 
 export default function Hero() {
   const ref = useRef(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
-  const y = useTransform(scrollYProgress, [0, 1], [0, 140])
-  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0])
+  const y = useTransform(scrollYProgress, [0, 1], [0, 120])
+  const opacity = useTransform(scrollYProgress, [0, 0.85], [1, 0])
 
   return (
-    <section id="top" ref={ref} className="relative min-h-[100svh] flex items-center bg-aurora overflow-hidden">
-      {/* floating orbs */}
-      <motion.div style={{ y }} className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-24 left-[8%] w-72 h-72 rounded-full bg-accent/20 blur-3xl animate-float" />
-        <div className="absolute top-1/3 right-[6%] w-80 h-80 rounded-full bg-glow/15 blur-3xl animate-float" style={{ animationDelay: '1.5s' }} />
-      </motion.div>
-
-      <motion.div style={{ opacity }} className="relative max-w-content mx-auto px-5 sm:px-8 w-full pt-28 pb-20">
-        <motion.p
-          initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease }}
-          className="font-mono text-sm text-glow mb-5 flex items-center gap-2"
+    <section id="top" ref={ref} className="relative min-h-[100svh] flex items-center">
+      <motion.div style={{ y, opacity }} className="relative max-w-content mx-auto px-5 sm:px-8 w-full pt-32 pb-24">
+        <motion.div
+          initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease }}
+          className="flex items-center gap-2.5 mb-8"
         >
-          <span className="inline-block w-2 h-2 rounded-full bg-glow animate-pulse" />
-          Aditya Sri Prasad — building, AI-first
-        </motion.p>
+          <span className="relative flex w-2.5 h-2.5">
+            <span className="absolute inline-flex w-full h-full rounded-full bg-accent animate-pulseDot" />
+            <span className="relative inline-flex w-2.5 h-2.5 rounded-full bg-accent" />
+          </span>
+          <span className="eyebrow text-soft">Product Manager &middot; AI Builder &middot; Huntsville, AL</span>
+        </motion.div>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.05, ease }}
-          className="font-display font-bold leading-[0.98] tracking-tight text-[clamp(2.6rem,8vw,6rem)]"
-        >
-          I ship full products
-          <br />
-          <span className="text-gradient">in days, not months.</span>
-        </motion.h1>
+        <h1 className="display font-medium leading-[0.94] text-[clamp(2.7rem,8.5vw,7rem)] text-ink">
+          <MaskText lines={['I design products', 'and build them']} />
+          <span className="mask-line">
+            <motion.span
+              initial={{ y: '115%' }} animate={{ y: 0 }} transition={{ duration: 0.7, delay: 0.3, ease }}
+              className="block italic text-accent"
+            >
+              myself.
+            </motion.span>
+          </span>
+        </h1>
 
         <motion.p
-          initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.15, ease }}
-          className="mt-7 max-w-2xl text-lg sm:text-xl text-muted leading-relaxed"
+          initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.45, ease }}
+          className="mt-9 max-w-2xl text-lg sm:text-xl text-soft leading-relaxed"
         >
-          AI product engineer working across retail, healthcare, fintech and consumer.
-          POS systems, loyalty platforms, medical AI, trading engines — end to end,
-          design through deploy.
+          I’m a product manager at{' '}
+          <a className="link-accent" href="#timeline">CStoreIQ</a> with an MS in AI from
+          Northeastern. I work across retail, healthcare and fintech, and I ship the code
+          myself, AI-first. Most of what you’ll see here went from idea to working build in
+          a few days.
         </motion.p>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.25, ease }}
-          className="mt-10 flex flex-wrap items-center gap-4"
+          initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.55, ease }}
+          className="mt-11 flex flex-wrap items-center gap-x-8 gap-y-3 font-mono text-sm text-soft"
         >
-          <a href="#work"
-            className="group rounded-full bg-white text-ink font-medium px-6 py-3 flex items-center gap-2 hover:bg-accent hover:text-white transition-colors">
-            View the work
-            <ArrowDown size={18} className="group-hover:translate-y-0.5 transition-transform" />
+          <a href="#work" className="group inline-flex items-center gap-2 text-ink hover:text-accent transition-colors">
+            See the work
+            <ArrowDown size={16} className="group-hover:translate-y-0.5 transition-transform" />
           </a>
-          <a href="mailto:aadityasp@gmail.com"
-            className="rounded-full glass px-6 py-3 flex items-center gap-2 hover:border-white/30 transition-colors">
-            <Mail size={18} /> Get in touch
-          </a>
-          <a href="https://github.com/aadityasp" target="_blank" rel="noreferrer"
-            className="rounded-full glass p-3 hover:border-white/30 transition-colors" aria-label="GitHub">
-            <Github size={18} />
-          </a>
+          <a href="mailto:aadityasp@gmail.com" className="hover:text-ink transition-colors">aadityasp@gmail.com</a>
+          <a href="https://github.com/aadityasp" target="_blank" rel="noreferrer" className="hover:text-ink transition-colors">github.com/aadityasp</a>
         </motion.div>
       </motion.div>
 
-      <motion.a
-        href="#work"
-        style={{ opacity }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-muted"
-        initial={{ y: 0 }} animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 2 }}
-        aria-label="Scroll"
-      >
-        <ArrowDown size={22} />
-      </motion.a>
+      <motion.div style={{ opacity }} className="absolute bottom-7 left-1/2 -translate-x-1/2 text-faint"
+        initial={{ y: 0 }} animate={{ y: [0, 7, 0] }} transition={{ repeat: Infinity, duration: 2 }}>
+        <ArrowDown size={20} />
+      </motion.div>
     </section>
   )
 }
