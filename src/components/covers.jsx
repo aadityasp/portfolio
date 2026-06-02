@@ -114,7 +114,31 @@ function InviteCover() {
   )
 }
 
-const COVERS = { trading: TradingCover, invoice: InvoiceCover, storybook: StorybookCover, graph: GraphCover, invite: InviteCover }
+function ScribeCover() {
+  const bars = [44, 56, 30, 70, 40, 84, 50, 64, 34, 74, 46]
+  return (
+    <Frame tint="#E9ECFA">
+      {/* voice waveform */}
+      <g>
+        {bars.map((h, i) => (
+          <rect key={i} x={40 + i * 9} y={100 - h / 2} width="4" height={h} rx="2"
+            fill={i % 3 === 0 ? AC : INK} opacity={i % 3 === 0 ? 0.9 : 0.55} />
+        ))}
+      </g>
+      <path d="M150 100 H184" stroke={AC} strokeWidth="3" strokeDasharray="2 6" strokeLinecap="round" />
+      <path d="M178 92 l10 8 l-10 8" fill="none" stroke={AC} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+      {/* clinical note card */}
+      <rect x="198" y="50" width="84" height="100" rx="8" fill="#fff" stroke={INK} strokeOpacity="0.12" />
+      <circle cx="214" cy="68" r="6" fill="none" stroke={AC} strokeWidth="2" />
+      <path d="M211 68 h6 M214 65 v6" stroke={AC} strokeWidth="1.6" strokeLinecap="round" />
+      {[86, 98, 110, 122, 134].map((y, i) => (
+        <rect key={y} x="210" y={y} width={i % 2 ? 44 : 60} height="3.5" rx="2" fill={INK} opacity="0.25" />
+      ))}
+    </Frame>
+  )
+}
+
+const COVERS = { trading: TradingCover, invoice: InvoiceCover, storybook: StorybookCover, graph: GraphCover, invite: InviteCover, scribe: ScribeCover }
 
 export default function Cover({ variant }) {
   const C = COVERS[variant] || TradingCover

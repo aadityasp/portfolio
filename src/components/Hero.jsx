@@ -67,9 +67,10 @@ export default function Hero() {
           >
             <div className="absolute -inset-3 sm:-inset-4 rounded-[28px] bg-accent/12 rotate-3" />
             <img
-              src="/images/aditya_portrait.jpg"
+              src="/images/aditya_hero.jpg"
               alt="Aditya Sri Prasad"
-              className="relative w-full rounded-[24px] object-cover border border-line shadow-[0_24px_60px_rgba(25,21,16,0.18)] aspect-[3/4]"
+              style={{ objectPosition: '58% 22%' }}
+              className="relative w-full rounded-[24px] object-cover border border-line shadow-[0_24px_60px_rgba(25,21,16,0.18)] aspect-[4/5]"
             />
             <div className="absolute -bottom-4 -left-3 sm:-left-4 bg-paper border border-line rounded-2xl px-4 py-2.5 shadow-[0_10px_30px_rgba(25,21,16,0.12)]">
               <span className="font-mono text-[11px] text-soft">Hi, I’m</span>

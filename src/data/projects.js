@@ -45,7 +45,7 @@ export const featured = [
     stack: ['Next.js', 'FastAPI', 'Sarvam AI', 'GPT-4o'],
     status: 'Prototype',
     badge: 'Healthcare AI',
-    cover: { type: 'icon', src: '/images/heal_icon.png' },
+    cover: { type: 'svg', variant: 'scribe' },
     links: [{ label: 'GitHub', href: 'https://github.com/aadityasp/ai-medical-scribe' }],
   },
 ]
