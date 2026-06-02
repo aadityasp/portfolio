@@ -39,14 +39,14 @@ export const featured = [
   },
   {
     id: 'heal',
-    name: 'HEAL.AI Clinical Scribe',
+    name: 'AI Clinical Scribe',
     tagline: 'Ambient medical scribe',
     blurb: 'Turns code-mixed doctor visits into FHIR clinical notes the doctor reviews and signs.',
     stack: ['Next.js', 'FastAPI', 'Sarvam AI', 'GPT-4o'],
-    status: 'Prototype',
+    status: 'Live demo',
     badge: 'Healthcare AI',
     cover: { type: 'svg', variant: 'scribe' },
-    links: [{ label: 'GitHub', href: 'https://github.com/aadityasp/ai-medical-scribe' }],
+    links: [{ label: 'View live', href: 'https://heal-ai.vercel.app/' }, { label: 'GitHub', href: 'https://github.com/aadityasp/ai-medical-scribe' }],
   },
 ]
 
