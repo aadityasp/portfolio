@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import { featured, apps, research } from '../data/projects'
 import Media from './Media'
-import Reveal, { stagger, item } from './Reveal'
+import Reveal, { Parallax, stagger, item } from './Reveal'
 
 function Tag({ children }) {
   return (
@@ -95,8 +95,12 @@ export default function Projects() {
       <div className="max-w-content mx-auto px-5 sm:px-8">
         <Head kicker="Selected work" title="Flagship builds"
           sub="The big ones: a production retail POS, a loyalty platform, fintech automation, and clinical AI." />
-        <div className="grid md:grid-cols-2 gap-6">
-          {featured.map((p, i) => <FeaturedCard key={p.id} p={p} i={i} />)}
+        <div className="grid md:grid-cols-2 gap-6 items-start">
+          {featured.map((p, i) => (
+            <Parallax key={p.id} speed={i % 2 === 0 ? 26 : -14} className="h-full">
+              <FeaturedCard p={p} i={i} />
+            </Parallax>
+          ))}
         </div>
 
         <div className="mt-24">

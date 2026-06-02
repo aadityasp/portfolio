@@ -1,7 +1,19 @@
-import { motion, useSpring } from 'framer-motion'
+import { motion, useSpring, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
 
 const ease = [0.22, 1, 0.36, 1]
+
+// Scroll-linked vertical drift. `speed` in px of total travel across the viewport pass.
+export function Parallax({ children, speed = 40, className = '' }) {
+  const ref = useRef(null)
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
+  const y = useTransform(scrollYProgress, [0, 1], [speed, -speed])
+  return (
+    <motion.div ref={ref} style={{ y }} className={className}>
+      {children}
+    </motion.div>
+  )
+}
 
 // Fade + lift into view, once.
 export default function Reveal({ children, delay = 0, y = 24, className = '', as = 'div' }) {
