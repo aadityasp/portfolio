@@ -9,8 +9,8 @@ export default function About() {
         <Reveal className="order-2 lg:order-1">
           <div className="relative max-w-[320px] mx-auto lg:mx-0">
             <div className="absolute -inset-3 rounded-3xl bg-accent/10 -rotate-3" />
-            <img src="/images/resized_asp2.png" alt="Aditya Sri Prasad"
-              className="relative rounded-3xl w-full object-cover border border-line shadow-[0_18px_50px_rgba(25,21,16,0.16)]" />
+            <img src="/images/aditya_headshot.jpg" alt="Aditya Sri Prasad"
+              className="relative rounded-3xl w-full aspect-square object-cover border border-line shadow-[0_18px_50px_rgba(25,21,16,0.16)]" />
           </div>
         </Reveal>
 
@@ -22,13 +22,11 @@ export default function About() {
             </h2>
             <div className="text-soft mt-6 space-y-4 text-lg leading-relaxed">
               <p>
-                I started in engineering: autonomous-vehicle simulation at Wipro, then computer
-                vision research and a CV/ML internship while finishing my MS in AI at Northeastern.
+                Engineer turned product manager. I lead product at CStoreIQ, and I still
+                build the thing myself, AI-first.
               </p>
               <p>
-                Now I lead product at CStoreIQ, and I still build. AI-first development lets me go
-                from a problem to a working product in days, across retail, healthcare and fintech.
-                This site is most of that work, in one place.
+                Give me a problem and a weekend, and you’ll usually get a working product back.
               </p>
             </div>
           </Reveal>

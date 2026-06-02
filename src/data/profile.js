@@ -13,9 +13,6 @@ export const experience = [
     points: [
       'Lead product for POS and Back-Office in convenience retail',
       'Shipped 15+ features driving $700K in new revenue',
-      '2x onboarding capacity, support escalations down 30%',
-      'Cut production bugs ~40% with sharper PRDs',
-      'Integrated Verifone Commander, Gilbarco Passport, NCR RPOS',
       'Build production features myself, AI-first',
     ],
     tags: ['Product', 'B2B SaaS', 'Retail Tech', 'AI-first'],
@@ -30,7 +27,6 @@ export const experience = [
     chapter: 'Engineering',
     points: [
       'Built a real-time interaction system for immersive AR/VR',
-      'Reduced end-to-end latency in the video pipeline',
       'Patent-pending metaverse method using pose estimation',
     ],
     tags: ['Computer Vision', 'AR / VR', 'Pose Estimation'],
@@ -45,8 +41,7 @@ export const experience = [
     chapter: 'Engineering',
     points: [
       'Built an autonomous-vehicle simulation platform on CARLA + Unreal Engine 4',
-      'Authored 50+ simulation scenarios for varied driving conditions',
-      'Ran customer demos that secured added program funding',
+      'Authored 50+ driving scenarios; demos secured added funding',
     ],
     tags: ['CARLA', 'Unreal Engine', 'Autonomous Vehicles'],
   },

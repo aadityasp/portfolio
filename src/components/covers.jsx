@@ -98,7 +98,23 @@ function GraphCover() {
   )
 }
 
-const COVERS = { trading: TradingCover, invoice: InvoiceCover, storybook: StorybookCover, graph: GraphCover }
+function InviteCover() {
+  return (
+    <Frame tint="#F2ECE0">
+      {/* layered invitation cards */}
+      <g transform="rotate(-7 160 100)">
+        <rect x="92" y="44" width="136" height="116" rx="8" fill="#fff" stroke={INK} strokeOpacity="0.12" />
+      </g>
+      <rect x="104" y="50" width="112" height="104" rx="8" fill="#fff" stroke={AC} strokeWidth="1.5" />
+      <rect x="116" y="62" width="88" height="80" rx="4" fill="none" stroke={AC} strokeOpacity="0.4" strokeDasharray="1 4" />
+      <path d="M160 92 c-6 -10 -22 -6 -22 6 c0 9 12 16 22 24 c10 -8 22 -15 22 -24 c0 -12 -16 -16 -22 -6 Z" fill={AC} opacity="0.9" />
+      <text x="160" y="78" fontFamily="serif" fontSize="9" fill={INK} textAnchor="middle" letterSpacing="2" opacity="0.6">YOU ARE INVITED</text>
+      <rect x="132" y="128" width="56" height="3" rx="1.5" fill={INK} opacity="0.25" />
+    </Frame>
+  )
+}
+
+const COVERS = { trading: TradingCover, invoice: InvoiceCover, storybook: StorybookCover, graph: GraphCover, invite: InviteCover }
 
 export default function Cover({ variant }) {
   const C = COVERS[variant] || TradingCover
