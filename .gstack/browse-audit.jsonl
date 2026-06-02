@@ -1,0 +1,3 @@
+{"ts":"2026-06-02T02:57:47.486Z","cmd":"goto","args":"http://localhost:8765/","origin":"http://localhost:8765/","durationMs":556,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-06-02T02:57:47.610Z","cmd":"js","args":"document.querySelectorAll('.animate-on-scroll').forEach(e=>{e.style.opacity=1;e.style.transform='none'})","origin":"http://localhost:8765/","durationMs":2,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-06-02T02:57:48.195Z","cmd":"screenshot","args":"--selector #portfolio /tmp/portfolio_v2.png","origin":"http://localhost:8765/","durationMs":496,"status":"ok","hasCookies":false,"mode":"launched"}
