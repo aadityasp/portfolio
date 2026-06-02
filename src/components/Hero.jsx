@@ -87,7 +87,7 @@ export default function Hero() {
             <div className="absolute -inset-3 sm:-inset-4 rounded-[28px] bg-accent/12 rotate-3" />
             <img
               src="/images/aditya_hero.jpg"
-              alt="Aditya Sri Prasad"
+              alt="Aditya Appana"
               style={{ objectPosition: '58% 22%' }}
               className="relative w-full rounded-[24px] object-cover border border-line shadow-[0_24px_60px_rgba(25,21,16,0.18)] aspect-[4/5]"
             />

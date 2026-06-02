@@ -30,7 +30,7 @@ export default function Nav() {
     >
       <nav className="max-w-content mx-auto px-5 sm:px-8 flex items-center justify-between">
         <a href="#top" className="font-display text-lg font-semibold tracking-tight">
-          Aditya Sri Prasad
+          Aditya Appana
         </a>
 
         <div className="hidden md:flex items-center gap-8">

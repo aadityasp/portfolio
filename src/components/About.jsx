@@ -9,7 +9,7 @@ export default function About() {
         <Reveal className="order-2 lg:order-1">
           <div className="relative max-w-[320px] mx-auto lg:mx-0">
             <div className="absolute -inset-3 rounded-3xl bg-accent/10 -rotate-3" />
-            <img src="/images/aditya_headshot.jpg" alt="Aditya Sri Prasad"
+            <img src="/images/aditya_headshot.jpg" alt="Aditya Appana"
               className="relative rounded-3xl w-full aspect-square object-cover border border-line shadow-[0_18px_50px_rgba(25,21,16,0.16)]" />
           </div>
         </Reveal>

@@ -36,7 +36,7 @@ export default function Contact() {
       </div>
 
       <footer className="max-w-content mx-auto px-5 sm:px-8 mt-24 pt-8 border-t border-line flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-soft">
-        <span className="font-mono text-xs">© 2026 Aditya Sri Prasad</span>
+        <span className="font-mono text-xs">© 2026 Aditya Appana</span>
         <span className="font-mono text-xs">Built AI-first with React + Framer Motion</span>
       </footer>
     </section>
