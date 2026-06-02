@@ -92,9 +92,9 @@ export const apps = [
     name: 'RoastToast iOS',
     blurb: 'Gemini-powered app that roasts your photos. Built in a day.',
     stack: ['SwiftUI', 'Gemini API'],
-    status: 'TestFlight',
+    status: 'On the App Store',
     cover: { type: 'icon', src: '/images/roasttoast_logo.png' },
-    links: [{ label: 'TestFlight', href: 'https://testflight.apple.com/join/AcacQbAe' }],
+    links: [{ label: 'App Store', href: 'https://apps.apple.com/us/app/roasttoast-ai-roast-machine/id6757412164' }],
   },
   {
     id: 'promo',
