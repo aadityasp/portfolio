@@ -52,6 +52,15 @@ export const featured = [
 
 export const apps = [
   {
+    id: 'grader',
+    name: 'Restaurant Growth Grader',
+    blurb: 'A real-time rebuild of Owner.com’s Grader. Fetches a restaurant’s live website and validates 20+ signals into a growth score. Not a mockup, it runs the checks live.',
+    stack: ['JavaScript', 'Live fetch', 'DOM analysis'],
+    status: 'Live',
+    cover: { type: 'shot', src: '/images/grader_app.png', frame: 'web' },
+    links: [{ label: 'Try it live', href: 'https://aadityasp.github.io/restaurant-growth-grader/' }],
+  },
+  {
     id: 'luxe',
     name: 'Luxe Invites',
     blurb: 'I built my own wedding invite, then turned it into a product so anyone can make one.',
