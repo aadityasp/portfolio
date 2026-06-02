@@ -5,6 +5,12 @@ import { MaskText } from './Reveal'
 
 const ease = [0.22, 1, 0.36, 1]
 
+const proof = [
+  ['$700K', 'new revenue'],
+  ['17+', 'products shipped'],
+  ['2 to 5 days', 'idea to live'],
+]
+
 export default function Hero() {
   const ref = useRef(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
@@ -25,17 +31,17 @@ export default function Hero() {
               <span className="absolute inline-flex w-full h-full rounded-full bg-accent animate-pulseDot" />
               <span className="relative inline-flex w-2.5 h-2.5 rounded-full bg-accent" />
             </span>
-            <span className="eyebrow text-soft">AI Product Manager who ships</span>
+            <span className="eyebrow text-soft">AI Product Manager &middot; MS in AI &middot; CStoreIQ</span>
           </motion.div>
 
-          <h1 className="display font-medium leading-[0.95] text-[clamp(2.5rem,6.5vw,5rem)] text-ink">
-            <MaskText lines={['I design products', 'and build them']} />
+          <h1 className="display font-medium leading-[0.95] text-[clamp(2.5rem,6.2vw,5rem)] text-ink">
+            <MaskText lines={['I ship AI products', 'in days,']} />
             <span className="mask-line">
               <motion.span
                 initial={{ y: '115%' }} animate={{ y: 0 }} transition={{ duration: 0.7, delay: 0.3, ease }}
                 className="block italic text-accent"
               >
-                myself.
+                not quarters.
               </motion.span>
             </span>
           </h1>
@@ -44,12 +50,25 @@ export default function Hero() {
             initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.45, ease }}
             className="mt-7 max-w-lg text-lg text-soft leading-relaxed"
           >
-            Product manager at CStoreIQ with an MS in AI. I turn ideas into shipped products
-            in days across retail, health and fintech, then bring the metrics.
+            Product manager who still builds. I design the product, write the code with AI,
+            and put it in front of users, fast, across retail, health and fintech.
           </motion.p>
 
+          {/* proof, above the fold */}
           <motion.div
             initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.55, ease }}
+            className="mt-8 flex flex-wrap gap-x-8 gap-y-3"
+          >
+            {proof.map(([v, l]) => (
+              <div key={l}>
+                <div className="display text-2xl font-semibold text-ink leading-none">{v}</div>
+                <div className="font-mono text-[11px] text-soft mt-1">{l}</div>
+              </div>
+            ))}
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.65, ease }}
             className="mt-9 flex flex-wrap items-center gap-x-7 gap-y-3 font-mono text-sm text-soft"
           >
             <a href="#work" className="group inline-flex items-center gap-2 rounded-full bg-ink text-paper px-5 py-2.5 hover:bg-accent transition-colors">

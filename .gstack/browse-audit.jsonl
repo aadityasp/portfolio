@@ -90,3 +90,11 @@
 {"ts":"2026-06-02T04:19:27.568Z","cmd":"console","args":"--errors","origin":"http://localhost:8765/","durationMs":3,"status":"ok","hasCookies":false,"mode":"launched"}
 {"ts":"2026-06-02T04:19:27.664Z","cmd":"js","args":"typeof window.__lenis !== 'undefined' ? 'flag' : (document.documentElement.className||'no-flag')","origin":"http://localhost:8765/","durationMs":1,"status":"ok","hasCookies":false,"mode":"launched"}
 {"ts":"2026-06-02T04:19:28.228Z","cmd":"screenshot","args":"--viewport /tmp/i_hero.png","origin":"http://localhost:8765/","durationMs":481,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-06-02T04:25:29.013Z","cmd":"viewport","args":"1440x900","origin":"http://localhost:8765/","durationMs":19,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-06-02T04:25:29.380Z","cmd":"goto","args":"http://localhost:8765/","origin":"http://localhost:8765/","durationMs":265,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-06-02T04:25:29.615Z","cmd":"js","args":"location.reload(true)","origin":"http://localhost:8765/","durationMs":3,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-06-02T04:25:30.949Z","cmd":"console","args":"--errors","origin":"http://localhost:8765/","durationMs":0,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-06-02T04:25:31.225Z","cmd":"screenshot","args":"--viewport /tmp/h_desk.png","origin":"http://localhost:8765/","durationMs":189,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-06-02T04:25:31.341Z","cmd":"viewport","args":"390x844","origin":"http://localhost:8765/","durationMs":34,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-06-02T04:25:31.450Z","cmd":"goto","args":"http://localhost:8765/","origin":"http://localhost:8765/","durationMs":24,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-06-02T04:25:32.714Z","cmd":"screenshot","args":"--viewport /tmp/h_mob.png","origin":"http://localhost:8765/","durationMs":95,"status":"ok","hasCookies":false,"mode":"launched"}

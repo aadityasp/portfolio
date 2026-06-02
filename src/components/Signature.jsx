@@ -46,7 +46,7 @@ export default function Signature() {
         <p className="font-mono text-xs uppercase tracking-[0.22em] text-paper/45 mt-10">
           Build things &middot; Break things &middot; Ship things
         </p>
-        <p className="font-mono text-[11px] text-paper/30 mt-6">psst, the dots react to your cursor. click them.</p>
+        <p className="font-mono text-[11px] text-paper/30 mt-6">psst, the dots react to you. move and tap.</p>
       </div>
     </section>
   )
