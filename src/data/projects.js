@@ -130,7 +130,7 @@ export const apps = [
     stack: ['React', 'TypeScript'],
     status: 'Shipped',
     cover: { type: 'shot', src: '/images/csiq_website.png', frame: 'web' },
-    links: [{ label: 'View site', href: 'https://website-ten-ivory-86.vercel.app/' }],
+    links: [{ label: 'View site', href: 'https://cstoreiq1.vercel.app/' }],
   },
   {
     id: 'mission-control',
@@ -171,7 +171,7 @@ export const research = [
 ]
 
 export const stats = [
-  { value: '15+', label: 'Features shipped at CStoreIQ' },
+  { value: '3 domains', label: 'Retail, health & fintech' },
   { value: '17+', label: 'Products shipped, idea to live' },
   { value: '2 to 5 days', label: 'From idea to working build' },
   { value: 'MS in AI', label: 'Northeastern University' },

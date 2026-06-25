@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { motion, useInView, useMotionValue, useTransform, animate } from 'framer-motion'
 import Particles from './Particles'
 
-const TARGET = 8_000_000_000
+const TARGET = 10_000_000_000
 
 export default function Signature() {
   const ref = useRef(null)
