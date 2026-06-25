@@ -72,7 +72,17 @@ export const certs = [
 ]
 
 // Extra certifications revealed by the "+ N more" toggle in the Certifications block.
-// Add your real ones here — the toggle count updates automatically, and the button
-// only appears when this list is non-empty (so it never claims certs that aren't here).
+// The toggle count updates automatically, and the button only appears when this
+// list is non-empty (so it never claims certs that aren't here).
+// Note: the 4 Andrew Ng / Coursera deep-learning courses (Neural Networks & Deep
+// Learning, Improving Deep NN, Structuring ML Projects, CNNs) are represented by the
+// "Deep Learning Specialization" pill above, so they aren't repeated here.
 export const moreCerts = [
+  'Learning REST APIs',
+  'Visual Perception - First Principles of CV',
+  'Camera & Imaging - First Principles of CV',
+  'AI Foundations: Machine Learning',
+  'The Complete Python Bootcamp',
+  'Learn Ethical Hacking from Scratch',
+  'IP Addressing & Subnetting',
 ]
