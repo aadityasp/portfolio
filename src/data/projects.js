@@ -171,7 +171,7 @@ export const research = [
 ]
 
 export const stats = [
-  { value: '$700K', label: 'New revenue influenced at CStoreIQ' },
+  { value: '15+', label: 'Features shipped at CStoreIQ' },
   { value: '17+', label: 'Products shipped, idea to live' },
   { value: '2 to 5 days', label: 'From idea to working build' },
   { value: 'MS in AI', label: 'Northeastern University' },

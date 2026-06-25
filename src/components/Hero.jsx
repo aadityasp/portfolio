@@ -6,7 +6,7 @@ import { MaskText } from './Reveal'
 const ease = [0.22, 1, 0.36, 1]
 
 const proof = [
-  ['$700K', 'new revenue'],
+  ['15+', 'features shipped'],
   ['17+', 'products shipped'],
   ['2 to 5 days', 'idea to live'],
 ]

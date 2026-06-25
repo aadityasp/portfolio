@@ -26,7 +26,7 @@ export default function About() {
                 to prove an idea. I prototype it, ship it, measure it, and bring the data.
               </p>
               <p>
-                That’s how 15+ features and $700K in new revenue happened, and how the
+                That’s how 15+ features shipped, and how the
                 projects on this page went from idea to working product in days.
               </p>
             </div>

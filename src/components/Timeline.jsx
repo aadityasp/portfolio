@@ -1,6 +1,6 @@
 import { motion, useScroll, useSpring } from 'framer-motion'
-import { useRef } from 'react'
-import { experience, education, certs } from '../data/profile'
+import { useRef, useState } from 'react'
+import { experience, education, certs, moreCerts } from '../data/profile'
 import Reveal from './Reveal'
 
 const ease = [0.22, 1, 0.36, 1]
@@ -68,6 +68,7 @@ export default function Timeline() {
   const ref = useRef(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start center', 'end end'] })
   const fill = useSpring(scrollYProgress, { stiffness: 120, damping: 30 })
+  const [certsExpanded, setCertsExpanded] = useState(false)
 
   let prevChapter = null
 
@@ -127,6 +128,19 @@ export default function Timeline() {
               {certs.map((c) => (
                 <span key={c} className="font-mono text-xs text-soft border border-line rounded-full px-3 py-1.5">{c}</span>
               ))}
+              {certsExpanded && moreCerts.map((c) => (
+                <span key={c} className="font-mono text-xs text-soft border border-line rounded-full px-3 py-1.5">{c}</span>
+              ))}
+              {moreCerts.length > 0 && (
+                <button
+                  type="button"
+                  onClick={() => setCertsExpanded((v) => !v)}
+                  aria-expanded={certsExpanded}
+                  className="font-mono text-xs text-accent border border-line rounded-full px-3 py-1.5 hover:bg-accent hover:text-paper transition-colors cursor-pointer"
+                >
+                  {certsExpanded ? 'Show less' : `+ ${moreCerts.length} more`}
+                </button>
+              )}
             </div>
           </Reveal>
         </div>

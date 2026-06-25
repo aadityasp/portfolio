@@ -12,7 +12,7 @@ export const experience = [
     current: true,
     points: [
       'Lead product for POS and Back-Office in convenience retail',
-      'Shipped 15+ features driving $700K in new revenue',
+      'Shipped 15+ features from discovery to launch',
       'Build production features myself, AI-first',
     ],
     tags: ['Product', 'B2B SaaS', 'Retail Tech', 'AI-first'],
@@ -69,5 +69,10 @@ export const certs = [
   'AWS Machine Learning',
   'Transformers for Computer Vision',
   'Deep Learning Specialization',
-  '+ 10 more',
+]
+
+// Extra certifications revealed by the "+ N more" toggle in the Certifications block.
+// Add your real ones here — the toggle count updates automatically, and the button
+// only appears when this list is non-empty (so it never claims certs that aren't here).
+export const moreCerts = [
 ]
