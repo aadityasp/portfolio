@@ -52,6 +52,36 @@ export const featured = [
 
 export const apps = [
   {
+    id: 'lifeos',
+    name: 'LifeOS',
+    blurb: 'My personal operating system for life: one AI-first app to run everything I do. Still under wraps — the code goes public soon.',
+    stack: ['AI-first', 'Personal OS'],
+    status: 'Private build',
+    cover: { type: 'svg', variant: 'lifeos' },
+    links: [],
+  },
+  {
+    id: 'blackjack',
+    name: 'Blackjack Trainer: 21 Coach',
+    blurb: 'Free iOS trainer that drills mathematically-correct basic strategy, hand by hand, with instant feedback. No ads, no accounts, fully offline.',
+    stack: ['SwiftUI', 'iOS'],
+    status: 'On the App Store',
+    cover: { type: 'svg', variant: 'blackjack' },
+    links: [
+      { label: 'App Store', href: 'https://apps.apple.com/us/app/id6789853035' },
+      { label: 'GitHub', href: 'https://github.com/aadityasp/blackjack-trainer' },
+    ],
+  },
+  {
+    id: 'visual-workflows',
+    name: 'Visual Workflows',
+    blurb: 'Real-time dashboard for Claude Code multi-agent runs: animated agent panels, inline terminals and full-run replay. Local-first, 340+ tests.',
+    stack: ['React', 'TypeScript', 'Node.js', 'WebSockets'],
+    status: 'Open source',
+    cover: { type: 'svg', variant: 'agents' },
+    links: [{ label: 'GitHub', href: 'https://github.com/aadityasp/visual-workflows' }],
+  },
+  {
     id: 'grader',
     name: 'Restaurant Growth Grader',
     blurb: 'A real-time rebuild of Owner.com’s Grader. Fetches a restaurant’s live website and validates 20+ signals into a growth score. Not a mockup, it runs the checks live.',

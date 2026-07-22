@@ -138,7 +138,83 @@ function ScribeCover() {
   )
 }
 
-const COVERS = { trading: TradingCover, invoice: InvoiceCover, storybook: StorybookCover, graph: GraphCover, invite: InviteCover, scribe: ScribeCover }
+function LifeOSCover() {
+  // modular "operating system for life" tiles around a core
+  const tiles = [
+    [52, 44, 70, 48], [52, 108, 70, 48], [198, 44, 70, 30], [198, 90, 70, 30], [198, 136, 70, 20],
+  ]
+  return (
+    <Frame tint="#F2ECE0">
+      {tiles.map(([x, y, w, h], i) => (
+        <rect key={i} x={x} y={y} width={w} height={h} rx="8" fill="#fff" stroke={INK} strokeOpacity="0.12" />
+      ))}
+      {[[64, 60], [64, 124]].map(([x, y], i) => (
+        <g key={i}>
+          <rect x={x} y={y} width="46" height="3.5" rx="2" fill={INK} opacity="0.25" />
+          <rect x={x} y={y + 10} width="30" height="3.5" rx="2" fill={INK} opacity="0.18" />
+        </g>
+      ))}
+      <circle cx="160" cy="100" r="26" fill="none" stroke={AC} strokeWidth="2" />
+      <circle cx="160" cy="100" r="8" fill={AC} />
+      <circle cx="160" cy="100" r="36" fill="none" stroke={AC} strokeOpacity="0.3" strokeWidth="1.2" strokeDasharray="2 5" />
+      {[[134, 68], [186, 68], [134, 132], [186, 132]].map(([x, y], i) => (
+        <line key={i} x1={x} y1={y} x2={160 + (x < 160 ? -18 : 18)} y2={100 + (y < 100 ? -18 : 18)}
+          stroke={INK} strokeOpacity="0.25" strokeWidth="1.2" />
+      ))}
+      <rect x="210" y="55" width="46" height="3.5" rx="2" fill={AC} opacity="0.8" />
+      <rect x="210" y="101" width="34" height="3.5" rx="2" fill={INK} opacity="0.25" />
+      <rect x="210" y="143" width="40" height="3.5" rx="2" fill={INK} opacity="0.18" />
+    </Frame>
+  )
+}
+
+function BlackjackCover() {
+  return (
+    <Frame tint="#E9ECFA">
+      {/* face-down dealer card */}
+      <g transform="rotate(-9 120 96)">
+        <rect x="86" y="44" width="70" height="100" rx="9" fill="#fff" stroke={INK} strokeOpacity="0.15" />
+        <rect x="94" y="52" width="54" height="84" rx="5" fill="none" stroke={AC} strokeOpacity="0.45" strokeDasharray="1 4" />
+      </g>
+      {/* ace of spades */}
+      <g transform="rotate(7 190 104)">
+        <rect x="152" y="56" width="70" height="100" rx="9" fill="#fff" stroke={AC} strokeWidth="2" />
+        <text x="163" y="78" fontFamily="serif" fontSize="15" fill={INK} fontWeight="700">A</text>
+        <path d="M187 82 c-8 13 -21 17 -21 27 c0 10 13 14 18 6 c-1 7 -4 11 -7 14 h20 c-3 -3 -6 -7 -7 -14 c5 8 18 4 18 -6 c0 -10 -13 -14 -21 -27 Z" fill={INK} />
+      </g>
+      {/* strategy verdict chip */}
+      <rect x="236" y="82" width="52" height="24" rx="12" fill={AC} />
+      <text x="262" y="98" fontFamily="monospace" fontSize="11" fill="#fff" textAnchor="middle" fontWeight="700">HIT</text>
+      <text x="52" y="170" fontFamily="monospace" fontSize="12" fill={AC} fontWeight="700" letterSpacing="3">21</text>
+    </Frame>
+  )
+}
+
+function AgentsCover() {
+  // agent panels wired into a workflow, inline terminal lines
+  const panels = [[44, 48], [44, 116], [136, 82], [228, 48], [228, 116]]
+  const wires = [[0, 2], [1, 2], [2, 3], [2, 4]]
+  return (
+    <Frame>
+      {wires.map(([a, b], i) => (
+        <path key={i}
+          d={`M${panels[a][0] + 64} ${panels[a][1] + 20} C ${panels[a][0] + 90} ${panels[a][1] + 20}, ${panels[b][0] - 26} ${panels[b][1] + 20}, ${panels[b][0]} ${panels[b][1] + 20}`}
+          fill="none" stroke={AC} strokeOpacity="0.55" strokeWidth="1.6" />
+      ))}
+      {panels.map(([x, y], i) => (
+        <g key={i}>
+          <rect x={x} y={y} width="64" height="40" rx="7" fill="#fff" stroke={i === 2 ? AC : INK} strokeOpacity={i === 2 ? 1 : 0.15} strokeWidth={i === 2 ? 2 : 1} />
+          <circle cx={x + 10} cy={y + 10} r="3" fill={i === 2 ? AC : INK} opacity={i === 2 ? 1 : 0.4} />
+          <rect x={x + 18} y={y + 8} width="34" height="3" rx="1.5" fill={INK} opacity="0.3" />
+          <rect x={x + 8} y={y + 20} width={i % 2 ? 40 : 48} height="3" rx="1.5" fill={AC} opacity="0.55" />
+          <rect x={x + 8} y={y + 28} width={i % 2 ? 30 : 24} height="3" rx="1.5" fill={INK} opacity="0.22" />
+        </g>
+      ))}
+    </Frame>
+  )
+}
+
+const COVERS = { trading: TradingCover, invoice: InvoiceCover, storybook: StorybookCover, graph: GraphCover, invite: InviteCover, scribe: ScribeCover, lifeos: LifeOSCover, blackjack: BlackjackCover, agents: AgentsCover }
 
 export default function Cover({ variant }) {
   const C = COVERS[variant] || TradingCover
