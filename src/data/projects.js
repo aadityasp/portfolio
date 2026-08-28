@@ -1,7 +1,8 @@
 // Verified against source on disk + the user's Claude-history inventory.
 // Copy is intentionally short: one punchy line per project.
 //
-// cover.type: 'svg' | 'icon' | 'shot' | 'photo' | 'video'
+// cover.type: 'svg' | 'icon' | 'shot' | 'photo' | 'video' | 'slideshow'
+// cover.fallback: svg variant to show if the asset fails to load.
 
 export const featured = [
   {
@@ -12,7 +13,7 @@ export const featured = [
     stack: ['Kotlin', 'Jetpack Compose', 'FastAPI', 'SQL Server', 'AWS'],
     status: 'In production',
     badge: 'Top contributor',
-    cover: { type: 'shot', src: '/images/pos_app.png', frame: 'web' },
+    cover: { type: 'shot', src: '/images/pos_app.png', frame: 'web', fallback: 'pos' },
     links: [],
   },
   {
@@ -23,7 +24,7 @@ export const featured = [
     stack: ['Flutter', 'FastAPI', 'Angular', 'SQL Server'],
     status: 'Active dev',
     badge: 'Full platform',
-    cover: { type: 'shot', src: '/images/rewards.png', frame: 'phone' },
+    cover: { type: 'shot', src: '/images/rewards.png', frame: 'phone', fallback: 'loyalty' },
     links: [],
   },
   {
@@ -32,8 +33,8 @@ export const featured = [
     tagline: 'Paper invoice to payment',
     blurb: 'Snap a paper invoice, AI reads it, it issues an EDI 810 and triggers the check payment.',
     stack: ['Flutter', 'FastAPI', 'Mistral AI OCR', 'EDI 810'],
-    status: 'Working MVP',
-    badge: 'Demo-ready',
+    status: 'In production',
+    badge: 'Live with vendors',
     cover: { type: 'svg', variant: 'invoice' },
     links: [],
   },
@@ -43,14 +44,26 @@ export const featured = [
     tagline: 'Ambient medical scribe',
     blurb: 'Turns code-mixed doctor visits into FHIR clinical notes the doctor reviews and signs.',
     stack: ['Next.js', 'FastAPI', 'Sarvam AI', 'GPT-4o'],
-    status: 'Live demo',
+    status: 'In beta with doctors',
     badge: 'Healthcare AI',
-    cover: { type: 'svg', variant: 'scribe' },
+    cover: { type: 'video', src: '/images/heal_demo.mp4', poster: '/images/heal_demo_poster.jpg', fallback: 'scribe' },
     links: [{ label: 'View live', href: 'https://heal-ai.vercel.app/' }, { label: 'GitHub', href: 'https://github.com/aadityasp/ai-medical-scribe' }],
   },
 ]
 
 export const apps = [
+  {
+    id: 'scaniq',
+    name: 'ScanIQ',
+    blurb: 'Scan a vendor invoice with your phone and every line item is read automatically and sent straight to the back office. No typing. Open beta on both stores.',
+    stack: ['Flutter', 'FastAPI', 'OCR', 'iOS + Android'],
+    status: 'Open beta',
+    cover: { type: 'video', src: '/images/scaniq_demo.mp4', poster: '/images/scaniq_demo_poster.jpg', fallback: 'invoice' },
+    links: [
+      { label: 'Google Play beta', href: 'https://play.google.com/apps/testing/com.cstoreiq.scaniq' },
+      { label: 'TestFlight beta', href: 'https://testflight.apple.com/join/caa1kBh6' },
+    ],
+  },
   {
     id: 'lifeos',
     name: 'LifeOS',
@@ -78,7 +91,7 @@ export const apps = [
     blurb: 'Real-time dashboard for Claude Code multi-agent runs: animated agent panels, inline terminals and full-run replay. Local-first, 340+ tests.',
     stack: ['React', 'TypeScript', 'Node.js', 'WebSockets'],
     status: 'Open source',
-    cover: { type: 'svg', variant: 'agents' },
+    cover: { type: 'video', src: '/images/visualworkflows_demo.mp4', poster: '/images/visualworkflows_demo_poster.jpg', frame: 'web', fallback: 'agents' },
     links: [{ label: 'GitHub', href: 'https://github.com/aadityasp/visual-workflows' }],
   },
   {
@@ -87,7 +100,7 @@ export const apps = [
     blurb: 'A real-time rebuild of Owner.com’s Grader. Fetches a restaurant’s live website and validates 20+ signals into a growth score. Not a mockup, it runs the checks live.',
     stack: ['JavaScript', 'Live fetch', 'DOM analysis'],
     status: 'Live',
-    cover: { type: 'shot', src: '/images/grader_app.png', frame: 'web' },
+    cover: { type: 'shot', src: '/images/grader_app.png', frame: 'web', fallback: 'graph' },
     links: [{ label: 'Try it live', href: 'https://aadityasp.github.io/restaurant-growth-grader/' }],
   },
   {
@@ -114,7 +127,7 @@ export const apps = [
     blurb: 'Geofenced attendance, timesheets and chat across role-based dashboards.',
     stack: ['Next.js', 'Expo', 'PostgreSQL'],
     status: 'Web + mobile',
-    cover: { type: 'shot', src: '/images/satcom_app.png', frame: 'web' },
+    cover: { type: 'shot', src: '/images/satcom_app.png', frame: 'web', fallback: 'graph' },
     links: [],
   },
   {
@@ -123,7 +136,7 @@ export const apps = [
     blurb: 'Prints barcode shelf labels to Brother printers over WiFi or Bluetooth.',
     stack: ['Flutter', 'Fastify', 'Brother SDK'],
     status: 'Build ready',
-    cover: { type: 'icon', src: '/images/labelprinter_icon.png' },
+    cover: { type: 'svg', variant: 'label' },
     links: [],
   },
   {
@@ -132,7 +145,7 @@ export const apps = [
     blurb: 'Gemini-powered app that roasts your photos. Built in a day.',
     stack: ['SwiftUI', 'Gemini API'],
     status: 'On the App Store',
-    cover: { type: 'icon', src: '/images/roasttoast_logo.png' },
+    cover: { type: 'icon', src: '/images/roasttoast_logo.png', fallback: 'storybook' },
     links: [{ label: 'App Store', href: 'https://apps.apple.com/us/app/roasttoast-ai-roast-machine/id6757412164' }],
   },
   {
@@ -141,7 +154,7 @@ export const apps = [
     blurb: 'Loyalty and promos app with push, maps, coupons and biometric login.',
     stack: ['Flutter', 'AWS CDK', 'Firebase'],
     status: 'Active dev',
-    cover: { type: 'icon', src: '/images/promo_icon.png' },
+    cover: { type: 'svg', variant: 'loyalty' },
     links: [],
   },
   {
@@ -159,7 +172,7 @@ export const apps = [
     blurb: 'Marketing site for a retail-tech suite. Animated, shipped fast.',
     stack: ['React', 'TypeScript'],
     status: 'Shipped',
-    cover: { type: 'shot', src: '/images/csiq_website.png', frame: 'web' },
+    cover: { type: 'shot', src: '/images/csiq_website.png', frame: 'web', fallback: 'pos' },
     links: [{ label: 'View site', href: 'https://cstoreiq1.vercel.app/' }],
   },
   {
