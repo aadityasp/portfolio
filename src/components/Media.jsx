@@ -81,15 +81,6 @@ export default function Media({ cover, alt }) {
     return () => clearInterval(id)
   }, [cover.type, cover.interval, active, frames.length])
 
-  // Scroll-reveal remounts a card mid-load, which aborts the fetch and fires a
-  // spurious error. Only a real decode/network failure should drop to the
-  // fallback art.
-  const onVideoError = (e) => {
-    const err = e.currentTarget?.error
-    if (!err || err.code === err.MEDIA_ERR_ABORTED) return
-    setFailed(true)
-  }
-
   const wrap = (children) => (
     <div ref={ref} {...handlers} className="w-full h-full">
       {children}
@@ -182,6 +173,10 @@ export default function Media({ cover, alt }) {
     )
   }
 
+  // Video never swaps to fallback art. Scroll-reveal remounts the element
+  // mid-load and the resulting abort is indistinguishable enough from a real
+  // failure that latching on it silently killed working covers. The poster is
+  // already a real product still, so a video that cannot play just stays on it.
   if (cover.type === 'video') {
     const inner = (
       <video
@@ -193,7 +188,6 @@ export default function Media({ cover, alt }) {
         playsInline
         preload="metadata"
         aria-label={alt}
-        onError={onVideoError}
         className="w-full h-full object-cover"
       />
     )
