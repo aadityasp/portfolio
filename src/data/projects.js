@@ -47,7 +47,7 @@ export const featured = [
     status: 'In beta with doctors',
     badge: 'Healthcare AI',
     cover: { type: 'video', src: '/images/heal_demo.mp4', poster: '/images/heal_demo_poster.jpg', fallback: 'scribe' },
-    links: [{ label: 'View live', href: 'https://heal-ai.vercel.app/' }, { label: 'GitHub', href: 'https://github.com/aadityasp/ai-medical-scribe' }],
+    links: [{ label: 'View live', href: 'https://ai-medical-scribe-three.vercel.app' }, { label: 'GitHub', href: 'https://github.com/aadityasp/ai-medical-scribe' }],
   },
 ]
 
