@@ -7,12 +7,12 @@ export default function Testimonials() {
     <section id="testimonials" className="relative py-24 sm:py-32 border-t border-line">
       <div className="max-w-content mx-auto px-5 sm:px-8">
         <Reveal>
-          <p className="eyebrow text-accent mb-3">What colleagues said</p>
+          <p className="eyebrow text-accent mb-3">What colleagues say</p>
           <h2 className="display text-3xl sm:text-5xl font-semibold tracking-tight text-ink leading-[1.05]">
-            Notes from the team when I left Wipro.
+            What it is like to work with me, in their words.
           </h2>
           <p className="text-soft mt-4 text-lg leading-relaxed max-w-2xl">
-            From the autonomous vehicle simulation team, December 2020. Their words, lightly trimmed for length.
+            From engineers and leads on the autonomous vehicle simulation team at Wipro. Lightly trimmed for length.
           </p>
         </Reveal>
 

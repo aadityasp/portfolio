@@ -1,22 +1,22 @@
-// Farewell notes from the Wipro autonomous vehicle simulation team (Dec 2020).
+// Notes from colleagues on the Wipro autonomous vehicle simulation team.
 // Quotes are the colleagues' own words, lightly trimmed for length. Names only, no photos.
 
 export const testimonials = [
   {
     name: 'Yuvika Dev',
-    context: 'Wipro, Simulator team',
+    context: 'Wipro',
     quote:
       'Always takes complete ownership of the assigned tasks and makes sure they are closed with proper quality and timeline, without any follow-ups. He was assigned critical tasks and always did justice to them.',
   },
   {
     name: 'Dr. Dattatray Parle',
-    context: 'Wipro, Autonomous Vehicles Practice',
+    context: 'Wipro',
     quote:
-      'You contributed in several areas in the Autonomous Vehicles Practice. I found you an easy person to work with.',
+      'You contributed in several areas of the autonomous vehicle project. I found you an easy person to work with.',
   },
   {
     name: 'Shreekant Dashora',
-    context: 'Wipro, Simulator team',
+    context: 'Wipro',
     quote:
       'You were my mentor in this team when we started. You are one of the smartest people I have met, with knowledge of everything from hardware to software.',
   },
@@ -28,7 +28,7 @@ export const testimonials = [
   },
   {
     name: 'Senthil Kumar M',
-    context: 'Wipro, autonomous vehicle project',
+    context: 'Wipro',
     quote:
       'You always did a great job for our autonomous vehicle project. Your contributions and dedication will always be a prime example for others.',
   },
