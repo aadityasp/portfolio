@@ -6,7 +6,7 @@ export const experience = [
     range: 'Jun 2023 — Now',
     company: 'CStoreIQ',
     location: 'Huntsville, AL',
-    role: 'Product Manager',
+    role: 'Senior Product Manager',
     logo: '/images/cstoreiq_logo.svg',
     chapter: 'Product',
     current: true,
