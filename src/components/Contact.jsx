@@ -10,7 +10,7 @@ export default function Contact() {
           <h2 className="display text-[clamp(2.6rem,9vw,7rem)] font-medium tracking-tight leading-[0.95] text-ink">
             Let’s build
             <br />
-            <span className="italic text-accent">something.</span>
+            <span className="italic text-accent">something great!</span>
           </h2>
           <p className="text-soft mt-7 max-w-xl mx-auto text-lg">
             Open to product and founding-engineer conversations. Email is the fastest way to reach me.
