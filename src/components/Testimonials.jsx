@@ -97,7 +97,7 @@ export default function Testimonials() {
                 What it is like to work with me, in their words.
               </h2>
               <p className="text-soft mt-4 text-lg leading-relaxed">
-                Twelve farewell notes from the autonomous vehicle simulation team at Wipro.
+                A few testimonials from the autonomous vehicle simulation team at Wipro.
               </p>
             </div>
 
