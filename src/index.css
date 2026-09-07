@@ -45,6 +45,10 @@ body::before {
   @apply text-accent decoration-accent/30 underline underline-offset-4 hover:decoration-accent transition-colors;
 }
 
+/* Scrollable row with the scrollbar hidden (the row keeps its own position line) */
+.no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
 /* Masked line-rise reveal helper */
 .mask-line { overflow: hidden; display: block; }
 
