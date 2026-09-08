@@ -10,6 +10,7 @@ import Testimonials from './components/Testimonials'
 import About from './components/About'
 import Signature from './components/Signature'
 import Contact from './components/Contact'
+import { initTracking } from './lib/track'
 
 function ScrollProgress() {
   const { scrollYProgress } = useScroll()
@@ -18,6 +19,8 @@ function ScrollProgress() {
 }
 
 export default function App() {
+  useEffect(() => { initTracking() }, [])
+
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
