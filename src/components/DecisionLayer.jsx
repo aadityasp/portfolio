@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowUpRight, X } from 'lucide-react'
 import { decisionsFor } from '../data/decisions'
+import { getLenis } from '../lib/scroll'
 import { featured, apps } from '../data/projects'
 
 const allProjects = [...featured, ...apps]
@@ -33,11 +34,15 @@ export default function DecisionLayer({ projectId, onClose }) {
     const previouslyFocused = document.activeElement
     const { overflow } = document.body.style
     document.body.style.overflow = 'hidden'
+    // Lenis owns the wheel; stop it or the page keeps scrolling behind the sheet.
+    const lenis = getLenis()
+    lenis?.stop()
     closeRef.current?.focus()
     const onKey = (e) => { if (e.key === 'Escape') onClose() }
     window.addEventListener('keydown', onKey)
     return () => {
       document.body.style.overflow = overflow
+      lenis?.start()
       window.removeEventListener('keydown', onKey)
       previouslyFocused?.focus?.()
     }
@@ -54,6 +59,7 @@ export default function DecisionLayer({ projectId, onClose }) {
           <div className="absolute inset-0 bg-ink/40 backdrop-blur-sm" onClick={onClose} aria-hidden />
           <motion.div
             role="dialog" aria-modal="true" aria-labelledby="decision-title"
+            data-lenis-prevent
             initial={{ y: 28, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 20, opacity: 0 }}
             transition={{ type: 'spring', stiffness: 320, damping: 30 }}
             className="relative w-full sm:max-w-3xl max-h-[92vh] sm:max-h-[88vh] overflow-y-auto bg-paper border border-line rounded-t-3xl sm:rounded-3xl shadow-2xl"

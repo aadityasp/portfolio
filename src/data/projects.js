@@ -86,6 +86,16 @@ export const apps = [
     ],
   },
   {
+    id: 'catalog',
+    name: 'Catalog Enrichment',
+    blurb: 'Mapped a 522,000 item master catalog onto the NACS industry taxonomy and enriched brand, manufacturer, category and unit of measure with an LLM pipeline. Every value carries a confidence score, so downstream features can tell a confirmed manufacturer from a guessed one.',
+    stack: ['Python', 'LLM classification', 'NACS taxonomy'],
+    status: 'Shipped internally',
+    cover: { type: 'svg', variant: 'graph' },
+    note: 'Internal CStoreIQ data work, so there is no public build.',
+    links: [],
+  },
+  {
     id: 'lifeos',
     name: 'LifeOS',
     blurb: 'A persistent AI agent team that runs my admin. Department heads I task from Telegram, a numbered decision queue I answer with a yes or no, verification before anything reaches me, and hard red lines it can never cross: no sends, no spend, no new accounts. All state lives in files, never in a context window.',

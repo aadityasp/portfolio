@@ -35,8 +35,8 @@ function LinkBtn({ link }) {
 function DecisionBtn({ onClick }) {
   return (
     <button type="button" onClick={onClick}
-      className="inline-flex items-center gap-1.5 text-sm font-medium text-ink hover:text-accent transition-colors">
-      <ScrollText size={15} /> Read the decision
+      className="inline-flex items-center gap-1.5 text-sm font-medium text-paper bg-ink border border-ink rounded-full px-3.5 py-1.5 hover:bg-accent hover:border-accent transition-colors">
+      <ScrollText size={14} /> Read the decision
     </button>
   )
 }

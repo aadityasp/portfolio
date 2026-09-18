@@ -11,6 +11,7 @@ import About from './components/About'
 import Signature from './components/Signature'
 import Contact from './components/Contact'
 import { initTracking } from './lib/track'
+import { setLenis } from './lib/scroll'
 
 function ScrollProgress() {
   const { scrollYProgress } = useScroll()
@@ -25,6 +26,7 @@ export default function App() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
     const lenis = new Lenis({ lerp: 0.09, smoothWheel: true, wheelMultiplier: 1 })
+    setLenis(lenis)
     let raf = requestAnimationFrame(function loop(t) {
       lenis.raf(t)
       raf = requestAnimationFrame(loop)
@@ -41,7 +43,7 @@ export default function App() {
       }
     }
     document.addEventListener('click', onClick)
-    return () => { cancelAnimationFrame(raf); lenis.destroy(); document.removeEventListener('click', onClick) }
+    return () => { cancelAnimationFrame(raf); lenis.destroy(); setLenis(null); document.removeEventListener('click', onClick) }
   }, [])
 
   return (

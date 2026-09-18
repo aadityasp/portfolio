@@ -44,11 +44,11 @@ export const studies = [
     link: { label: 'Try the scanning half (ScanIQ beta)', href: 'https://play.google.com/apps/testing/com.cstoreiq.scaniq' },
   },
   {
-    id: 'pos-catalog',
-    project: 'pos',
+    id: 'catalog-confidence',
+    project: 'catalog',
     headline: 'Ship the clean file, or the honest one?',
     context:
-      'The master item catalog behind the pricebook, 522,000 items, had to be mapped onto the NACS industry taxonomy and enriched with brand, manufacturer, category, and unit of measure using LLM classification. The request was the mapping. Deliver the mapped catalog, done.',
+      'I was asked to map a 522,000 item product catalog onto the NACS industry taxonomy and enrich brand, manufacturer, category, and unit of measure on every item using LLM classification. The request was the mapping. Deliver the mapped catalog, done.',
     sections: [
       {
         label: 'The problem',
