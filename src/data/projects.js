@@ -102,10 +102,8 @@ export const apps = [
     stack: ['SwiftUI', 'iOS'],
     status: 'On the App Store',
     cover: { type: 'svg', variant: 'blackjack' },
-    links: [
-      { label: 'App Store', href: 'https://apps.apple.com/us/app/id6789853035' },
-      { label: 'GitHub', href: 'https://github.com/aadityasp/blackjack-trainer' },
-    ],
+    // No GitHub link: the public repo only hosts the App Store privacy/support page, not the app source.
+    links: [{ label: 'App Store', href: 'https://apps.apple.com/us/app/id6789853035' }],
   },
   {
     id: 'visual-workflows',
