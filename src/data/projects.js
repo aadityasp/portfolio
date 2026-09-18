@@ -17,8 +17,9 @@ export const featured = [
     stack: ['Kotlin', 'Jetpack Compose', 'FastAPI', 'SQL Server', 'AWS'],
     status: 'In production',
     badge: 'Top contributor',
-    cover: { type: 'shot', src: '/images/pos_app.png', frame: 'web', fallback: 'pos' },
-    note: 'Runs on registers inside CStoreIQ retailer stores, so there is no public install. Happy to walk through it on a call.',
+    // Real register screens (Sunmi build), cycled as a short walkthrough.
+    cover: { type: 'slideshow', srcs: ['/images/pos_slide_1.jpg', '/images/pos_slide_2.jpg', '/images/pos_slide_3.jpg', '/images/pos_slide_4.jpg'], fallback: 'pos' },
+    note: 'Runs on registers inside CStoreIQ retailer stores, so there is no public install. The screens above are the real register.',
     links: [{ label: 'CStoreIQ site', href: 'https://cstoreiq1.vercel.app/' }],
   },
   {
@@ -43,7 +44,10 @@ export const featured = [
     badge: 'Live with vendors',
     cover: { type: 'svg', variant: 'invoice' },
     note: 'The payment rail is private to CStoreIQ vendors. The scanning half is public as ScanIQ.',
-    links: [{ label: 'Try the scanner (ScanIQ beta)', href: 'https://play.google.com/apps/testing/com.cstoreiq.scaniq' }],
+    links: [
+      { label: 'Read the decision', href: '#decisions' },
+      { label: 'Try the scanner (ScanIQ beta)', href: 'https://play.google.com/apps/testing/com.cstoreiq.scaniq' },
+    ],
   },
   {
     id: 'heal',
@@ -91,7 +95,7 @@ export const apps = [
     stack: ['Claude Code', 'Telegram', 'Markdown state'],
     status: 'Private build',
     cover: { type: 'svg', variant: 'lifeos' },
-    note: 'Private repo while it runs on my real inbox and calendar.',
+    note: 'Private repo, since it runs my own admin.',
     links: [],
   },
   {

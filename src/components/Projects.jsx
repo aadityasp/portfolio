@@ -19,8 +19,9 @@ function Note({ children }) {
 }
 
 function LinkBtn({ link }) {
+  const internal = link.href.startsWith('#')
   return (
-    <a href={link.href} target="_blank" rel="noreferrer"
+    <a href={link.href} target={internal ? undefined : '_blank'} rel={internal ? undefined : 'noreferrer'}
       className="inline-flex items-center gap-1 text-sm font-medium text-accent hover:text-accent-ink transition-colors">
       {link.label} <ArrowUpRight size={15} />
     </a>
