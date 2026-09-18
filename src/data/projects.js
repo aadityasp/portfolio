@@ -223,7 +223,8 @@ export const research = [
   {
     id: 'colorization',
     name: 'Image Colorization',
-    blurb: 'CNN autoencoder that colorizes grayscale photos, ~20% over baseline.',
+    // No percentage claim: the report has none. Findings below are the ones it states.
+    blurb: 'PyTorch reimplementation of Deep Koalarization: a CNN predicts the color channels of a grayscale photo. Swapping the paper’s MSE loss for MSLE and its Inception-ResNet-v2 extractor for SE-ResNet-152 gave cleaner color and faster convergence on 200K ImageNet images.',
     stack: ['Python', 'TensorFlow', 'CNNs'],
     cover: { type: 'photo', src: '/images/imagecolorization.png' },
     links: [{ label: 'GitHub', href: 'https://github.com/aadityasp/Image_colorization' }],
