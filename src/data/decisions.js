@@ -1,4 +1,7 @@
-// Product decisions, written up end to end (problem, decision, tradeoff, result).
+// Product decisions, one per project, written up as problem / decision /
+// tradeoff / result. They never render on the main page: a card whose id has
+// a decision here shows a "Read the decision" button that opens the layer
+// (src/components/DecisionLayer.jsx) with ONLY that project's write-up.
 //
 // Honesty rule for this file: every number here is one that already appears on
 // the resume and has been verified there. Nothing is rounded up, and design
@@ -6,8 +9,8 @@
 
 export const studies = [
   {
-    id: 'invoicepay',
-    product: 'InvoicePay',
+    id: 'invoicepay-policy',
+    project: 'invoicepay',
     headline: 'Which fields may post without a human?',
     context:
       'Many supplier invoices at convenience stores still arrive on paper, and someone keys each line in by hand. InvoicePay reads the invoice with OCR and an LLM and posts it as structured, auditable records through the back office, EDI, and payment systems.',
@@ -41,11 +44,11 @@ export const studies = [
     link: { label: 'Try the scanning half (ScanIQ beta)', href: 'https://play.google.com/apps/testing/com.cstoreiq.scaniq' },
   },
   {
-    id: 'catalog',
-    product: 'Product catalog',
+    id: 'pos-catalog',
+    project: 'pos',
     headline: 'Ship the clean file, or the honest one?',
     context:
-      'I was asked to map a 522,000 item product catalog onto the NACS industry taxonomy and enrich brand, manufacturer, category, and unit of measure on every item using LLM classification. The request was the mapping. Deliver the mapped catalog, done.',
+      'The master item catalog behind the pricebook, 522,000 items, had to be mapped onto the NACS industry taxonomy and enriched with brand, manufacturer, category, and unit of measure using LLM classification. The request was the mapping. Deliver the mapped catalog, done.',
     sections: [
       {
         label: 'The problem',
@@ -75,3 +78,8 @@ export const studies = [
     link: null,
   },
 ]
+
+/** Decisions attached to one project card (empty array when it has none). */
+export function decisionsFor(projectId) {
+  return studies.filter((s) => s.project === projectId)
+}

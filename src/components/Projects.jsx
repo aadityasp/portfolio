@@ -1,6 +1,9 @@
+import { useCallback, useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { ArrowUpRight } from 'lucide-react'
+import { ArrowUpRight, ScrollText } from 'lucide-react'
 import { featured, apps, research } from '../data/projects'
+import { decisionsFor } from '../data/decisions'
+import DecisionLayer from './DecisionLayer'
 import Media from './Media'
 import Reveal, { Parallax, stagger, item } from './Reveal'
 
@@ -28,7 +31,28 @@ function LinkBtn({ link }) {
   )
 }
 
-function FeaturedCard({ p, i }) {
+/** Opens the decision layer for this card only (rendered when the project has a write-up). */
+function DecisionBtn({ onClick }) {
+  return (
+    <button type="button" onClick={onClick}
+      className="inline-flex items-center gap-1.5 text-sm font-medium text-ink hover:text-accent transition-colors">
+      <ScrollText size={15} /> Read the decision
+    </button>
+  )
+}
+
+function CardActions({ p, onOpenDecision, gap }) {
+  const hasDecision = decisionsFor(p.id).length > 0
+  if (!hasDecision && !(p.links?.length > 0)) return null
+  return (
+    <div className={`flex flex-wrap items-center ${gap}`}>
+      {hasDecision && <DecisionBtn onClick={() => onOpenDecision(p.id)} />}
+      {p.links?.map((l) => <LinkBtn key={l.href} link={l} />)}
+    </div>
+  )
+}
+
+function FeaturedCard({ p, i, onOpenDecision }) {
   return (
     <Reveal delay={(i % 2) * 0.06}>
       <motion.article
@@ -54,16 +78,14 @@ function FeaturedCard({ p, i }) {
           <p className="text-soft mt-3 leading-relaxed text-[15px]">{p.blurb}</p>
           <div className="flex flex-wrap gap-1.5 mt-4">{p.stack.map((s) => <Tag key={s}>{s}</Tag>)}</div>
           {p.note && <Note>{p.note}</Note>}
-          {p.links?.length > 0 && (
-            <div className="flex flex-wrap gap-5 mt-5 pt-4 border-t border-line">{p.links.map((l) => <LinkBtn key={l.href} link={l} />)}</div>
-          )}
+          <CardActions p={p} onOpenDecision={onOpenDecision} gap="gap-5 mt-5 pt-4 border-t border-line" />
         </div>
       </motion.article>
     </Reveal>
   )
 }
 
-function AppCard({ p }) {
+function AppCard({ p, onOpenDecision }) {
   return (
     <motion.article
       variants={item} whileHover={{ y: -5 }} transition={{ type: 'spring', stiffness: 300, damping: 24 }}
@@ -80,9 +102,7 @@ function AppCard({ p }) {
         <p className="text-soft mt-2 text-sm leading-relaxed flex-1">{p.blurb}</p>
         <div className="flex flex-wrap gap-1.5 mt-3">{p.stack.map((s) => <Tag key={s}>{s}</Tag>)}</div>
         {p.note && <Note>{p.note}</Note>}
-        {p.links?.length > 0 && (
-          <div className="flex flex-wrap gap-4 mt-4 pt-3 border-t border-line">{p.links.map((l) => <LinkBtn key={l.href} link={l} />)}</div>
-        )}
+        <CardActions p={p} onOpenDecision={onOpenDecision} gap="gap-4 mt-4 pt-3 border-t border-line" />
       </div>
     </motion.article>
   )
@@ -98,7 +118,43 @@ function Head({ kicker, title, sub }) {
   )
 }
 
+// The open decision lives in the URL hash (#decision-<projectId>) so it is
+// deep-linkable and the browser Back button closes it.
+const DECISION_HASH = /^#decision-([a-z0-9-]+)$/
+const readDecisionHash = () => {
+  const m = DECISION_HASH.exec(window.location.hash)
+  return m ? m[1] : null
+}
+
 export default function Projects() {
+  const [decision, setDecision] = useState(null)
+
+  useEffect(() => {
+    const sync = () => setDecision(readDecisionHash())
+    sync()
+    window.addEventListener('popstate', sync)
+    window.addEventListener('hashchange', sync)
+    return () => {
+      window.removeEventListener('popstate', sync)
+      window.removeEventListener('hashchange', sync)
+    }
+  }, [])
+
+  const openDecision = useCallback((id) => {
+    window.history.pushState({ decision: id }, '', `#decision-${id}`)
+    setDecision(id)
+  }, [])
+
+  const closeDecision = useCallback(() => {
+    if (window.history.state?.decision) {
+      window.history.back() // popstate → sync → null
+    } else {
+      // Arrived by deep link: clear the hash without adding a history entry.
+      window.history.replaceState(null, '', window.location.pathname + window.location.search)
+      setDecision(null)
+    }
+  }, [])
+
   return (
     <section id="work" className="relative py-24 sm:py-32">
       <div className="max-w-content mx-auto px-5 sm:px-8">
@@ -107,7 +163,7 @@ export default function Projects() {
         <div className="grid md:grid-cols-2 gap-6 items-start">
           {featured.map((p, i) => (
             <Parallax key={p.id} speed={i % 2 === 0 ? 26 : -14} className="h-full">
-              <FeaturedCard p={p} i={i} />
+              <FeaturedCard p={p} i={i} onOpenDecision={openDecision} />
             </Parallax>
           ))}
         </div>
@@ -117,7 +173,7 @@ export default function Projects() {
             sub="Most of these went from idea to a working build in two or three days." />
           <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }}
             className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {apps.map((p) => <AppCard key={p.id} p={p} />)}
+            {apps.map((p) => <AppCard key={p.id} p={p} onOpenDecision={openDecision} />)}
           </motion.div>
         </div>
 
@@ -125,10 +181,12 @@ export default function Projects() {
           <Head kicker="Earlier & research" title="Where it started" />
           <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }}
             className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {research.map((p) => <AppCard key={p.id} p={p} />)}
+            {research.map((p) => <AppCard key={p.id} p={p} onOpenDecision={openDecision} />)}
           </motion.div>
         </div>
       </div>
+
+      <DecisionLayer projectId={decision} onClose={closeDecision} />
     </section>
   )
 }

@@ -20,7 +20,7 @@ export const featured = [
     // Real register screens (Sunmi build), cycled as a short walkthrough.
     cover: { type: 'slideshow', srcs: ['/images/pos_slide_1.jpg', '/images/pos_slide_2.jpg', '/images/pos_slide_3.jpg', '/images/pos_slide_4.jpg'], fallback: 'pos' },
     note: 'Runs on registers inside CStoreIQ retailer stores, so there is no public install. The screens above are the real register.',
-    links: [{ label: 'CStoreIQ site', href: 'https://cstoreiq1.vercel.app/' }],
+    links: [{ label: 'CStoreIQ POS', href: 'https://www.cstoreiq.com/pos/index.html' }],
   },
   {
     id: 'rewards',
@@ -32,7 +32,7 @@ export const featured = [
     badge: 'Full platform',
     cover: { type: 'shot', src: '/images/rewards.png', frame: 'phone', fallback: 'loyalty' },
     note: 'Store-branded builds ship per retailer, so there is no single public app to download yet.',
-    links: [{ label: 'CStoreIQ site', href: 'https://cstoreiq1.vercel.app/' }],
+    links: [],
   },
   {
     id: 'invoicepay',
@@ -44,10 +44,7 @@ export const featured = [
     badge: 'Live with vendors',
     cover: { type: 'svg', variant: 'invoice' },
     note: 'The payment rail is private to CStoreIQ vendors. The scanning half is public as ScanIQ.',
-    links: [
-      { label: 'Read the decision', href: '#decisions' },
-      { label: 'Try the scanner (ScanIQ beta)', href: 'https://play.google.com/apps/testing/com.cstoreiq.scaniq' },
-    ],
+    links: [{ label: 'Try the scanner (ScanIQ beta)', href: 'https://play.google.com/apps/testing/com.cstoreiq.scaniq' }],
   },
   {
     id: 'heal',

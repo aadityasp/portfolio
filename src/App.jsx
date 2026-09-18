@@ -5,7 +5,6 @@ import Nav from './components/Nav'
 import Hero from './components/Hero'
 import Marquee from './components/Marquee'
 import Projects from './components/Projects'
-import CaseStudy from './components/CaseStudy'
 import Timeline from './components/Timeline'
 import Testimonials from './components/Testimonials'
 import About from './components/About'
@@ -53,7 +52,6 @@ export default function App() {
         <Hero />
         <Marquee />
         <Projects />
-        <CaseStudy />
         <Timeline />
         <Testimonials />
         <About />
