@@ -12,6 +12,12 @@ function Tag({ children }) {
   )
 }
 
+function Note({ children }) {
+  return (
+    <p className="font-mono text-[11px] leading-relaxed text-soft/80 mt-3">{children}</p>
+  )
+}
+
 function LinkBtn({ link }) {
   return (
     <a href={link.href} target="_blank" rel="noreferrer"
@@ -46,8 +52,9 @@ function FeaturedCard({ p, i }) {
           <p className="font-mono text-xs text-soft mt-1">{p.tagline}</p>
           <p className="text-soft mt-3 leading-relaxed text-[15px]">{p.blurb}</p>
           <div className="flex flex-wrap gap-1.5 mt-4">{p.stack.map((s) => <Tag key={s}>{s}</Tag>)}</div>
+          {p.note && <Note>{p.note}</Note>}
           {p.links?.length > 0 && (
-            <div className="flex gap-5 mt-5 pt-4 border-t border-line">{p.links.map((l) => <LinkBtn key={l.href} link={l} />)}</div>
+            <div className="flex flex-wrap gap-5 mt-5 pt-4 border-t border-line">{p.links.map((l) => <LinkBtn key={l.href} link={l} />)}</div>
           )}
         </div>
       </motion.article>
@@ -71,8 +78,9 @@ function AppCard({ p }) {
         {p.status && <span className="font-mono text-[11px] text-accent mt-0.5">{p.status}</span>}
         <p className="text-soft mt-2 text-sm leading-relaxed flex-1">{p.blurb}</p>
         <div className="flex flex-wrap gap-1.5 mt-3">{p.stack.map((s) => <Tag key={s}>{s}</Tag>)}</div>
+        {p.note && <Note>{p.note}</Note>}
         {p.links?.length > 0 && (
-          <div className="flex gap-4 mt-4 pt-3 border-t border-line">{p.links.map((l) => <LinkBtn key={l.href} link={l} />)}</div>
+          <div className="flex flex-wrap gap-4 mt-4 pt-3 border-t border-line">{p.links.map((l) => <LinkBtn key={l.href} link={l} />)}</div>
         )}
       </div>
     </motion.article>

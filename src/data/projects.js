@@ -3,40 +3,47 @@
 //
 // cover.type: 'svg' | 'icon' | 'shot' | 'photo' | 'video' | 'slideshow'
 // cover.fallback: svg variant to show if the asset fails to load.
+//
+// Every card must give the visitor something to do or an honest reason it can't:
+// either `links` (something to open) or `note` (why there is no public build).
+// A status with neither is a dead end and gets cut.
 
 export const featured = [
   {
     id: 'pos',
     name: 'CStoreIQ POS System',
     tagline: 'Enterprise point of sale',
-    blurb: 'Production Android POS built by a 3-developer team. I built ~70% of it using AI, end to end.',
+    blurb: 'Production Android POS built by a 3-developer team. I built ~70% of it using AI, end to end: checkout, tenders, lottery, and the back-office sync that keeps every store’s pricebook current.',
     stack: ['Kotlin', 'Jetpack Compose', 'FastAPI', 'SQL Server', 'AWS'],
     status: 'In production',
     badge: 'Top contributor',
     cover: { type: 'shot', src: '/images/pos_app.png', frame: 'web', fallback: 'pos' },
-    links: [],
+    note: 'Runs on registers inside CStoreIQ retailer stores, so there is no public install. Happy to walk through it on a call.',
+    links: [{ label: 'CStoreIQ site', href: 'https://cstoreiq1.vercel.app/' }],
   },
   {
     id: 'rewards',
     name: 'Rewards & Gamification',
     tagline: 'Loyalty built on real games',
-    blurb: 'Spin-wheel, scratch-card and slot games with tiered points and live POS accrual at checkout.',
+    blurb: 'Spin-wheel, scratch-card and slot games with tiered points and live POS accrual at checkout. Shopper app, retailer admin, and the accrual service that credits points the moment a receipt closes.',
     stack: ['Flutter', 'FastAPI', 'Angular', 'SQL Server'],
     status: 'Active dev',
     badge: 'Full platform',
     cover: { type: 'shot', src: '/images/rewards.png', frame: 'phone', fallback: 'loyalty' },
-    links: [],
+    note: 'Store-branded builds ship per retailer, so there is no single public app to download yet.',
+    links: [{ label: 'CStoreIQ site', href: 'https://cstoreiq1.vercel.app/' }],
   },
   {
     id: 'invoicepay',
     name: 'InvoicePay',
     tagline: 'Paper invoice to payment',
-    blurb: 'Snap a paper invoice, AI reads it, it issues an EDI 810 and triggers the check payment.',
+    blurb: 'Snap a paper invoice, AI reads every line, it issues an EDI 810 and triggers the check payment. Per-field confidence decides what posts unattended and what a human reviews.',
     stack: ['Flutter', 'FastAPI', 'Mistral AI OCR', 'EDI 810'],
     status: 'In production',
     badge: 'Live with vendors',
     cover: { type: 'svg', variant: 'invoice' },
-    links: [],
+    note: 'The payment rail is private to CStoreIQ vendors. The scanning half is public as ScanIQ.',
+    links: [{ label: 'Try the scanner (ScanIQ beta)', href: 'https://play.google.com/apps/testing/com.cstoreiq.scaniq' }],
   },
   {
     id: 'heal',
@@ -80,10 +87,11 @@ export const apps = [
   {
     id: 'lifeos',
     name: 'LifeOS',
-    blurb: 'My personal operating system for life: one AI-first app to run everything I do. Still under wraps — the code goes public soon.',
-    stack: ['AI-first', 'Personal OS'],
+    blurb: 'A persistent AI agent team that runs my admin. Department heads I task from Telegram, a numbered decision queue I answer with a yes or no, verification before anything reaches me, and hard red lines it can never cross: no sends, no spend, no new accounts. All state lives in files, never in a context window.',
+    stack: ['Claude Code', 'Telegram', 'Markdown state'],
     status: 'Private build',
     cover: { type: 'svg', variant: 'lifeos' },
+    note: 'Private repo while it runs on my real inbox and calendar.',
     links: [],
   },
   {
@@ -128,28 +136,30 @@ export const apps = [
   {
     id: 'trading',
     name: 'Trading Engine',
-    blurb: 'Crypto and Kalshi bot: backtests, arbitrage, Kelly sizing, Telegram alerts.',
-    stack: ['Python', 'Freqtrade', 'Kalshi API'],
-    status: 'Paper-trading',
+    blurb: 'Two signal engines, both human-in-the-loop. A Polymarket tracker watches recently profitable wallets and flags when several pile into the same outcome, then writes a trade ticket I execute by hand. An order-flow backtester turns a Robbins Cup trader’s published rules into code and tests them on real tick data.',
+    stack: ['Python', 'Polymarket API', 'Tick-data backtests'],
+    status: 'Signals only, no auto-execution',
     cover: { type: 'svg', variant: 'trading' },
+    note: 'Private repo. It never places an order, so there is nothing to log into.',
     links: [],
   },
   {
     id: 'satcom',
     name: 'Satcom Workforce Tracker',
-    blurb: 'Geofenced attendance, timesheets and chat across role-based dashboards.',
-    stack: ['Next.js', 'Expo', 'PostgreSQL'],
-    status: 'Web + mobile',
+    blurb: 'Geofenced attendance, timesheets, leave and team chat across SuperAdmin, HR, manager and employee dashboards. Web app plus an Expo mobile app on one API, Docker-packaged for the client to self-host.',
+    stack: ['Next.js', 'Expo', 'PostgreSQL', 'Docker'],
+    status: 'Built for a client',
     cover: { type: 'shot', src: '/images/satcom_app.png', frame: 'web', fallback: 'graph' },
-    links: [],
+    links: [{ label: 'GitHub', href: 'https://github.com/aadityasp/satcom-workforce' }],
   },
   {
     id: 'label',
     name: 'Shelf Label Printer',
-    blurb: 'Prints barcode shelf labels to Brother printers over WiFi or Bluetooth.',
+    blurb: 'Phone app that prints barcode shelf labels for gas-station product racks to Brother QL-810W printers over WiFi or Bluetooth. Pulls live product data through a Fastify API that issues short-lived tokens, so phones never touch the store database.',
     stack: ['Flutter', 'Fastify', 'Brother SDK'],
     status: 'Build ready',
     cover: { type: 'svg', variant: 'label' },
+    note: 'Internal CStoreIQ tool, ships to store staff rather than the app stores.',
     links: [],
   },
   {
@@ -164,19 +174,11 @@ export const apps = [
   {
     id: 'promo',
     name: 'Promo App',
-    blurb: 'Loyalty and promos app with push, maps, coupons and biometric login.',
-    stack: ['Flutter', 'AWS CDK', 'Firebase'],
+    blurb: 'Shopper-facing loyalty and promos app: push offers, store finder, coupons and biometric login, on a serverless AWS backend deployed with CDK.',
+    stack: ['Flutter', 'AWS CDK', 'Lambda', 'Firebase'],
     status: 'Active dev',
     cover: { type: 'svg', variant: 'loyalty' },
-    links: [],
-  },
-  {
-    id: 'storybook',
-    name: 'AI Storybook',
-    blurb: 'Turns prompts and photos into illustrated kids’ books with PDF export.',
-    stack: ['Python', 'Swift / iOS', 'React'],
-    status: 'Prototype',
-    cover: { type: 'svg', variant: 'storybook' },
+    note: 'White-labeled per retailer, so no single public listing yet.',
     links: [],
   },
   {
@@ -191,10 +193,11 @@ export const apps = [
   {
     id: 'mission-control',
     name: 'Mission Control',
-    blurb: 'Scrapes my inbox and builds an Obsidian topic graph and dashboard.',
-    stack: ['Python', 'LLM clustering'],
-    status: 'Prototype',
+    blurb: 'Pulls my whole work inbox and Jira board, clusters threads into topics with an LLM, and writes Obsidian maps of content that link every email to the tickets it touches. One dashboard instead of two inboxes.',
+    stack: ['Python', 'LLM clustering', 'Obsidian'],
+    status: 'Personal tool',
     cover: { type: 'svg', variant: 'graph' },
+    note: 'Runs on my private mail and tickets, so there is no public build.',
     links: [],
   },
 ]
