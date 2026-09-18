@@ -58,10 +58,10 @@ export const apps = [
     name: 'Distress Intelligence',
     blurb: 'Motivated-seller leads for any U.S. county, live from public records. A scraper harness pulls tax, probate and foreclosure filings, a scoring brain ranks them and explains why, and the operator board updates as the scrape runs.',
     stack: ['Next.js', 'Supabase', 'Drizzle + Postgres', 'MapLibre'],
-    status: 'Live, public demo',
+    status: 'Live',
     cover: { type: 'shot', src: '/images/distress_board.jpg', frame: 'web', fallback: 'graph' },
     links: [
-      { label: 'Explore the demo', href: 'https://distress-intelligence.vercel.app/login' },
+      { label: 'Try it live', href: 'https://distress-intelligence.vercel.app/login' },
       { label: 'View site', href: 'https://distress-intelligence.vercel.app' },
     ],
   },
