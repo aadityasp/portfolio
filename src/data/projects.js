@@ -62,6 +62,20 @@ export const featured = [
 
 export const apps = [
   {
+    id: 'writeoff',
+    name: 'WriteOff',
+    blurb: 'Tells a small-business owner whether an expense is a tax write-off, how much counts, why, and where it goes on Schedule C. Snap a receipt or type it. A rules engine checked against 1,523 IRS-sourced cases makes every call, and AI only reads the receipt.',
+    stack: ['Expo', 'Fastify', 'Postgres', 'Claude', 'jev'],
+    status: 'In App Store review',
+    // The film's problem, verdict and end card, muted; "Watch the film" plays it in full with sound.
+    cover: { type: 'video', src: '/images/writeoff_demo.mp4', poster: '/images/writeoff_demo_poster.jpg', fallback: 'invoice' },
+    // Add the App Store link once Apple approves it (apps.apple.com/us/app/id6815032980 404s until then).
+    links: [
+      { label: 'Watch the film', href: '/images/writeoff_film.mp4' },
+      { label: 'Website', href: 'https://writeoff-app-beta.vercel.app' },
+    ],
+  },
+  {
     id: 'distress',
     name: 'Distress Intelligence',
     blurb: 'Motivated-seller leads for any U.S. county, live from public records. A scraper harness pulls tax, probate and foreclosure filings, a scoring brain ranks them and explains why, and the operator board updates as the scrape runs.',
