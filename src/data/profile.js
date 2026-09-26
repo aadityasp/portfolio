@@ -4,7 +4,7 @@ export const experience = [
   {
     year: '2023',
     range: 'Jun 2023 — Now',
-    company: 'CStoreIQ',
+    company: 'CStoreiQ',
     location: 'Huntsville, AL',
     role: 'Senior Product Manager',
     logo: '/images/cstoreiq_logo.svg',

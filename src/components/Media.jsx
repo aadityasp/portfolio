@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { createContext, useContext, useEffect, useRef, useState } from 'react'
 import Cover from './covers'
 
 // Renders a project cover with the right treatment so nothing looks zoomed.
@@ -49,6 +49,10 @@ function useLive(ref) {
   return [inView || hover, handlers]
 }
 
+// True while a film or case study is open over the page: every cover loop
+// pauses so only the film moves (and the page behind it costs nothing).
+export const CoversPaused = createContext(false)
+
 const SHELL = 'w-full h-full grid place-items-center bg-[radial-gradient(120%_120%_at_50%_0%,#EEF1FD_0%,#ECE7DB_70%)]'
 
 export default function Media({ cover, alt }) {
@@ -56,10 +60,11 @@ export default function Media({ cover, alt }) {
   const videoRef = useRef(null)
   const [live, handlers] = useLive(ref)
   const reduced = useReducedMotion()
+  const paused = useContext(CoversPaused)
   const [failed, setFailed] = useState(false)
   const [slide, setSlide] = useState(0)
 
-  const active = live && !reduced
+  const active = live && !reduced && !paused
 
   // Drive the video off the same signal rather than autoplaying everything.
   useEffect(() => {
@@ -136,15 +141,17 @@ export default function Media({ cover, alt }) {
   }
 
   if (cover.type === 'shot' && cover.frame === 'phone') {
+    // Flex, not grid: a grid row sizes to the image, so h-full never capped a
+    // tall phone screenshot and it overflowed the cover (cut off at the bottom).
     return wrap(
-      <div className={`${SHELL} p-4`}>
+      <div className="w-full h-full flex items-center justify-center p-4 bg-[radial-gradient(120%_120%_at_50%_0%,#EEF1FD_0%,#ECE7DB_70%)]">
         <img
           src={cover.src}
           alt={alt}
           loading="lazy"
           decoding="async"
           onError={() => setFailed(true)}
-          className="h-full w-auto max-w-full object-contain rounded-2xl shadow-[0_12px_34px_rgba(25,21,16,0.18)] ring-1 ring-black/5"
+          className="max-h-full max-w-full w-auto h-auto object-contain rounded-2xl shadow-[0_12px_34px_rgba(25,21,16,0.18)] ring-1 ring-black/5"
         />
       </div>,
     )

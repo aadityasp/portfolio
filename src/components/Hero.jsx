@@ -31,7 +31,7 @@ export default function Hero() {
               <span className="absolute inline-flex w-full h-full rounded-full bg-accent animate-pulseDot" />
               <span className="relative inline-flex w-2.5 h-2.5 rounded-full bg-accent" />
             </span>
-            <span className="eyebrow text-soft">AI Product Manager &middot; MS in AI &middot; CStoreIQ</span>
+            <span className="eyebrow text-soft">AI Product Manager &middot; MS in AI &middot; CStoreiQ</span>
           </motion.div>
 
           <h1 className="display font-medium leading-[0.95] text-[clamp(2.5rem,6.2vw,5rem)] text-ink">

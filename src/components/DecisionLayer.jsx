@@ -18,8 +18,8 @@ function Num({ n }) {
 
 /**
  * The decision layer: a dismissable sheet over the page showing ONLY the
- * decision write-ups attached to one project. Opened from the "Read the
- * decision" button on that project's card. Escape, the backdrop, and the close
+ * decision write-ups attached to one project. Opened from the "Case study"
+ * button on that project's card. Escape, the backdrop, and the close
  * button all dismiss it; the opener owns the URL hash so browser Back also
  * closes it (see Projects.jsx).
  */
@@ -65,7 +65,7 @@ export default function DecisionLayer({ projectId, onClose }) {
             className="relative w-full sm:max-w-3xl max-h-[92vh] sm:max-h-[88vh] overflow-y-auto bg-paper border border-line rounded-t-3xl sm:rounded-3xl shadow-2xl"
           >
             <div className="sticky top-0 z-10 flex items-center justify-between gap-4 px-6 sm:px-9 py-4 bg-paper/95 backdrop-blur border-b border-line">
-              <p className="eyebrow text-accent">Product decision · {project.name}</p>
+              <p className="eyebrow text-accent">Case study · {project.name}</p>
               <button
                 ref={closeRef} type="button" onClick={onClose} aria-label="Close"
                 className="shrink-0 w-9 h-9 inline-flex items-center justify-center rounded-full border border-line text-soft hover:text-ink hover:bg-paper2 transition-colors"

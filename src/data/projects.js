@@ -3,6 +3,8 @@
 //
 // cover.type: 'svg' | 'icon' | 'shot' | 'photo' | 'video' | 'slideshow'
 // cover.fallback: svg variant to show if the asset fails to load.
+// film: the full narrated film ({ src, seconds }). It plays in an on-page player
+// from the "Play the film" line under the cover; seconds drives the m:ss label.
 //
 // Every card must give the visitor something to do or an honest reason it can't:
 // either `links` (something to open) or `note` (why there is no public build).
@@ -11,16 +13,15 @@
 export const featured = [
   {
     id: 'pos',
-    name: 'CStoreIQ POS System',
+    name: 'CStoreiQ POS System',
     tagline: 'Enterprise point of sale',
     blurb: 'Production Android POS built by a 3-developer team. I built ~70% of it using AI, end to end: checkout, tenders, lottery, and the back-office sync that keeps every store’s pricebook current.',
     stack: ['Kotlin', 'Jetpack Compose', 'FastAPI', 'SQL Server', 'AWS'],
     status: 'In production',
-    badge: 'Top contributor',
     // Real register screens (Sunmi build), cycled as a short walkthrough.
     cover: { type: 'slideshow', srcs: ['/images/pos_slide_1.jpg', '/images/pos_slide_2.jpg', '/images/pos_slide_3.jpg', '/images/pos_slide_4.jpg'], fallback: 'pos' },
-    note: 'Runs on registers inside CStoreIQ retailer stores, so there is no public install. The screens above are the real register.',
-    links: [{ label: 'CStoreIQ POS', href: 'https://www.cstoreiq.com/pos/index.html' }],
+    note: 'Runs on registers inside CStoreiQ retailer stores, so there is no public install. The screens above are the real register.',
+    links: [{ label: 'CStoreiQ POS', href: 'https://www.cstoreiq.com/pos/index.html' }],
   },
   {
     id: 'rewards',
@@ -29,8 +30,9 @@ export const featured = [
     blurb: 'Spin-wheel, scratch-card and slot games with tiered points and live POS accrual at checkout. Shopper app, retailer admin, and the accrual service that credits points the moment a receipt closes.',
     stack: ['Flutter', 'FastAPI', 'Angular', 'SQL Server'],
     status: 'Active dev',
-    badge: 'Full platform',
-    cover: { type: 'shot', src: '/images/rewards.png', frame: 'phone', fallback: 'loyalty' },
+    // Real app screens: the games hub, the Rewards tab scrolling (stitched from
+    // the e2e screenshots), and the points activity feed. No film yet.
+    cover: { type: 'video', src: '/images/rewards_demo.mp4', poster: '/images/rewards_demo_poster.jpg', fallback: 'loyalty' },
     note: 'Store-branded builds ship per retailer, so there is no single public app to download yet.',
     links: [],
   },
@@ -41,9 +43,8 @@ export const featured = [
     blurb: 'Snap a paper invoice, AI reads every line, it issues an EDI 810 and triggers the check payment. Per-field confidence decides what posts unattended and what a human reviews.',
     stack: ['Flutter', 'FastAPI', 'Mistral AI OCR', 'EDI 810'],
     status: 'In production',
-    badge: 'Live with vendors',
     cover: { type: 'svg', variant: 'invoice' },
-    note: 'The payment rail is private to CStoreIQ vendors. The scanning half is public as ScanIQ.',
+    note: 'The payment rail is private to CStoreiQ vendors. The scanning half is public as ScanIQ.',
     links: [{ label: 'Try the scanner (ScanIQ beta)', href: 'https://play.google.com/apps/testing/com.cstoreiq.scaniq' }],
   },
   {
@@ -53,12 +54,11 @@ export const featured = [
     blurb: 'Turns code-mixed doctor visits into FHIR clinical notes the doctor reviews and signs.',
     stack: ['Next.js', 'FastAPI', 'Sarvam AI', 'GPT-4o'],
     status: 'In beta with doctors',
-    badge: 'Healthcare AI',
     cover: { type: 'video', src: '/images/heal_demo.mp4', poster: '/images/heal_demo_poster.jpg', fallback: 'scribe' },
     // GitHub link removed 2026-09-14: repo is private, the link 404'd for every visitor.
+    film: { src: '/images/heal_film.mp4', seconds: 69.53 },
     links: [
-      { label: 'Watch the film', href: '/images/heal_film.mp4' },
-      { label: 'View live', href: 'https://ai-medical-scribe-three.vercel.app' },
+      { label: 'Try it live', href: 'https://ai-medical-scribe-three.vercel.app' },
     ],
   },
 ]
@@ -70,11 +70,11 @@ export const apps = [
     blurb: 'Tells a small-business owner whether an expense is a tax write-off, how much counts, why, and where it goes on Schedule C. Snap a receipt or type it. A rules engine checked against 1,523 IRS-sourced cases makes every call, and AI only reads the receipt.',
     stack: ['Expo', 'Fastify', 'Postgres', 'Claude', 'jev'],
     status: 'In App Store review',
-    // The film's problem, verdict and end card, muted; "Watch the film" plays it in full with sound.
+    // The film's problem, verdict and end card, muted; "Play the film" opens it in full with sound.
     cover: { type: 'video', src: '/images/writeoff_demo.mp4', poster: '/images/writeoff_demo_poster.jpg', fallback: 'invoice' },
     // Add the App Store link once Apple approves it (apps.apple.com/us/app/id6815032980 404s until then).
+    film: { src: '/images/writeoff_film.mp4', seconds: 69.01 },
     links: [
-      { label: 'Watch the film', href: '/images/writeoff_film.mp4' },
       { label: 'Website', href: 'https://writeoff-app-beta.vercel.app' },
     ],
   },
@@ -84,12 +84,12 @@ export const apps = [
     blurb: 'Motivated-seller leads for any U.S. county, live from public records. A scraper harness pulls tax, probate and foreclosure filings, a scoring brain ranks them and explains why, and the operator board updates as the scrape runs.',
     stack: ['Next.js', 'Supabase', 'Drizzle + Postgres', 'MapLibre'],
     status: 'Live',
-    // The film's problem, ranked lead and end card, muted; "Watch the film" plays it in full with sound.
+    // The film's problem, ranked lead and end card, muted; "Play the film" opens it in full with sound.
     cover: { type: 'video', src: '/images/distress_demo.mp4', poster: '/images/distress_demo_poster.jpg', fallback: 'graph' },
+    film: { src: '/images/distress_film.mp4', seconds: 71.9 },
     links: [
-      { label: 'Watch the film', href: '/images/distress_film.mp4' },
       { label: 'Try it live', href: 'https://distress-intelligence.vercel.app/login' },
-      { label: 'View site', href: 'https://distress-intelligence.vercel.app' },
+      { label: 'Website', href: 'https://distress-intelligence.vercel.app' },
     ],
   },
   {
@@ -111,7 +111,7 @@ export const apps = [
     stack: ['Python', 'LLM classification', 'NACS taxonomy'],
     status: 'Shipped internally',
     cover: { type: 'svg', variant: 'graph' },
-    note: 'Internal CStoreIQ data work, so there is no public build.',
+    note: 'Internal CStoreiQ data work, so there is no public build.',
     links: [],
   },
   {
@@ -120,10 +120,11 @@ export const apps = [
     blurb: 'A persistent AI agent team that runs my admin. Department heads I task from Telegram, a numbered decision queue I answer with a yes or no, verification before anything reaches me, and hard red lines it can never cross: no sends, no spend, no new accounts. All state lives in files, never in a context window.',
     stack: ['Claude Code', 'Telegram', 'Markdown state'],
     status: 'Private build',
-    // The film's problem, red lines and end card, muted; "Watch the film" plays it in full with sound.
+    // The film's problem, red lines and end card, muted; "Play the film" opens it in full with sound.
     cover: { type: 'video', src: '/images/lifeos_demo.mp4', poster: '/images/lifeos_demo_poster.jpg', fallback: 'lifeos' },
     note: 'Private repo, since it runs my own admin.',
-    links: [{ label: 'Watch the film', href: '/images/lifeos_film.mp4' }],
+    film: { src: '/images/lifeos_film.mp4', seconds: 59.93 },
+    links: [],
   },
   {
     id: 'blackjack',
@@ -131,11 +132,11 @@ export const apps = [
     blurb: 'Free iOS trainer that drills mathematically-correct basic strategy, hand by hand, with instant feedback. No ads, no accounts, fully offline.',
     stack: ['SwiftUI', 'iOS'],
     status: 'On the App Store',
-    // The film's problem, right play and end card, muted; "Watch the film" plays it in full with sound.
+    // The film's problem, right play and end card, muted; "Play the film" opens it in full with sound.
     cover: { type: 'video', src: '/images/blackjack_demo.mp4', poster: '/images/blackjack_demo_poster.jpg', fallback: 'blackjack' },
     // No GitHub link: the public repo only hosts the App Store privacy/support page, not the app source.
+    film: { src: '/images/blackjack_film.mp4', seconds: 58.7 },
     links: [
-      { label: 'Watch the film', href: '/images/blackjack_film.mp4' },
       { label: 'App Store', href: 'https://apps.apple.com/us/app/id6789853035' },
     ],
   },
@@ -146,8 +147,8 @@ export const apps = [
     stack: ['React', 'TypeScript', 'Node.js', 'WebSockets'],
     status: 'Open source',
     cover: { type: 'video', src: '/images/visualworkflows_demo.mp4', poster: '/images/visualworkflows_demo_poster.jpg', frame: 'web', fallback: 'agents' },
+    film: { src: '/images/visual-workflows_film.mp4', seconds: 59.93 },
     links: [
-      { label: 'Watch the film', href: '/images/visual-workflows_film.mp4' },
       { label: 'GitHub', href: 'https://github.com/aadityasp/visual-workflows' },
     ],
   },
@@ -157,10 +158,10 @@ export const apps = [
     blurb: 'A real-time rebuild of Owner.com’s Grader. Fetches a restaurant’s live website and validates 20+ signals into a growth score. Not a mockup, it runs the checks live.',
     stack: ['JavaScript', 'Live fetch', 'DOM analysis'],
     status: 'Live',
-    // The film's problem, growth score and end card, muted; "Watch the film" plays it in full with sound.
+    // The film's problem, growth score and end card, muted; "Play the film" opens it in full with sound.
     cover: { type: 'video', src: '/images/grader_demo.mp4', poster: '/images/grader_demo_poster.jpg', fallback: 'graph' },
+    film: { src: '/images/grader_film.mp4', seconds: 53.97 },
     links: [
-      { label: 'Watch the film', href: '/images/grader_film.mp4' },
       { label: 'Try it live', href: 'https://aadityasp.github.io/restaurant-growth-grader/' },
     ],
   },
@@ -170,11 +171,11 @@ export const apps = [
     blurb: 'I built my own wedding invite, then turned it into a product so anyone can make one.',
     stack: ['Next.js', 'React Three Fiber', 'Vercel'],
     status: 'Live',
-    // The film's problem, ceremony pages and end card, muted; "Watch the film" plays it in full with sound.
+    // The film's problem, ceremony pages and end card, muted; "Play the film" opens it in full with sound.
     cover: { type: 'video', src: '/images/luxe_demo.mp4', poster: '/images/luxe_demo_poster.jpg', fallback: 'invite' },
+    film: { src: '/images/luxe_film.mp4', seconds: 54.47 },
     links: [
-      { label: 'Watch the film', href: '/images/luxe_film.mp4' },
-      { label: 'Try it', href: 'https://luxe-invites.vercel.app' },
+      { label: 'Try it live', href: 'https://luxe-invites.vercel.app' },
     ],
   },
   {
@@ -183,10 +184,11 @@ export const apps = [
     blurb: 'Two signal engines, both human-in-the-loop. A Polymarket tracker watches recently profitable wallets and flags when several pile into the same outcome, then writes a trade ticket I execute by hand. An order-flow backtester turns a Robbins Cup trader’s published rules into code and tests them on real tick data.',
     stack: ['Python', 'Polymarket API', 'Tick-data backtests'],
     status: 'Signals only, no auto-execution',
-    // The film's problem, trade ticket and end card, muted; "Watch the film" plays it in full with sound.
+    // The film's problem, trade ticket and end card, muted; "Play the film" opens it in full with sound.
     cover: { type: 'video', src: '/images/trading_demo.mp4', poster: '/images/trading_demo_poster.jpg', fallback: 'trading' },
     note: 'Private repo. It never places an order, so there is nothing to log into.',
-    links: [{ label: 'Watch the film', href: '/images/trading_film.mp4' }],
+    film: { src: '/images/trading_film.mp4', seconds: 59.27 },
+    links: [],
   },
   {
     id: 'satcom',
@@ -194,10 +196,10 @@ export const apps = [
     blurb: 'Geofenced attendance, timesheets, leave and team chat across SuperAdmin, HR, manager and employee dashboards. Web app plus an Expo mobile app on one API, Docker-packaged for the client to self-host.',
     stack: ['Next.js', 'Expo', 'PostgreSQL', 'Docker'],
     status: 'Built for a client',
-    // The film's problem, geofence check and end card, muted; "Watch the film" plays it in full with sound.
+    // The film's problem, geofence check and end card, muted; "Play the film" opens it in full with sound.
     cover: { type: 'video', src: '/images/satcom_demo.mp4', poster: '/images/satcom_demo_poster.jpg', fallback: 'graph' },
+    film: { src: '/images/satcom_film.mp4', seconds: 66.6 },
     links: [
-      { label: 'Watch the film', href: '/images/satcom_film.mp4' },
       { label: 'GitHub', href: 'https://github.com/aadityasp/satcom-workforce' },
     ],
   },
@@ -208,7 +210,7 @@ export const apps = [
     stack: ['Flutter', 'Fastify', 'Brother SDK'],
     status: 'Build ready',
     cover: { type: 'svg', variant: 'label' },
-    note: 'Internal CStoreIQ tool, ships to store staff rather than the app stores.',
+    note: 'Internal CStoreiQ tool, ships to store staff rather than the app stores.',
     links: [],
   },
   {
@@ -218,10 +220,10 @@ export const apps = [
     // Not SwiftUI: the App Store build (EAS submit ascAppId 6757412164) is an Expo / React Native project.
     stack: ['React Native', 'Expo', 'Gemini API'],
     status: 'On the App Store',
-    // The film's problem, roast and end card, muted; "Watch the film" plays it in full with sound.
+    // The film's problem, roast and end card, muted; "Play the film" opens it in full with sound.
     cover: { type: 'video', src: '/images/roasttoast_demo.mp4', poster: '/images/roasttoast_demo_poster.jpg', fallback: 'storybook' },
+    film: { src: '/images/roasttoast_film.mp4', seconds: 47.07 },
     links: [
-      { label: 'Watch the film', href: '/images/roasttoast_film.mp4' },
       { label: 'App Store', href: 'https://apps.apple.com/us/app/roasttoast-ai-roast-machine/id6757412164' },
     ],
   },
@@ -237,12 +239,12 @@ export const apps = [
   },
   {
     id: 'cstoreiq-site',
-    name: 'CStoreIQ Website',
+    name: 'CStoreiQ Website',
     blurb: 'Marketing site for a retail-tech suite. Animated, shipped fast.',
     stack: ['React', 'TypeScript'],
     status: 'Shipped',
     cover: { type: 'shot', src: '/images/csiq_website.png', frame: 'web', fallback: 'pos' },
-    links: [{ label: 'View site', href: 'https://cstoreiq1.vercel.app/' }],
+    links: [{ label: 'Website', href: 'https://cstoreiq1.vercel.app/' }],
   },
   {
     id: 'mission-control',
@@ -250,10 +252,11 @@ export const apps = [
     blurb: 'Pulls my whole work inbox and Jira board, clusters threads into topics with an LLM, and writes Obsidian maps of content that link every email to the tickets it touches. One dashboard instead of two inboxes.',
     stack: ['Python', 'LLM clustering', 'Obsidian'],
     status: 'Personal tool',
-    // The film's problem, linked emails and end card, muted; "Watch the film" plays it in full with sound.
+    // The film's problem, linked emails and end card, muted; "Play the film" opens it in full with sound.
     cover: { type: 'video', src: '/images/mission-control_demo.mp4', poster: '/images/mission-control_demo_poster.jpg', fallback: 'graph' },
     note: 'Runs on my private mail and tickets, so there is no public build.',
-    links: [{ label: 'Watch the film', href: '/images/mission-control_film.mp4' }],
+    film: { src: '/images/mission-control_film.mp4', seconds: 50.33 },
+    links: [],
   },
 ]
 
@@ -264,8 +267,8 @@ export const research = [
     blurb: 'AR brain-controlled multiplayer game. MIT Reality Hack 2022 semi-finalist.',
     stack: ['Unity', 'AR', 'BCI'],
     cover: { type: 'photo', src: '/images/xr_MIT.jpeg' },
+    film: { src: '/images/sensorium_film.mp4', seconds: 44.83 },
     links: [
-      { label: 'Watch the film', href: '/images/sensorium_film.mp4' },
       { label: 'Devpost', href: 'https://devpost.com/software/sensorium?ref_content=user-portfolio&ref_feature=in_progress' },
     ],
   },
@@ -276,8 +279,8 @@ export const research = [
     blurb: 'PyTorch reimplementation of Deep Koalarization: a CNN predicts the color channels of a grayscale photo. Swapping the paper’s MSE loss for MSLE and its Inception-ResNet-v2 extractor for SE-ResNet-152 gave cleaner color and faster convergence on 200K ImageNet images.',
     stack: ['Python', 'TensorFlow', 'CNNs'],
     cover: { type: 'photo', src: '/images/imagecolorization.png' },
+    film: { src: '/images/colorization_film.mp4', seconds: 45.0 },
     links: [
-      { label: 'Watch the film', href: '/images/colorization_film.mp4' },
       { label: 'GitHub', href: 'https://github.com/aadityasp/Image_colorization' },
     ],
   },
@@ -287,8 +290,8 @@ export const research = [
     blurb: 'Touchless hand-tracking mouse with computer vision.',
     stack: ['Python', 'MediaPipe', 'OpenCV'],
     cover: { type: 'video', src: '/images/19 - virtual_hand.mp4' },
+    film: { src: '/images/virtual-mouse_film.mp4', seconds: 39.87 },
     links: [
-      { label: 'Watch the film', href: '/images/virtual-mouse_film.mp4' },
       { label: 'GitHub', href: 'https://github.com/aadityasp/Virtual_Mouse' },
     ],
   },

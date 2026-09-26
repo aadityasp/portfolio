@@ -1,6 +1,6 @@
 // Product decisions, one per project, written up as problem / decision /
 // tradeoff / result. They never render on the main page: a card whose id has
-// a decision here shows a "Read the decision" button that opens the layer
+// a decision here shows a "Case study" button that opens the layer
 // (src/components/DecisionLayer.jsx) with ONLY that project's write-up.
 //
 // Honesty rule for this file: every number here is one that already appears on

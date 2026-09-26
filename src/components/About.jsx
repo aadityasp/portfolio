@@ -22,7 +22,7 @@ export default function About() {
             </h2>
             <div className="text-soft mt-6 space-y-4 text-lg leading-relaxed">
               <p>
-                MS in AI, product manager at CStoreIQ. I don’t wait for engineering capacity
+                MS in AI, product manager at CStoreiQ. I don’t wait for engineering capacity
                 to prove an idea. I prototype it, ship it, measure it, and bring the data.
               </p>
               <p>
