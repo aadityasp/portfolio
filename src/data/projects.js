@@ -56,7 +56,10 @@ export const featured = [
     badge: 'Healthcare AI',
     cover: { type: 'video', src: '/images/heal_demo.mp4', poster: '/images/heal_demo_poster.jpg', fallback: 'scribe' },
     // GitHub link removed 2026-09-14: repo is private, the link 404'd for every visitor.
-    links: [{ label: 'View live', href: 'https://ai-medical-scribe-three.vercel.app' }],
+    links: [
+      { label: 'Watch the film', href: '/images/heal_film.mp4' },
+      { label: 'View live', href: 'https://ai-medical-scribe-three.vercel.app' },
+    ],
   },
 ]
 
@@ -81,8 +84,10 @@ export const apps = [
     blurb: 'Motivated-seller leads for any U.S. county, live from public records. A scraper harness pulls tax, probate and foreclosure filings, a scoring brain ranks them and explains why, and the operator board updates as the scrape runs.',
     stack: ['Next.js', 'Supabase', 'Drizzle + Postgres', 'MapLibre'],
     status: 'Live',
-    cover: { type: 'shot', src: '/images/distress_board.jpg', frame: 'web', fallback: 'graph' },
+    // The film's problem, ranked lead and end card, muted; "Watch the film" plays it in full with sound.
+    cover: { type: 'video', src: '/images/distress_demo.mp4', poster: '/images/distress_demo_poster.jpg', fallback: 'graph' },
     links: [
+      { label: 'Watch the film', href: '/images/distress_film.mp4' },
       { label: 'Try it live', href: 'https://distress-intelligence.vercel.app/login' },
       { label: 'View site', href: 'https://distress-intelligence.vercel.app' },
     ],
@@ -115,9 +120,10 @@ export const apps = [
     blurb: 'A persistent AI agent team that runs my admin. Department heads I task from Telegram, a numbered decision queue I answer with a yes or no, verification before anything reaches me, and hard red lines it can never cross: no sends, no spend, no new accounts. All state lives in files, never in a context window.',
     stack: ['Claude Code', 'Telegram', 'Markdown state'],
     status: 'Private build',
-    cover: { type: 'svg', variant: 'lifeos' },
+    // The film's problem, red lines and end card, muted; "Watch the film" plays it in full with sound.
+    cover: { type: 'video', src: '/images/lifeos_demo.mp4', poster: '/images/lifeos_demo_poster.jpg', fallback: 'lifeos' },
     note: 'Private repo, since it runs my own admin.',
-    links: [],
+    links: [{ label: 'Watch the film', href: '/images/lifeos_film.mp4' }],
   },
   {
     id: 'blackjack',
@@ -125,9 +131,13 @@ export const apps = [
     blurb: 'Free iOS trainer that drills mathematically-correct basic strategy, hand by hand, with instant feedback. No ads, no accounts, fully offline.',
     stack: ['SwiftUI', 'iOS'],
     status: 'On the App Store',
-    cover: { type: 'svg', variant: 'blackjack' },
+    // The film's problem, right play and end card, muted; "Watch the film" plays it in full with sound.
+    cover: { type: 'video', src: '/images/blackjack_demo.mp4', poster: '/images/blackjack_demo_poster.jpg', fallback: 'blackjack' },
     // No GitHub link: the public repo only hosts the App Store privacy/support page, not the app source.
-    links: [{ label: 'App Store', href: 'https://apps.apple.com/us/app/id6789853035' }],
+    links: [
+      { label: 'Watch the film', href: '/images/blackjack_film.mp4' },
+      { label: 'App Store', href: 'https://apps.apple.com/us/app/id6789853035' },
+    ],
   },
   {
     id: 'visual-workflows',
@@ -136,7 +146,10 @@ export const apps = [
     stack: ['React', 'TypeScript', 'Node.js', 'WebSockets'],
     status: 'Open source',
     cover: { type: 'video', src: '/images/visualworkflows_demo.mp4', poster: '/images/visualworkflows_demo_poster.jpg', frame: 'web', fallback: 'agents' },
-    links: [{ label: 'GitHub', href: 'https://github.com/aadityasp/visual-workflows' }],
+    links: [
+      { label: 'Watch the film', href: '/images/visual-workflows_film.mp4' },
+      { label: 'GitHub', href: 'https://github.com/aadityasp/visual-workflows' },
+    ],
   },
   {
     id: 'grader',
@@ -144,8 +157,12 @@ export const apps = [
     blurb: 'A real-time rebuild of Owner.com’s Grader. Fetches a restaurant’s live website and validates 20+ signals into a growth score. Not a mockup, it runs the checks live.',
     stack: ['JavaScript', 'Live fetch', 'DOM analysis'],
     status: 'Live',
-    cover: { type: 'shot', src: '/images/grader_app.png', frame: 'web', fallback: 'graph' },
-    links: [{ label: 'Try it live', href: 'https://aadityasp.github.io/restaurant-growth-grader/' }],
+    // The film's problem, growth score and end card, muted; "Watch the film" plays it in full with sound.
+    cover: { type: 'video', src: '/images/grader_demo.mp4', poster: '/images/grader_demo_poster.jpg', fallback: 'graph' },
+    links: [
+      { label: 'Watch the film', href: '/images/grader_film.mp4' },
+      { label: 'Try it live', href: 'https://aadityasp.github.io/restaurant-growth-grader/' },
+    ],
   },
   {
     id: 'luxe',
@@ -153,8 +170,12 @@ export const apps = [
     blurb: 'I built my own wedding invite, then turned it into a product so anyone can make one.',
     stack: ['Next.js', 'React Three Fiber', 'Vercel'],
     status: 'Live',
-    cover: { type: 'svg', variant: 'invite' },
-    links: [{ label: 'Try it', href: 'https://luxe-invites.vercel.app' }],
+    // The film's problem, ceremony pages and end card, muted; "Watch the film" plays it in full with sound.
+    cover: { type: 'video', src: '/images/luxe_demo.mp4', poster: '/images/luxe_demo_poster.jpg', fallback: 'invite' },
+    links: [
+      { label: 'Watch the film', href: '/images/luxe_film.mp4' },
+      { label: 'Try it', href: 'https://luxe-invites.vercel.app' },
+    ],
   },
   {
     id: 'trading',
@@ -162,9 +183,10 @@ export const apps = [
     blurb: 'Two signal engines, both human-in-the-loop. A Polymarket tracker watches recently profitable wallets and flags when several pile into the same outcome, then writes a trade ticket I execute by hand. An order-flow backtester turns a Robbins Cup trader’s published rules into code and tests them on real tick data.',
     stack: ['Python', 'Polymarket API', 'Tick-data backtests'],
     status: 'Signals only, no auto-execution',
-    cover: { type: 'svg', variant: 'trading' },
+    // The film's problem, trade ticket and end card, muted; "Watch the film" plays it in full with sound.
+    cover: { type: 'video', src: '/images/trading_demo.mp4', poster: '/images/trading_demo_poster.jpg', fallback: 'trading' },
     note: 'Private repo. It never places an order, so there is nothing to log into.',
-    links: [],
+    links: [{ label: 'Watch the film', href: '/images/trading_film.mp4' }],
   },
   {
     id: 'satcom',
@@ -172,8 +194,12 @@ export const apps = [
     blurb: 'Geofenced attendance, timesheets, leave and team chat across SuperAdmin, HR, manager and employee dashboards. Web app plus an Expo mobile app on one API, Docker-packaged for the client to self-host.',
     stack: ['Next.js', 'Expo', 'PostgreSQL', 'Docker'],
     status: 'Built for a client',
-    cover: { type: 'shot', src: '/images/satcom_app.png', frame: 'web', fallback: 'graph' },
-    links: [{ label: 'GitHub', href: 'https://github.com/aadityasp/satcom-workforce' }],
+    // The film's problem, geofence check and end card, muted; "Watch the film" plays it in full with sound.
+    cover: { type: 'video', src: '/images/satcom_demo.mp4', poster: '/images/satcom_demo_poster.jpg', fallback: 'graph' },
+    links: [
+      { label: 'Watch the film', href: '/images/satcom_film.mp4' },
+      { label: 'GitHub', href: 'https://github.com/aadityasp/satcom-workforce' },
+    ],
   },
   {
     id: 'label',
@@ -189,10 +215,15 @@ export const apps = [
     id: 'roasttoast',
     name: 'RoastToast iOS',
     blurb: 'Gemini-powered app that roasts your photos. Built in a day.',
-    stack: ['SwiftUI', 'Gemini API'],
+    // Not SwiftUI: the App Store build (EAS submit ascAppId 6757412164) is an Expo / React Native project.
+    stack: ['React Native', 'Expo', 'Gemini API'],
     status: 'On the App Store',
-    cover: { type: 'icon', src: '/images/roasttoast_logo.png', fallback: 'storybook' },
-    links: [{ label: 'App Store', href: 'https://apps.apple.com/us/app/roasttoast-ai-roast-machine/id6757412164' }],
+    // The film's problem, roast and end card, muted; "Watch the film" plays it in full with sound.
+    cover: { type: 'video', src: '/images/roasttoast_demo.mp4', poster: '/images/roasttoast_demo_poster.jpg', fallback: 'storybook' },
+    links: [
+      { label: 'Watch the film', href: '/images/roasttoast_film.mp4' },
+      { label: 'App Store', href: 'https://apps.apple.com/us/app/roasttoast-ai-roast-machine/id6757412164' },
+    ],
   },
   {
     id: 'promo',
@@ -219,9 +250,10 @@ export const apps = [
     blurb: 'Pulls my whole work inbox and Jira board, clusters threads into topics with an LLM, and writes Obsidian maps of content that link every email to the tickets it touches. One dashboard instead of two inboxes.',
     stack: ['Python', 'LLM clustering', 'Obsidian'],
     status: 'Personal tool',
-    cover: { type: 'svg', variant: 'graph' },
+    // The film's problem, linked emails and end card, muted; "Watch the film" plays it in full with sound.
+    cover: { type: 'video', src: '/images/mission-control_demo.mp4', poster: '/images/mission-control_demo_poster.jpg', fallback: 'graph' },
     note: 'Runs on my private mail and tickets, so there is no public build.',
-    links: [],
+    links: [{ label: 'Watch the film', href: '/images/mission-control_film.mp4' }],
   },
 ]
 
@@ -232,7 +264,10 @@ export const research = [
     blurb: 'AR brain-controlled multiplayer game. MIT Reality Hack 2022 semi-finalist.',
     stack: ['Unity', 'AR', 'BCI'],
     cover: { type: 'photo', src: '/images/xr_MIT.jpeg' },
-    links: [{ label: 'Devpost', href: 'https://devpost.com/software/sensorium?ref_content=user-portfolio&ref_feature=in_progress' }],
+    links: [
+      { label: 'Watch the film', href: '/images/sensorium_film.mp4' },
+      { label: 'Devpost', href: 'https://devpost.com/software/sensorium?ref_content=user-portfolio&ref_feature=in_progress' },
+    ],
   },
   {
     id: 'colorization',
@@ -241,7 +276,10 @@ export const research = [
     blurb: 'PyTorch reimplementation of Deep Koalarization: a CNN predicts the color channels of a grayscale photo. Swapping the paper’s MSE loss for MSLE and its Inception-ResNet-v2 extractor for SE-ResNet-152 gave cleaner color and faster convergence on 200K ImageNet images.',
     stack: ['Python', 'TensorFlow', 'CNNs'],
     cover: { type: 'photo', src: '/images/imagecolorization.png' },
-    links: [{ label: 'GitHub', href: 'https://github.com/aadityasp/Image_colorization' }],
+    links: [
+      { label: 'Watch the film', href: '/images/colorization_film.mp4' },
+      { label: 'GitHub', href: 'https://github.com/aadityasp/Image_colorization' },
+    ],
   },
   {
     id: 'virtual-mouse',
@@ -249,7 +287,10 @@ export const research = [
     blurb: 'Touchless hand-tracking mouse with computer vision.',
     stack: ['Python', 'MediaPipe', 'OpenCV'],
     cover: { type: 'video', src: '/images/19 - virtual_hand.mp4' },
-    links: [{ label: 'GitHub', href: 'https://github.com/aadityasp/Virtual_Mouse' }],
+    links: [
+      { label: 'Watch the film', href: '/images/virtual-mouse_film.mp4' },
+      { label: 'GitHub', href: 'https://github.com/aadityasp/Virtual_Mouse' },
+    ],
   },
 ]
 
