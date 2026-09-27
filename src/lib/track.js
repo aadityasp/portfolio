@@ -11,6 +11,16 @@ const rid = () =>
   (crypto?.randomUUID?.() || Math.random().toString(36).slice(2) + Date.now().toString(36))
     .replace(/-/g, '').slice(0, 22)
 
+// Set by initTracking once a session is live; stays null when opted out, so
+// mark() is a no-op on the owner's own devices too.
+let record = null
+
+// Records an in-page action (the story film opening, a chapter jump, the
+// film ending) as a click-like event on the same beacon the link clicks use.
+export function mark(label) {
+  try { record?.(String(label)) } catch { /* never surface an analytics failure */ }
+}
+
 function store(area, key, val) {
   try {
     if (val === undefined) return area.getItem(key)
@@ -87,6 +97,7 @@ export function initTracking() {
     const vid = visitorId()
 
     const eng = { sec: 0, scroll: 0, sections: [], clicks: [] }
+    record = (label) => { if (label && eng.clicks.length < 50) eng.clicks.push(label.slice(0, 60)) }
     let seq = 0
     let visibleSince = document.visibilityState === 'visible' ? Date.now() : 0
 

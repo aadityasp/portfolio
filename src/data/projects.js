@@ -42,7 +42,7 @@ export const featured = [
     tagline: 'Paper invoice to payment',
     blurb: 'Snap a paper invoice, AI reads every line, it issues an EDI 810 and triggers the check payment. Per-field confidence decides what posts unattended and what a human reviews.',
     stack: ['Flutter', 'FastAPI', 'Mistral AI OCR', 'EDI 810'],
-    status: 'In production',
+    status: 'Live in pilot stores',
     cover: { type: 'svg', variant: 'invoice' },
     note: 'The payment rail is private to CStoreiQ vendors. The scanning half is public as ScanIQ.',
     links: [{ label: 'Try the scanner (ScanIQ beta)', href: 'https://play.google.com/apps/testing/com.cstoreiq.scaniq' }],
@@ -54,7 +54,9 @@ export const featured = [
     blurb: 'Turns code-mixed doctor visits into FHIR clinical notes the doctor reviews and signs.',
     stack: ['Next.js', 'FastAPI', 'Sarvam AI', 'GPT-4o'],
     status: 'In beta with doctors',
-    cover: { type: 'video', src: '/images/heal_demo.mp4', poster: '/images/heal_demo_poster.jpg', fallback: 'scribe' },
+    // The film's 'A structured draft' shot, cropped on the phone and the SOAP cards (the old
+    // heal_demo clip showed a retired HEAL.AI UI that no longer matched the film).
+    cover: { type: 'video', src: '/images/heal_loop.mp4', poster: '/images/heal_loop_poster.jpg', fallback: 'scribe' },
     // GitHub link removed 2026-09-14: repo is private, the link 404'd for every visitor.
     film: { src: '/images/heal_film.mp4', seconds: 69.53 },
     links: [
@@ -146,7 +148,8 @@ export const apps = [
     blurb: 'Real-time dashboard for Claude Code multi-agent runs: animated agent panels, inline terminals and full-run replay. Local-first, 340+ tests.',
     stack: ['React', 'TypeScript', 'Node.js', 'WebSockets'],
     status: 'Open source',
-    cover: { type: 'video', src: '/images/visualworkflows_demo.mp4', poster: '/images/visualworkflows_demo_poster.jpg', frame: 'web', fallback: 'agents' },
+    // The film's 'Status at a glance' shot into 'It raises a hand', cropped on the agent panel.
+    cover: { type: 'video', src: '/images/visual-workflows_loop.mp4', poster: '/images/visual-workflows_loop_poster.jpg', fallback: 'agents' },
     film: { src: '/images/visual-workflows_film.mp4', seconds: 59.93 },
     links: [
       { label: 'GitHub', href: 'https://github.com/aadityasp/visual-workflows' },
@@ -264,7 +267,9 @@ export const research = [
   {
     id: 'sensorium',
     name: 'Sensorium',
-    blurb: 'AR brain-controlled multiplayer game. MIT Reality Hack 2022 semi-finalist.',
+    // Not 'brain-controlled': the headband's readings are shown, the game does not read them
+    // (portfolio-films/projects/sensorium/claims.json, TEAM-12 repo).
+    blurb: 'Multiplayer AR game about feelings: pick one with your hand and throw it to a friend, while a brain-computer headband reads focus, enjoyment and heart rate. MIT Reality Hack 2022 semi-finalist.',
     stack: ['Unity', 'AR', 'BCI'],
     cover: { type: 'photo', src: '/images/xr_MIT.jpeg' },
     film: { src: '/images/sensorium_film.mp4', seconds: 44.83 },
@@ -277,7 +282,7 @@ export const research = [
     name: 'Image Colorization',
     // No percentage claim: the report has none. Findings below are the ones it states.
     blurb: 'PyTorch reimplementation of Deep Koalarization: a CNN predicts the color channels of a grayscale photo. Swapping the paper’s MSE loss for MSLE and its Inception-ResNet-v2 extractor for SE-ResNet-152 gave cleaner color and faster convergence on 200K ImageNet images.',
-    stack: ['Python', 'TensorFlow', 'CNNs'],
+    stack: ['Python', 'PyTorch', 'CNNs'],
     cover: { type: 'photo', src: '/images/imagecolorization.png' },
     film: { src: '/images/colorization_film.mp4', seconds: 45.0 },
     links: [
@@ -289,7 +294,8 @@ export const research = [
     name: 'Virtual Mouse',
     blurb: 'Touchless hand-tracking mouse with computer vision.',
     stack: ['Python', 'MediaPipe', 'OpenCV'],
-    cover: { type: 'video', src: '/images/19 - virtual_hand.mp4' },
+    // Six seconds of the real hand-tracking demo (the full 45 MB recording autoplayed here before).
+    cover: { type: 'video', src: '/images/virtual-mouse_loop.mp4', poster: '/images/virtual-mouse_loop_poster.jpg' },
     film: { src: '/images/virtual-mouse_film.mp4', seconds: 39.87 },
     links: [
       { label: 'GitHub', href: 'https://github.com/aadityasp/Virtual_Mouse' },
