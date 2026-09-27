@@ -88,6 +88,10 @@ export function initTracking() {
     if (params.get('nt') === '1') store(localStorage, OPTOUT_KEY, '1')
     if (params.get('nt') === '0') { try { localStorage.removeItem(OPTOUT_KEY) } catch {} }
     if (store(localStorage, OPTOUT_KEY) === '1') return
+    // Never track local dev, previews on other hosts, or automated browsers:
+    // the collector writes one billed Blob operation per beacon.
+    if (!/^(portfolio\.)?adityasriprasad\.com$/.test(location.hostname)) return
+    if (navigator.webdriver || /headless|bot|crawler|spider|lighthouse/i.test(navigator.userAgent || '')) return
 
     const sid = sessionId()
     const vid = visitorId()
@@ -157,13 +161,13 @@ export function initTracking() {
 
     document.addEventListener('visibilitychange', () => {
       if (document.visibilityState === 'hidden') {
-        if (seq < 6) send(++seq)
+        if (seq < 2) send(++seq)
         if (visibleSince) { eng.sec += Math.round((Date.now() - visibleSince) / 1000); visibleSince = 0 }
       } else if (!visibleSince) {
         visibleSince = Date.now()
       }
     })
-    addEventListener('pagehide', () => { if (seq < 6) send(++seq) }, { once: true })
+    addEventListener('pagehide', () => { if (seq < 2) send(++seq) }, { once: true })
 
     // Fire immediately so a visitor who bounces in two seconds still counts.
     send(0)
