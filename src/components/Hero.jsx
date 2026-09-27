@@ -1,6 +1,9 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
-import { ArrowDown } from 'lucide-react'
+import { ArrowDown, Play } from 'lucide-react'
+import { story } from '../data/story'
+import { useLayer } from '../lib/layer'
+import { clock, spoken } from '../lib/duration'
 import { MaskText } from './Reveal'
 
 const ease = [0.22, 1, 0.36, 1]
@@ -10,6 +13,31 @@ const proof = [
   ['2 to 5 days', 'idea to live'],
   ['3 domains', 'retail · health · fintech'],
 ]
+
+// The first-screen door to the career film: a small chip pinned to the top
+// right of the portrait, diagonal from the name badge. It is a real link to
+// #story (copy-link and middle-click still deep-link) that opens the player
+// in place. The thumbnail is a crop of the film's title frame, so at this
+// size it reads as ruled paper and ink, not as a second headline.
+function StoryChip() {
+  const { openLayer } = useLayer()
+  return (
+    <motion.a
+      href="#story" aria-haspopup="dialog"
+      aria-label={`My story, a film, ${spoken(story.seconds)}. Music only, no narration. Opens a video player.`}
+      onClick={(e) => { e.preventDefault(); openLayer('film', 'story', { source: 'chip' }) }}
+      initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.9, ease }}
+      className="group absolute z-10 -top-3 -right-2 sm:-top-4 sm:-right-4 inline-flex items-center gap-2 h-9 pl-[7px] pr-3 rounded-full bg-paper border border-line shadow-[0_10px_30px_rgba(25,21,16,0.12)] after:absolute after:-inset-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
+    >
+      {/* The same play dot as the film lines under the project covers. */}
+      <span className="shrink-0 w-[22px] h-[22px] rounded-full bg-ink text-paper grid place-items-center transition-colors duration-200 group-hover:bg-accent">
+        <Play size={9} fill="currentColor" strokeWidth={0} className="translate-x-[0.5px]" />
+      </span>
+      <span className="text-[13px] font-medium text-ink group-hover:text-accent transition-colors">My story</span>
+      <span className="font-mono text-[11px] text-soft tabular-nums">{clock(story.seconds)}</span>
+    </motion.a>
+  )
+}
 
 export default function Hero() {
   const ref = useRef(null)
@@ -31,7 +59,8 @@ export default function Hero() {
               <span className="absolute inline-flex w-full h-full rounded-full bg-accent animate-pulseDot" />
               <span className="relative inline-flex w-2.5 h-2.5 rounded-full bg-accent" />
             </span>
-            <span className="eyebrow text-soft">AI Product Manager &middot; MS in AI &middot; CStoreiQ</span>
+            {/* .eyebrow uppercases; the brand keeps its casing. */}
+            <span className="eyebrow text-soft">AI Product Manager <span className="whitespace-nowrap">&middot; MS in AI</span> <span className="whitespace-nowrap">&middot; <span className="normal-case">CStoreiQ</span></span></span>
           </motion.div>
 
           <h1 className="display font-medium leading-[0.95] text-[clamp(2.5rem,6.2vw,5rem)] text-ink">
@@ -88,9 +117,11 @@ export default function Hero() {
             <img
               src="/images/aditya_hero.jpg"
               alt="Aditya Appana"
+              width="1400" height="693" fetchpriority="high" decoding="async"
               style={{ objectPosition: '58% 22%' }}
               className="relative w-full rounded-[24px] object-cover border border-line shadow-[0_24px_60px_rgba(25,21,16,0.18)] aspect-[4/5]"
             />
+            <StoryChip />
             <div className="absolute -bottom-4 -left-3 sm:-left-4 bg-paper border border-line rounded-2xl px-4 py-2.5 shadow-[0_10px_30px_rgba(25,21,16,0.12)]">
               <span className="font-mono text-[11px] text-soft">Hi, I’m</span>
               <p className="display text-base font-semibold leading-none text-ink">Aditya</p>

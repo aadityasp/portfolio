@@ -1,19 +1,20 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback } from 'react'
 import { motion } from 'framer-motion'
-import { ArrowUpRight, Play, ScrollText, Volume2 } from 'lucide-react'
+import { ArrowUpRight, ScrollText } from 'lucide-react'
 import { featured, apps, research } from '../data/projects'
 import { decisionsFor } from '../data/decisions'
-import DecisionLayer from './DecisionLayer'
-import FilmLayer from './FilmLayer'
+import FilmLine from './FilmLine'
 import Media, { CoversPaused } from './Media'
 import Reveal, { stagger, item } from './Reveal'
-import { clock, readMinutes, spoken } from '../lib/duration'
+import { useLayer } from '../lib/layer'
+import { readMinutes, spoken } from '../lib/duration'
 
 // Status is the one status signal on a card: a neutral pill with a colored dot,
 // never the link color. Anything not listed here reads as private (grey).
 const TONE = {
   Live: 'live',
   'In production': 'live',
+  'Live in pilot stores': 'live',
   'On the App Store': 'live',
   Shipped: 'live',
   'Shipped internally': 'live',
@@ -44,26 +45,6 @@ function Tag({ children }) {
   )
 }
 
-/** The film's credit line, directly under the cover. Never on the cover itself. */
-function FilmLine({ p, pad, tall, onPlay }) {
-  return (
-    <button
-      type="button" onClick={() => onPlay(p.id)}
-      aria-label={`Play the ${p.name} film, ${spoken(p.film.seconds)}, narrated, with sound`}
-      className={`group/film w-full ${tall ? 'h-12' : 'h-11'} ${pad} flex items-center gap-2.5 border-b border-line bg-paper/50 text-left transition-colors hover:bg-accent/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent`}
-    >
-      <span className="shrink-0 w-[22px] h-[22px] rounded-full bg-ink text-paper grid place-items-center transition-colors duration-200 group-hover/film:bg-accent">
-        <Play size={9} fill="currentColor" strokeWidth={0} className="translate-x-[0.5px]" />
-      </span>
-      <span className="text-[13px] font-medium text-ink whitespace-nowrap transition-colors duration-200 group-hover/film:text-accent">Play the film</span>
-      <span className="font-mono text-[11px] text-faint tabular-nums">{clock(p.film.seconds)}</span>
-      <span className="ml-auto inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-faint whitespace-nowrap">
-        <Volume2 size={12} /> Narrated
-      </span>
-    </button>
-  )
-}
-
 /** The case study in the same slot, for a card that has one and no film. */
 function StudyLine({ p, minutes, pad, tall, onOpen }) {
   return (
@@ -76,8 +57,9 @@ function StudyLine({ p, minutes, pad, tall, onOpen }) {
         <ScrollText size={11} />
       </span>
       <span className="text-[13px] font-medium text-ink whitespace-nowrap transition-colors duration-200 group-hover/film:text-accent">Read the case study</span>
-      <span className="font-mono text-[11px] text-faint tabular-nums whitespace-nowrap">{minutes} min</span>
-      {tall && <span className="ml-auto font-mono text-[10px] uppercase tracking-[0.16em] text-faint whitespace-nowrap">Problem → Result</span>}
+      <span className="font-mono text-[11px] text-soft tabular-nums whitespace-nowrap">{minutes} min</span>
+      {/* Only where a flagship card is wide enough (from lg); below that the row's nowrap items would overflow the card. */}
+      {tall && <span className="hidden lg:inline ml-auto font-mono text-[10px] uppercase tracking-[0.16em] text-soft whitespace-nowrap">Problem → Result</span>}
     </button>
   )
 }
@@ -149,7 +131,9 @@ const SIZE = {
 // (CSS subgrid), so covers, film lines, titles, blurbs, chips and footers line
 // up across a row even when one card has no film or a longer blurb. The grid
 // has no row gap (it would open up between a card's own rows); cards space
-// themselves with a bottom margin instead.
+// themselves with a bottom margin instead. The one column is minmax(0,1fr):
+// an implicit column would grow to the widest nowrap row and push content
+// past the card's edge.
 function Card({ p, size = 'md', onOpenFilm, onOpenDecision }) {
   const s = SIZE[size]
   const tall = size === 'lg'
@@ -159,14 +143,20 @@ function Card({ p, size = 'md', onOpenFilm, onOpenDecision }) {
     : 0
   // The slot under the cover tells the story: the film, else the case study.
   const story = p.film
-    ? <FilmLine p={p} pad={s.pad} tall={tall} onPlay={onOpenFilm} />
+    ? (
+      <FilmLine
+        seconds={p.film.seconds} pad={s.pad} tall={tall}
+        ariaLabel={`Play the ${p.name} film, ${spoken(p.film.seconds)}, narrated, with sound`}
+        onPlay={() => onOpenFilm(p.id)}
+      />
+    )
     : minutes
       ? <StudyLine p={p} minutes={minutes} pad={s.pad} tall={tall} onOpen={onOpenDecision} />
       : <div aria-hidden />
   return (
     <motion.article
       variants={item} whileHover={{ y: s.lift }} transition={{ type: 'spring', stiffness: 300, damping: 24 }}
-      className={`group bg-paper2 border border-line ${s.shell} overflow-hidden grid grid-rows-subgrid row-span-6 gap-0 mb-6`}
+      className={`group bg-paper2 border border-line ${s.shell} overflow-hidden grid grid-cols-[minmax(0,1fr)] grid-rows-subgrid row-span-6 gap-0 mb-6`}
     >
       <div className="relative aspect-video overflow-hidden border-b border-line">
         <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-[1.03]">
@@ -214,50 +204,19 @@ function Grid({ className, children }) {
   )
 }
 
-// The open layer lives in the URL hash (#film-<id> or #decision-<id>) so it is
-// deep-linkable and the browser Back button closes it.
-const LAYER_HASH = /^#(film|decision)-([a-z0-9-]+)$/
-const readLayerHash = () => {
-  const m = LAYER_HASH.exec(window.location.hash)
-  return m ? { kind: m[1], id: m[2] } : null
-}
-
+// The open layer (a film or a case study) is owned by src/lib/layer.jsx and
+// rendered once in App.jsx; the cards only ask for it to open.
 export default function Projects() {
-  const [layer, setLayer] = useState(null)
-
-  useEffect(() => {
-    const sync = () => setLayer(readLayerHash())
-    sync()
-    window.addEventListener('popstate', sync)
-    window.addEventListener('hashchange', sync)
-    return () => {
-      window.removeEventListener('popstate', sync)
-      window.removeEventListener('hashchange', sync)
-    }
-  }, [])
-
-  const openLayer = useCallback((kind, id) => {
-    window.history.pushState({ layer: kind }, '', `#${kind}-${id}`)
-    setLayer({ kind, id })
-  }, [])
+  const { layer, openLayer } = useLayer()
   const openFilm = useCallback((id) => openLayer('film', id), [openLayer])
   const openDecision = useCallback((id) => openLayer('decision', id), [openLayer])
-
-  const closeLayer = useCallback(() => {
-    if (window.history.state?.layer) {
-      window.history.back() // popstate → sync → null
-    } else {
-      // Arrived by deep link: clear the hash without adding a history entry.
-      window.history.replaceState(null, '', window.location.pathname + window.location.search)
-      setLayer(null)
-    }
-  }, [])
 
   const cards = (list, size) =>
     list.map((p) => <Card key={p.id} p={p} size={size} onOpenFilm={openFilm} onOpenDecision={openDecision} />)
 
   return (
     <section id="work" className="relative py-24 sm:py-32">
+      {/* Covers pause while any layer is open, the career film included. */}
       <CoversPaused.Provider value={layer !== null}>
         <div className="max-w-content mx-auto px-5 sm:px-8">
           <Head kicker="Selected work" title="Flagship builds"
@@ -276,9 +235,6 @@ export default function Projects() {
           </div>
         </div>
       </CoversPaused.Provider>
-
-      <DecisionLayer projectId={layer?.kind === 'decision' ? layer.id : null} onClose={closeLayer} />
-      <FilmLayer projectId={layer?.kind === 'film' ? layer.id : null} onClose={closeLayer} />
     </section>
   )
 }

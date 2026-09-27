@@ -42,7 +42,7 @@ export const featured = [
     tagline: 'Paper invoice to payment',
     blurb: 'Snap a paper invoice, AI reads every line, it issues an EDI 810 and triggers the check payment. Per-field confidence decides what posts unattended and what a human reviews.',
     stack: ['Flutter', 'FastAPI', 'Mistral AI OCR', 'EDI 810'],
-    status: 'In production',
+    status: 'Live in pilot stores',
     cover: { type: 'svg', variant: 'invoice' },
     note: 'The payment rail is private to CStoreiQ vendors. The scanning half is public as ScanIQ.',
     links: [{ label: 'Try the scanner (ScanIQ beta)', href: 'https://play.google.com/apps/testing/com.cstoreiq.scaniq' }],

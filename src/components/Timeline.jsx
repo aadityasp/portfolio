@@ -1,6 +1,7 @@
 import { motion, useScroll, useSpring } from 'framer-motion'
 import { useRef, useState } from 'react'
 import { experience, education, certs, moreCerts } from '../data/profile'
+import PathFilm from './PathFilm'
 import Reveal from './Reveal'
 
 const ease = [0.22, 1, 0.36, 1]
@@ -75,14 +76,18 @@ export default function Timeline() {
   return (
     <section id="timeline" className="relative py-24 sm:py-32 border-t border-line">
       <div className="max-w-content mx-auto px-5 sm:px-8">
-        <Reveal className="mb-14">
-          <p className="eyebrow text-accent mb-3">The path</p>
-          <h2 className="display text-3xl sm:text-5xl font-semibold tracking-tight text-ink">
-            From engineering to product
-          </h2>
-          <p className="text-soft mt-4 max-w-2xl text-lg">
-            Autonomous vehicles, then computer vision, then product. The engineering never stopped, it just got AI-assisted.
-          </p>
+        {/* The head shares its row with the career film's card; on phones the card stacks under the heading. */}
+        <Reveal className="mb-14 grid gap-x-14 lg:grid-cols-[minmax(0,1fr)_400px] xl:grid-cols-[minmax(0,1fr)_460px] items-end">
+          <div>
+            <p className="eyebrow text-accent mb-3">The path</p>
+            <h2 className="display text-3xl sm:text-5xl font-semibold tracking-tight text-ink [text-wrap:balance]">
+              From engineering to product
+            </h2>
+            <p className="text-soft mt-4 max-w-2xl text-lg">
+              Autonomous vehicles, then computer vision, then product. The engineering never stopped, it just got AI-assisted.
+            </p>
+          </div>
+          <PathFilm />
         </Reveal>
 
         {/* timeline rail + entries */}
