@@ -21,6 +21,7 @@ const TONE = {
   'Open source': 'live',
   'In App Store review': 'building',
   'Open beta': 'building',
+  'In TestFlight beta': 'building',
   'In beta with doctors': 'building',
   'Active dev': 'building',
   'Build ready': 'building',

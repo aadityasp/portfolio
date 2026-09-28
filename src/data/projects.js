@@ -67,6 +67,25 @@ export const featured = [
 
 export const apps = [
   {
+    id: 'instalist',
+    name: 'Instalist',
+    // Built solo with Claude Code, end to end: iPhone app, web, backend, the ffmpeg video pipeline,
+    // the TestFlight release and the launch film. Claims checked against the founder doc
+    // (instalist-ai/docs/FOUNDER_DELIVERABLES.md); no user, revenue or App Store claims.
+    blurb: 'Turns a property address and a camera roll into a real estate agent’s listing kit. Every AI photo edit (staging, declutter, twilight) is checked against the original so nothing is added that isn’t in the house, and the copy is screened for Fair Housing language. Then it makes a narrated video and a property page with a yard-sign QR code.',
+    stack: ['Expo', 'Next.js', 'Supabase', 'Claude', 'Gemini'],
+    status: 'In TestFlight beta',
+    // The film's living room restyled Modern to Luxury, then the house going from day to twilight,
+    // muted; "Play the film" opens it in full with sound.
+    cover: { type: 'video', src: '/images/instalist_demo.mp4', poster: '/images/instalist_demo_poster.jpg', fallback: 'graph' },
+    // External TestFlight beta, approved by Apple 2026-09-27. Add the App Store link once it is public.
+    film: { src: '/images/instalist_film.mp4', seconds: 67.2 },
+    links: [
+      { label: 'Join the TestFlight beta', href: 'https://testflight.apple.com/join/vKYtSXWz' },
+      { label: 'Website', href: 'https://instalist-ai.vercel.app' },
+    ],
+  },
+  {
     id: 'writeoff',
     name: 'WriteOff',
     blurb: 'Tells a small-business owner whether an expense is a tax write-off, how much counts, why, and where it goes on Schedule C. Snap a receipt or type it. A rules engine checked against 1,523 IRS-sourced cases makes every call, and AI only reads the receipt.',
