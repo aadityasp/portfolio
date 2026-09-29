@@ -85,9 +85,9 @@ export default function App() {
               <Marquee />
               <Projects />
               <Timeline />
-              <Testimonials />
               <About />
               <Signature />
+              <Testimonials />
               <Contact />
             </main>
           </Page>

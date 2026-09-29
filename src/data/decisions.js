@@ -77,6 +77,118 @@ export const studies = [
     ],
     link: null,
   },
+  {
+    id: 'writeoff-engine',
+    project: 'writeoff',
+    // Source: ~/Downloads/writeoff/README.md (request flow steps 2-5) and docs/api-changes.md
+    // (facts never taken from the model's reading; eval harness results for tax engine 2026.09.3).
+    headline: 'Should the model make the tax call?',
+    context:
+      'WriteOff tells a small-business owner whether an expense is potentially deductible, how much counts, why, and where it goes on Schedule C. They snap a receipt or type what they bought.',
+    sections: [
+      {
+        label: 'The problem',
+        body:
+          'People who do not understand taxes will believe a confident answer. A model that sounds sure and gets a deduction wrong is worse than an app that stops and asks one more question.',
+      },
+      {
+        label: 'The decision',
+        body:
+          'The model only reads the receipt. A deterministic tax engine makes every decision and does every calculation. The model may reword the explanation, but it cannot change the decision or the numbers. Facts that change the answer, like business use or who attended, are never taken from the model’s reading. The engine asks the owner instead, one question per screen.',
+      },
+      {
+        label: 'The tradeoff',
+        body:
+          'It is more work and more questions. Every expense category needed its own decision tree, with rates versioned by tax year, where a chatbot would have answered instantly with no rules behind it at all.',
+      },
+      {
+        label: 'The result',
+        body:
+          'Every answer cites the IRS authority behind it and is saved as an audit-ready record. The eval harness caught cases where the engine overstated a deduction, such as travel with a spouse who is not an employee showing the whole bill instead of your own share, and they were fixed before launch. The app is in App Store review.',
+      },
+    ],
+    numbers: [
+      { value: '1,523', label: 'IRS-sourced cases the engine is checked against' },
+      { value: '50+', label: 'Expense categories, each with its own decision tree' },
+      { value: 'Zero', label: 'Decisions or amounts the model is allowed to change' },
+    ],
+    link: { label: 'See WriteOff', href: 'https://writeoff-app-beta.vercel.app' },
+  },
+  {
+    id: 'pos-offline-first',
+    project: 'pos',
+    // Decision confirmed by Aditya 2026-09-28 (offline first). Specifics from the public product
+    // page cstoreiq.com/pos ("Never miss a sale", 7-day on-device store, 15-minute sync). Platform
+    // numbers are resume cs6, stated at platform scope.
+    headline: 'Should the register need the internet?',
+    context:
+      'CStoreiQ POS is a production Android point of sale for non-fuel convenience stores, covering checkout, tenders and lottery, built on CStoreiQ BackOffice so every store’s pricebook stays current. I led it as PM and built about 70 percent of it myself, AI-first.',
+    sections: [
+      {
+        label: 'The problem',
+        body:
+          'A convenience store sells in seconds, one customer after another. If the register depends on the connection, a dropped line or a flaky router stops checkout at the counter, and that sale walks out the door.',
+      },
+      {
+        label: 'The decision',
+        body:
+          'Offline first. The register completes every sale on the device whether or not it is online. Transactions queue locally, are held for up to 7 days, and sync to the back office every 15 minutes once the connection returns.',
+      },
+      {
+        label: 'The tradeoff',
+        body:
+          'It is harder to build than a register that simply calls the cloud. The device has to carry everything it needs to sell on its own, and the back office has to accept sales that arrive late and in batches.',
+      },
+      {
+        label: 'The result',
+        body:
+          'The POS runs in production on registers inside CStoreiQ retailer stores, and a dropped connection does not stop checkout. Across the platform I own, the team shipped 15+ features in 6 months, contributing to $700K in revenue, while production defects fell 40 percent and support escalations fell 30 percent.',
+      },
+    ],
+    numbers: [
+      { value: '7 days', label: 'Transactions held on the device during an outage' },
+      { value: '15 min', label: 'Sync interval once the connection returns' },
+      { value: '15+', label: 'Platform features shipped in 6 months' },
+    ],
+    link: { label: 'CStoreiQ POS', href: 'https://www.cstoreiq.com/pos/index.html' },
+  },
+  {
+    id: 'rewards-three-calls',
+    project: 'rewards',
+    // All three decisions confirmed by Aditya 2026-09-28: games instead of plain points, live
+    // accrual when the receipt closes, a store-branded app per retailer.
+    headline: 'What brings a shopper back?',
+    context:
+      'Rewards is CStoreiQ’s loyalty platform, with a shopper app, a retailer admin, and an accrual service tied to the POS.',
+    sections: [
+      {
+        label: 'The problem',
+        body:
+          'A points balance alone does not bring shoppers back. A reward that shows up hours later is easy to ignore, and a loyalty app that carries the platform’s name builds the platform’s relationship with the shopper, not the store’s.',
+      },
+      {
+        label: 'The decision',
+        body:
+          'Three calls. Rewards run on games, spin-wheel, scratch-card and slots on tiered points, instead of a plain balance. Points credit the moment a receipt closes at the POS, so the reward lands while the shopper is still at the counter. And every retailer gets its own store-branded app, so the relationship stays with the store.',
+      },
+      {
+        label: 'The tradeoff',
+        body:
+          'Each call adds work. Live accrual puts loyalty on the checkout path, so the accrual service has to be as dependable as the register. Games need their own rules and odds to manage. And a branded app per retailer means shipping many builds instead of one.',
+      },
+      {
+        label: 'The result',
+        body:
+          'It is in active development, with store-branded builds that ship per retailer.',
+      },
+    ],
+    numbers: [
+      { value: '3', label: 'Game types (spin-wheel, scratch-card and slots)' },
+      { value: 'Live', label: 'Points credited when the receipt closes' },
+      { value: 'Per retailer', label: 'Store-branded builds' },
+    ],
+    link: null,
+  },
 ]
 
 /** Decisions attached to one project card (empty array when it has none). */

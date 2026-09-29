@@ -6,6 +6,12 @@
 // film: the full narrated film ({ src, seconds }). It plays in an on-page player
 // from the "Play the film" line under the cover; seconds drives the m:ss label.
 //
+// pdo (flagship cards): problem, decision, outcome, one line each. They open the card in
+// place of the blurb. Sources: InvoicePay = resume cs1/cs2 + Alden Q6; Scribe = Alden Q1 +
+// portfolio-films/projects/heal/claims.json (consent before recording); POS = offline first,
+// confirmed by Aditya 2026-09-28, specifics from cstoreiq.com/pos (7-day on-device store, 15-min
+// sync); Rewards = his three calls, confirmed 2026-09-28 (games, live accrual, per-retailer brand).
+//
 // Every card must give the visitor something to do or an honest reason it can't:
 // either `links` (something to open) or `note` (why there is no public build).
 // A status with neither is a dead end and gets cut.
@@ -16,6 +22,11 @@ export const featured = [
     name: 'CStoreiQ POS System',
     tagline: 'Enterprise point of sale',
     blurb: 'Production Android POS built by a 3-developer team. I built ~70% of it using AI, end to end: checkout, tenders, lottery, and the back-office sync that keeps every store’s pricebook current.',
+    pdo: {
+      problem: 'A convenience store cannot stop selling when the internet drops, and a register that depends on the connection loses the sale at the counter.',
+      decision: 'Offline first. The register keeps selling with no connection, holds transactions on the device for up to 7 days, and syncs them to the back office when the connection returns.',
+      outcome: 'In production on registers inside CStoreiQ retailer stores. I led it and built about 70 percent of it myself, using AI.',
+    },
     stack: ['Kotlin', 'Jetpack Compose', 'FastAPI', 'SQL Server', 'AWS'],
     status: 'In production',
     // Real register screens (Sunmi build), cycled as a short walkthrough.
@@ -28,6 +39,11 @@ export const featured = [
     name: 'Rewards & Gamification',
     tagline: 'Loyalty built on real games',
     blurb: 'Spin-wheel, scratch-card and slot games with tiered points and live POS accrual at checkout. Shopper app, retailer admin, and the accrual service that credits points the moment a receipt closes.',
+    pdo: {
+      problem: 'A points balance alone does not bring shoppers back, and a reward that shows up hours later is easy to ignore.',
+      decision: 'Games instead of plain points, points credited the moment a receipt closes, and a store-branded app for every retailer so the relationship stays with the store.',
+      outcome: 'In active development, with the shopper app, retailer admin and live accrual service.',
+    },
     stack: ['Flutter', 'FastAPI', 'Angular', 'SQL Server'],
     status: 'Active dev',
     // Real app screens: the games hub, the Rewards tab scrolling (stitched from
@@ -41,6 +57,11 @@ export const featured = [
     name: 'InvoicePay',
     tagline: 'Paper invoice to payment',
     blurb: 'Snap a paper invoice, AI reads every line, it issues an EDI 810 and triggers the check payment. Per-field confidence decides what posts unattended and what a human reviews.',
+    pdo: {
+      problem: 'Store operators were retyping paper supplier invoices into the back office by hand.',
+      decision: 'A per-field automation policy. Some fields post unattended, some never do, and anything below its bar goes to a named human reviewer.',
+      outcome: 'Live in pilot stores through back office, EDI and payment, saving an estimated 30 to 40 hours per store each month.',
+    },
     stack: ['Flutter', 'FastAPI', 'Mistral AI OCR', 'EDI 810'],
     status: 'Live in pilot stores',
     cover: { type: 'svg', variant: 'invoice' },
@@ -52,6 +73,11 @@ export const featured = [
     name: 'AI Clinical Scribe',
     tagline: 'Ambient medical scribe',
     blurb: 'Turns code-mixed doctor visits into FHIR clinical notes the doctor reviews and signs.',
+    pdo: {
+      problem: 'Doctors and patients switch languages inside a single sentence, and most transcription falls apart exactly there.',
+      decision: 'The AI drafts and the doctor decides. Each visit becomes a structured FHIR note the doctor edits and signs, and recording starts only after the patient consents.',
+      outcome: 'In beta with doctors.',
+    },
     stack: ['Next.js', 'FastAPI', 'Sarvam AI', 'GPT-4o'],
     status: 'In beta with doctors',
     // The film's 'A structured draft' shot, cropped on the phone and the SOAP cards (the old

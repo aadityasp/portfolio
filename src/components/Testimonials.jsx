@@ -10,6 +10,7 @@ export default function Testimonials() {
   const targetRef = useRef(0) // card the row is heading to; survives rapid clicks mid-scroll
   const settleTimer = useRef(null)
   const [index, setIndex] = useState(0)
+  const [open, setOpen] = useState(() => new Set()) // notes expanded past the clamp
   const [progress, setProgress] = useState(0) // 0..1 scroll position
   const [thumb, setThumb] = useState(1) // visible fraction of the track
   const count = testimonials.length
@@ -87,17 +88,17 @@ export default function Testimonials() {
   const atEnd = progress >= 0.999
 
   return (
-    <section id="testimonials" className="relative py-24 sm:py-32 border-t border-line">
+    <section id="testimonials" className="relative py-16 sm:py-20 border-t border-line">
       <div className="max-w-content mx-auto px-5 sm:px-8">
         <Reveal>
           <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-6">
             <div className="max-w-2xl">
               <p className="eyebrow text-accent mb-3">What colleagues say</p>
-              <h2 className="display text-3xl sm:text-5xl font-semibold tracking-tight text-ink leading-[1.05]">
+              <h2 className="display text-2xl sm:text-3xl font-semibold tracking-tight text-ink leading-[1.1]">
                 What it is like to work with me, in their words.
               </h2>
-              <p className="text-soft mt-4 text-lg leading-relaxed">
-                A few testimonials from the autonomous vehicle simulation team at Wipro.
+              <p className="text-soft mt-3 leading-relaxed">
+                Farewell notes from my engineering team at Wipro, 2018 to 2020.
               </p>
             </div>
 
@@ -134,7 +135,7 @@ export default function Testimonials() {
           aria-label="Notes from colleagues"
           tabIndex={0}
           onKeyDown={onKeyDown}
-          className="no-scrollbar mt-10 -mx-5 sm:-mx-8 px-5 sm:px-8 scroll-pl-5 sm:scroll-pl-8 flex gap-4 sm:gap-5 overflow-x-auto snap-x snap-mandatory pb-2 rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+          className="no-scrollbar mt-8 -mx-5 sm:-mx-8 px-5 sm:px-8 scroll-pl-5 sm:scroll-pl-8 flex gap-4 sm:gap-5 overflow-x-auto snap-x snap-mandatory pb-2 rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
         >
           {testimonials.map((t, i) => (
             <article
@@ -143,16 +144,31 @@ export default function Testimonials() {
               role="group"
               aria-roledescription="slide"
               aria-label={`${i + 1} of ${count}, ${t.name}`}
-              className="snap-start flex-none w-[min(88vw,560px)] flex flex-col rounded-2xl border border-line bg-paper2 p-6 sm:p-8"
+              className="snap-start flex-none w-[min(84vw,400px)] flex flex-col rounded-2xl border border-line bg-paper2 p-5 sm:p-6"
             >
-              <blockquote className="display text-ink text-[17px] sm:text-lg leading-[1.6] space-y-3">
-                {t.paragraphs.map((p, j) => (
-                  <p key={j}>{p}</p>
-                ))}
-              </blockquote>
-              <footer className="mt-auto pt-6">
+              {(() => {
+                const long = t.paragraphs.join(' ').length > 240
+                const isOpen = open.has(i)
+                return (
+                  <>
+                    <blockquote className="display text-ink text-[15px] leading-[1.55] space-y-2.5">
+                      {isOpen || !long
+                        ? t.paragraphs.map((p, j) => <p key={j}>{p}</p>)
+                        : <p className="line-clamp-5">{t.paragraphs.join(' ')}</p>}
+                    </blockquote>
+                    {long && (
+                      <button type="button"
+                        onClick={() => setOpen((s) => { const n = new Set(s); n.has(i) ? n.delete(i) : n.add(i); return n })}
+                        className="self-start mt-2.5 font-mono text-[11px] text-accent hover:text-accent-ink transition-colors">
+                        {isOpen ? 'Show less' : 'Read the full note'}
+                      </button>
+                    )}
+                  </>
+                )
+              })()}
+              <footer className="mt-auto pt-5">
                 <div className="border-t border-line pt-4 flex items-baseline justify-between gap-4">
-                  <span className="display italic text-lg text-ink">{t.name}</span>
+                  <span className="display italic text-base text-ink">{t.name}</span>
                   <span className="font-mono text-xs text-faint">{t.context}</span>
                 </div>
               </footer>

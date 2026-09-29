@@ -13,7 +13,7 @@ export default function Contact() {
             <span className="italic text-accent">something great!</span>
           </h2>
           <p className="text-soft mt-7 max-w-xl mx-auto text-lg">
-            Open to product and founding-engineer conversations. Email is the fastest way to reach me.
+            Open to AI product manager roles. Email is the fastest way to reach me.
           </p>
         </Reveal>
 

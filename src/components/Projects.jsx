@@ -38,29 +38,58 @@ function Status({ status }) {
   )
 }
 
-function Tag({ children }) {
+// The stack is supporting detail, not the headline: one quiet mono line.
+function Stack({ items }) {
   return (
-    <span className="font-mono text-[11px] text-soft border border-line rounded-full px-2.5 py-1 whitespace-nowrap">
-      {children}
-    </span>
+    <p className="font-mono text-[10.5px] leading-relaxed text-faint">
+      {items.join(' · ')}
+    </p>
   )
 }
 
-/** The case study in the same slot, for a card that has one and no film. */
-function StudyLine({ p, minutes, pad, tall, onOpen }) {
+// Flagship cards open with the product story: problem, decision, outcome.
+function PDO({ pdo, size }) {
+  const rows = [['Problem', pdo.problem], ['Decision', pdo.decision], ['Outcome', pdo.outcome]]
+  return (
+    <dl className={`-mt-3 sm:mt-0 grid grid-cols-1 sm:grid-cols-[5.5rem_minmax(0,1fr)] gap-x-4 gap-y-1 sm:gap-y-2.5 ${size === 'lg' ? 'text-[15px]' : 'text-sm'}`}>
+      {rows.map(([k, v]) => (
+        <div key={k} className="contents">
+          <dt className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-accent pt-3 sm:pt-[3px]">{k}</dt>
+          <dd className={`leading-relaxed ${k === 'Decision' ? 'text-ink' : 'text-soft'}`}>{v}</dd>
+        </div>
+      ))}
+    </dl>
+  )
+}
+
+/** The case study in the same slot, for a card that has one and no film. The decision's own
+ *  question is the label, so the product call is visible without opening anything. */
+function StudyLine({ p, question, minutes, pad, tall, onOpen }) {
   return (
     <button
       type="button" onClick={() => onOpen(p.id)}
-      aria-label={`Read the ${p.name} case study, ${minutes} minute read`}
-      className={`group/film w-full ${tall ? 'h-12' : 'h-11'} ${pad} flex items-center gap-2.5 border-b border-line bg-paper/50 text-left transition-colors hover:bg-accent/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent`}
+      aria-label={`Case study: ${question} ${minutes} minute read`}
+      className={`group/film w-full ${tall ? 'min-h-12' : 'min-h-11'} py-2 ${pad} flex items-center gap-2.5 border-b border-line bg-paper/50 text-left transition-colors hover:bg-accent/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent`}
     >
       <span className="shrink-0 w-[22px] h-[22px] rounded-full bg-ink text-paper grid place-items-center transition-colors duration-200 group-hover/film:bg-accent">
         <ScrollText size={11} />
       </span>
-      <span className="text-[13px] font-medium text-ink whitespace-nowrap transition-colors duration-200 group-hover/film:text-accent">Read the case study</span>
-      <span className="font-mono text-[11px] text-soft tabular-nums whitespace-nowrap">{minutes} min</span>
-      {/* Only where a flagship card is wide enough (from lg); below that the row's nowrap items would overflow the card. */}
-      {tall && <span className="hidden lg:inline ml-auto font-mono text-[10px] uppercase tracking-[0.16em] text-soft whitespace-nowrap">Problem → Result</span>}
+      <span className="min-w-0 sm:truncate leading-snug display italic text-[15px] text-ink transition-colors duration-200 group-hover/film:text-accent">{question}</span>
+      <span className="shrink-0 font-mono text-[11px] text-soft tabular-nums whitespace-nowrap">{minutes} min</span>
+    </button>
+  )
+}
+
+/** For a card whose story slot is its film: the decision question as a teaser under the copy. */
+function StudyTeaser({ question, minutes, onOpen }) {
+  return (
+    <button type="button" onClick={onOpen}
+      className="group/teaser mt-4 w-full text-left rounded-xl border border-line bg-paper/60 px-3.5 py-3 transition-colors hover:border-accent/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent">
+      <span className="block font-mono text-[10px] uppercase tracking-[0.16em] text-accent">The product call</span>
+      <span className="mt-1 flex items-baseline justify-between gap-3">
+        <span className="display italic text-[16px] leading-snug text-ink group-hover/teaser:text-accent transition-colors">{question}</span>
+        <span className="shrink-0 font-mono text-[11px] text-soft whitespace-nowrap">{minutes} min</span>
+      </span>
     </button>
   )
 }
@@ -152,7 +181,7 @@ function Card({ p, size = 'md', onOpenFilm, onOpenDecision }) {
       />
     )
     : minutes
-      ? <StudyLine p={p} minutes={minutes} pad={s.pad} tall={tall} onOpen={onOpenDecision} />
+      ? <StudyLine p={p} question={studies[0].headline} minutes={minutes} pad={s.pad} tall={tall} onOpen={onOpenDecision} />
       : <div aria-hidden />
   return (
     <motion.article
@@ -173,14 +202,19 @@ function Card({ p, size = 'md', onOpenFilm, onOpenDecision }) {
         {p.tagline && <p className="font-mono text-xs text-soft mt-1">{p.tagline}</p>}
       </div>
 
-      <p className={`${s.pad} text-soft leading-relaxed ${s.blurb}`}>{p.blurb}</p>
+      <div className={`${s.pad} ${s.blurb}`}>
+        {p.pdo ? <PDO pdo={p.pdo} size={size} /> : <p className="text-soft leading-relaxed">{p.blurb}</p>}
+        {p.film && minutes > 0 && (
+          <StudyTeaser question={studies[0].headline} minutes={minutes} onOpen={() => onOpenDecision(p.id)} />
+        )}
+      </div>
 
-      <div className={`${s.pad} ${s.chips} flex flex-wrap content-start gap-1.5`}>
-        {p.stack.map((t) => <Tag key={t}>{t}</Tag>)}
+      <div className={`${s.pad} ${s.chips}`}>
+        <Stack items={p.stack} />
       </div>
 
       <div className={s.foot}>
-        <Footer p={p} minutes={minutes} studyHere={Boolean(minutes && p.film)} pad={s.pad} bottom={s.bottom} onOpenDecision={onOpenDecision} />
+        <Footer p={p} minutes={minutes} studyHere={false} pad={s.pad} bottom={s.bottom} onOpenDecision={onOpenDecision} />
       </div>
     </motion.article>
   )
@@ -220,13 +254,13 @@ export default function Projects() {
       {/* Covers pause while any layer is open, the career film included. */}
       <CoversPaused.Provider value={layer !== null}>
         <div className="max-w-content mx-auto px-5 sm:px-8">
-          <Head kicker="Selected work" title="Flagship builds"
-            sub="The big ones: a production retail POS, a loyalty platform, fintech automation, and clinical AI." />
+          <Head kicker="Selected work" title="Products I led and built"
+            sub="Each one opens with the problem, the call I made, and what happened." />
           <Grid className="md:grid-cols-2">{cards(featured, 'lg')}</Grid>
 
           <div className="mt-24">
-            <Head kicker="More apps" title="Shipped fast, end to end"
-              sub="Most of these went from idea to a working build in two or three days." />
+            <Head kicker="How I test ideas" title="Built end to end"
+              sub="Most went from idea to a working app in two or three days, and several are live or on the App Store." />
             <Grid className="sm:grid-cols-2 lg:grid-cols-3">{cards(apps, 'md')}</Grid>
           </div>
 
