@@ -4,7 +4,7 @@
 // cover.type: 'svg' | 'icon' | 'shot' | 'photo' | 'video' | 'slideshow'
 // cover.fallback: svg variant to show if the asset fails to load.
 // film: the full narrated film ({ src, seconds }). It plays in an on-page player
-// from the "Play the film" line under the cover; seconds drives the m:ss label.
+// from the "Watch the product overview" line under the cover; seconds drives the m:ss label.
 //
 // pdo (flagship cards): problem, decision, outcome, one line each. They open the card in
 // place of the blurb. Sources: InvoicePay = resume cs1/cs2 + Alden Q6; Scribe = Alden Q1 +
@@ -102,7 +102,7 @@ export const apps = [
     stack: ['Expo', 'Next.js', 'Supabase', 'Claude', 'Gemini'],
     status: 'In TestFlight beta',
     // The film's living room restyled Modern to Luxury, then the house going from day to twilight,
-    // muted; "Play the film" opens it in full with sound.
+    // muted; "Watch the product overview" opens it in full with sound.
     cover: { type: 'video', src: '/images/instalist_demo.mp4', poster: '/images/instalist_demo_poster.jpg', fallback: 'graph' },
     // External TestFlight beta, approved by Apple 2026-09-27. Add the App Store link once it is public.
     film: { src: '/images/instalist_film.mp4', seconds: 67.2 },
@@ -117,7 +117,7 @@ export const apps = [
     blurb: 'Tells a small-business owner whether an expense is a tax write-off, how much counts, why, and where it goes on Schedule C. Snap a receipt or type it. A rules engine checked against 1,523 IRS-sourced cases makes every call, and AI only reads the receipt.',
     stack: ['Expo', 'Fastify', 'Postgres', 'Claude', 'jev'],
     status: 'In App Store review',
-    // The film's problem, verdict and end card, muted; "Play the film" opens it in full with sound.
+    // The film's problem, verdict and end card, muted; "Watch the product overview" opens it in full with sound.
     cover: { type: 'video', src: '/images/writeoff_demo.mp4', poster: '/images/writeoff_demo_poster.jpg', fallback: 'invoice' },
     // Add the App Store link once Apple approves it (apps.apple.com/us/app/id6815032980 404s until then).
     film: { src: '/images/writeoff_film.mp4', seconds: 69.01 },
@@ -131,7 +131,7 @@ export const apps = [
     blurb: 'Motivated-seller leads for any U.S. county, live from public records. A scraper harness pulls tax, probate and foreclosure filings, a scoring brain ranks them and explains why, and the operator board updates as the scrape runs.',
     stack: ['Next.js', 'Supabase', 'Drizzle + Postgres', 'MapLibre'],
     status: 'Live',
-    // The film's problem, ranked lead and end card, muted; "Play the film" opens it in full with sound.
+    // The film's problem, ranked lead and end card, muted; "Watch the product overview" opens it in full with sound.
     cover: { type: 'video', src: '/images/distress_demo.mp4', poster: '/images/distress_demo_poster.jpg', fallback: 'graph' },
     film: { src: '/images/distress_film.mp4', seconds: 71.9 },
     links: [
@@ -167,7 +167,7 @@ export const apps = [
     blurb: 'A persistent AI agent team that runs my admin. Department heads I task from Telegram, a numbered decision queue I answer with a yes or no, verification before anything reaches me, and hard red lines it can never cross: no sends, no spend, no new accounts. All state lives in files, never in a context window.',
     stack: ['Claude Code', 'Telegram', 'Markdown state'],
     status: 'Private build',
-    // The film's problem, red lines and end card, muted; "Play the film" opens it in full with sound.
+    // The film's problem, red lines and end card, muted; "Watch the product overview" opens it in full with sound.
     cover: { type: 'video', src: '/images/lifeos_demo.mp4', poster: '/images/lifeos_demo_poster.jpg', fallback: 'lifeos' },
     note: 'Private repo, since it runs my own admin.',
     film: { src: '/images/lifeos_film.mp4', seconds: 59.93 },
@@ -179,7 +179,7 @@ export const apps = [
     blurb: 'Free iOS trainer that drills mathematically-correct basic strategy, hand by hand, with instant feedback. No ads, no accounts, fully offline.',
     stack: ['SwiftUI', 'iOS'],
     status: 'On the App Store',
-    // The film's problem, right play and end card, muted; "Play the film" opens it in full with sound.
+    // The film's problem, right play and end card, muted; "Watch the product overview" opens it in full with sound.
     cover: { type: 'video', src: '/images/blackjack_demo.mp4', poster: '/images/blackjack_demo_poster.jpg', fallback: 'blackjack' },
     // No GitHub link: the public repo only hosts the App Store privacy/support page, not the app source.
     film: { src: '/images/blackjack_film.mp4', seconds: 58.7 },
@@ -206,7 +206,7 @@ export const apps = [
     blurb: 'A real-time rebuild of Owner.com’s Grader. Fetches a restaurant’s live website and validates 20+ signals into a growth score. Not a mockup, it runs the checks live.',
     stack: ['JavaScript', 'Live fetch', 'DOM analysis'],
     status: 'Live',
-    // The film's problem, growth score and end card, muted; "Play the film" opens it in full with sound.
+    // The film's problem, growth score and end card, muted; "Watch the product overview" opens it in full with sound.
     cover: { type: 'video', src: '/images/grader_demo.mp4', poster: '/images/grader_demo_poster.jpg', fallback: 'graph' },
     film: { src: '/images/grader_film.mp4', seconds: 53.97 },
     links: [
@@ -219,7 +219,7 @@ export const apps = [
     blurb: 'I built my own wedding invite, then turned it into a product so anyone can make one.',
     stack: ['Next.js', 'React Three Fiber', 'Vercel'],
     status: 'Live',
-    // The film's problem, ceremony pages and end card, muted; "Play the film" opens it in full with sound.
+    // The film's problem, ceremony pages and end card, muted; "Watch the product overview" opens it in full with sound.
     cover: { type: 'video', src: '/images/luxe_demo.mp4', poster: '/images/luxe_demo_poster.jpg', fallback: 'invite' },
     film: { src: '/images/luxe_film.mp4', seconds: 54.47 },
     links: [
@@ -232,7 +232,7 @@ export const apps = [
     blurb: 'Two signal engines, both human-in-the-loop. A Polymarket tracker watches recently profitable wallets and flags when several pile into the same outcome, then writes a trade ticket I execute by hand. An order-flow backtester turns a Robbins Cup trader’s published rules into code and tests them on real tick data.',
     stack: ['Python', 'Polymarket API', 'Tick-data backtests'],
     status: 'Signals only, no auto-execution',
-    // The film's problem, trade ticket and end card, muted; "Play the film" opens it in full with sound.
+    // The film's problem, trade ticket and end card, muted; "Watch the product overview" opens it in full with sound.
     cover: { type: 'video', src: '/images/trading_demo.mp4', poster: '/images/trading_demo_poster.jpg', fallback: 'trading' },
     note: 'Private repo. It never places an order, so there is nothing to log into.',
     film: { src: '/images/trading_film.mp4', seconds: 59.27 },
@@ -244,7 +244,7 @@ export const apps = [
     blurb: 'Geofenced attendance, timesheets, leave and team chat across SuperAdmin, HR, manager and employee dashboards. Web app plus an Expo mobile app on one API, Docker-packaged for the client to self-host.',
     stack: ['Next.js', 'Expo', 'PostgreSQL', 'Docker'],
     status: 'Built for a client',
-    // The film's problem, geofence check and end card, muted; "Play the film" opens it in full with sound.
+    // The film's problem, geofence check and end card, muted; "Watch the product overview" opens it in full with sound.
     cover: { type: 'video', src: '/images/satcom_demo.mp4', poster: '/images/satcom_demo_poster.jpg', fallback: 'graph' },
     film: { src: '/images/satcom_film.mp4', seconds: 66.6 },
     links: [
@@ -268,7 +268,7 @@ export const apps = [
     // Not SwiftUI: the App Store build (EAS submit ascAppId 6757412164) is an Expo / React Native project.
     stack: ['React Native', 'Expo', 'Gemini API'],
     status: 'On the App Store',
-    // The film's problem, roast and end card, muted; "Play the film" opens it in full with sound.
+    // The film's problem, roast and end card, muted; "Watch the product overview" opens it in full with sound.
     cover: { type: 'video', src: '/images/roasttoast_demo.mp4', poster: '/images/roasttoast_demo_poster.jpg', fallback: 'storybook' },
     film: { src: '/images/roasttoast_film.mp4', seconds: 47.07 },
     links: [
@@ -300,7 +300,7 @@ export const apps = [
     blurb: 'Pulls my whole work inbox and Jira board, clusters threads into topics with an LLM, and writes Obsidian maps of content that link every email to the tickets it touches. One dashboard instead of two inboxes.',
     stack: ['Python', 'LLM clustering', 'Obsidian'],
     status: 'Personal tool',
-    // The film's problem, linked emails and end card, muted; "Play the film" opens it in full with sound.
+    // The film's problem, linked emails and end card, muted; "Watch the product overview" opens it in full with sound.
     cover: { type: 'video', src: '/images/mission-control_demo.mp4', poster: '/images/mission-control_demo_poster.jpg', fallback: 'graph' },
     note: 'Runs on my private mail and tickets, so there is no public build.',
     film: { src: '/images/mission-control_film.mp4', seconds: 50.33 },

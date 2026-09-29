@@ -49,6 +49,16 @@ body::before {
 .no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
 
+/* Film line under a cover: sized by its own card, not the viewport, because
+   the same card is wide in one grid and narrow in the next. */
+.film-line { container-type: inline-size; }
+.film-line .fl-short, .film-line .fl-tag-text { display: none; }
+@container (min-width: 340px) { .film-line .fl-tag-text { display: inline; } }
+@container (max-width: 271px) {
+  .film-line .fl-full.has-short { display: none; }
+  .film-line .fl-short { display: inline; }
+}
+
 /* Masked line-rise reveal helper */
 .mask-line { overflow: hidden; display: block; }
 

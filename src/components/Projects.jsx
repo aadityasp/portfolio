@@ -175,8 +175,8 @@ function Card({ p, size = 'md', onOpenFilm, onOpenDecision }) {
   const story = p.film
     ? (
       <FilmLine
-        seconds={p.film.seconds} pad={s.pad} tall={tall}
-        ariaLabel={`Play the ${p.name} film, ${spoken(p.film.seconds)}, narrated, with sound`}
+        label="Watch the product overview" shortLabel="Watch the overview" seconds={p.film.seconds} pad={s.pad} tall={tall}
+        ariaLabel={`Watch the ${p.name} product overview, ${spoken(p.film.seconds)}, narrated, with sound`}
         onPlay={() => onOpenFilm(p.id)}
       />
     )
