@@ -116,12 +116,13 @@ export const apps = [
     name: 'WriteOff',
     blurb: 'Tells a small-business owner whether an expense is a tax write-off, how much counts, why, and where it goes on Schedule C. Snap a receipt or type it. A rules engine checked against 1,523 IRS-sourced cases makes every call, and AI only reads the receipt.',
     stack: ['Expo', 'Fastify', 'Postgres', 'Claude', 'jev'],
-    status: 'In App Store review',
+    status: 'On the App Store',
     // The film's problem, verdict and end card, muted; "Watch the product overview" opens it in full with sound.
     cover: { type: 'video', src: '/images/writeoff_demo.mp4', poster: '/images/writeoff_demo_poster.jpg', fallback: 'invoice' },
-    // Add the App Store link once Apple approves it (apps.apple.com/us/app/id6815032980 404s until then).
+    // Live on the App Store since 2026-10-06.
     film: { src: '/images/writeoff_film.mp4', seconds: 69.01 },
     links: [
+      { label: 'App Store', href: 'https://apps.apple.com/us/app/writeoff-can-i-deduct-it/id6815032980' },
       { label: 'Website', href: 'https://writeoff-app-beta.vercel.app' },
     ],
   },

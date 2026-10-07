@@ -104,7 +104,7 @@ export const studies = [
       {
         label: 'The result',
         body:
-          'Every answer cites the IRS authority behind it and is saved as an audit-ready record. The eval harness caught cases where the engine overstated a deduction, such as travel with a spouse who is not an employee showing the whole bill instead of your own share, and they were fixed before launch. The app is in App Store review.',
+          'Every answer cites the IRS authority behind it and is saved as an audit-ready record. The eval harness caught cases where the engine overstated a deduction, such as travel with a spouse who is not an employee showing the whole bill instead of your own share, and they were fixed before launch. The app is live on the App Store.',
       },
     ],
     numbers: [
@@ -112,7 +112,7 @@ export const studies = [
       { value: '50+', label: 'Expense categories, each with its own decision tree' },
       { value: 'Zero', label: 'Decisions or amounts the model is allowed to change' },
     ],
-    link: { label: 'See WriteOff', href: 'https://writeoff-app-beta.vercel.app' },
+    link: { label: 'Get WriteOff on the App Store', href: 'https://apps.apple.com/us/app/writeoff-can-i-deduct-it/id6815032980' },
   },
   {
     id: 'pos-offline-first',
