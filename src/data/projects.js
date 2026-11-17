@@ -114,7 +114,7 @@ export const apps = [
   {
     id: 'writeoff',
     name: 'WriteOff',
-    blurb: 'Tells a small-business owner whether an expense is a tax write-off, how much counts, why, and where it goes on Schedule C. Snap a receipt or type it. A rules engine checked against 1,523 IRS-sourced cases makes every call, and AI only reads the receipt.',
+    blurb: 'Tells a small-business owner whether an expense is a tax write-off, how much counts, why, and where it goes on Schedule C. Snap a receipt, type it, or connect a bank or card read-only so new charges get checked as they land. A rules engine checked against 1,523 IRS-sourced cases makes every call, and AI only reads the receipt. Meals, travel and gifts always get a question first.',
     stack: ['Expo', 'Fastify', 'Postgres', 'Claude', 'jev'],
     status: 'On the App Store',
     // The film's problem, verdict and end card, muted; "Watch the product overview" opens it in full with sound.
@@ -124,6 +124,23 @@ export const apps = [
     links: [
       { label: 'App Store', href: 'https://apps.apple.com/us/app/writeoff-can-i-deduct-it/id6815032980' },
       { label: 'Website', href: 'https://writeoff-app-beta.vercel.app' },
+    ],
+  },
+  {
+    id: 'part107',
+    name: 'Part 107 Trainer',
+    // Facts from the App Store and Google Play listings and part107-trainer.vercel.app (read 2026-11-17).
+    // Stack is not public, so it is described by platform only.
+    blurb: 'Study app for the FAA Part 107 drone pilot exam. Every one of the 321 practice questions shows the regulation or FAA source behind its answer, all 98 FAA test figures open offline, and timed exams run on the real test’s 60 questions and 2 hours. One price, no subscription, no ads, no account.',
+    stack: ['iOS + Android', 'Offline', 'FAA and eCFR sources'],
+    status: 'On the App Store and Google Play',
+    // Real app screens from the product site: a sourced answer, the timed exam, the readiness
+    // estimate and a sectional chart figure. Muted loop; there is no narrated film yet.
+    cover: { type: 'video', src: '/images/part107_demo.mp4', poster: '/images/part107_demo_poster.jpg', fallback: 'graph' },
+    links: [
+      { label: 'App Store', href: 'https://apps.apple.com/us/app/id6820398552' },
+      { label: 'Google Play', href: 'https://play.google.com/store/apps/details?id=com.appanaventures.part107trainer' },
+      { label: 'Website', href: 'https://part107-trainer.vercel.app/' },
     ],
   },
   {
@@ -177,15 +194,33 @@ export const apps = [
   {
     id: 'blackjack',
     name: 'Blackjack Trainer: 21 Coach',
-    blurb: 'Free iOS trainer that drills mathematically-correct basic strategy, hand by hand, with instant feedback. No ads, no accounts, fully offline.',
-    stack: ['SwiftUI', 'iOS'],
-    status: 'On the App Store',
+    // Store listings read 2026-11-17: strategy plus Hi-Lo counting, rules-aware (S17, decks, late
+    // surrender), free core with an optional Pro, no ads, analytics or account, offline.
+    blurb: 'Trainer for mathematically correct basic strategy and Hi-Lo card counting, hand by hand, with instant feedback. The right play follows the table’s rules, like whether the dealer stands on soft 17, how many decks, and late surrender. Free to train, with an optional Pro. No ads, no accounts, fully offline.',
+    stack: ['SwiftUI', 'iOS + Android'],
+    status: 'On the App Store and Google Play',
     // The film's problem, right play and end card, muted; "Watch the product overview" opens it in full with sound.
     cover: { type: 'video', src: '/images/blackjack_demo.mp4', poster: '/images/blackjack_demo_poster.jpg', fallback: 'blackjack' },
     // No GitHub link: the public repo only hosts the App Store privacy/support page, not the app source.
     film: { src: '/images/blackjack_film.mp4', seconds: 58.7 },
     links: [
       { label: 'App Store', href: 'https://apps.apple.com/us/app/id6789853035' },
+      { label: 'Google Play', href: 'https://play.google.com/store/apps/details?id=com.coach21.blackjack' },
+    ],
+  },
+  {
+    id: 'tinytumbles',
+    name: 'Tiny Tumbles: Marble Puzzles',
+    // Google Play listing and tiny-tumbles.vercel.app, read 2026-11-17. The iPhone listing could not
+    // be confirmed, so only the Play link is shown.
+    blurb: 'Cozy physics puzzle game: pull back, fling a marble and topple toy towers without knocking over the little lantern. 100 puzzles across five worlds, every one tested to be beatable, and the same shot always plays out the same way. First world free, then one unlock. No ads, no energy, no timers.',
+    stack: ['Unity', 'Android'],
+    status: 'On Google Play',
+    // Real footage from the game's site: the title screen, then the five worlds. Muted; no narrated film yet.
+    cover: { type: 'video', src: '/images/tinytumbles_demo.mp4', poster: '/images/tinytumbles_demo_poster.jpg', fallback: 'storybook' },
+    links: [
+      { label: 'Google Play', href: 'https://play.google.com/store/apps/details?id=com.tinytumbles.app' },
+      { label: 'Website', href: 'https://tiny-tumbles.vercel.app' },
     ],
   },
   {
@@ -199,6 +234,18 @@ export const apps = [
     film: { src: '/images/visual-workflows_film.mp4', seconds: 59.93 },
     links: [
       { label: 'GitHub', href: 'https://github.com/aadityasp/visual-workflows' },
+    ],
+  },
+  {
+    id: 'blindspots',
+    name: 'Blind Spots',
+    // From the public repo README (github.com/aadityasp/blind-spots). Cover is its own demo recording.
+    blurb: 'A Claude Code mod that keeps a side pane of the assumptions Claude is making and the scenarios you might have missed, refreshed after every reply. Press one and it becomes your next message. It never sends anything on its own.',
+    stack: ['Claude Code', 'TypeScript', 'Hooks'],
+    status: 'Open source',
+    cover: { type: 'video', src: '/images/blindspots_demo.mp4', poster: '/images/blindspots_demo_poster.jpg', fallback: 'agents' },
+    links: [
+      { label: 'GitHub', href: 'https://github.com/aadityasp/blind-spots' },
     ],
   },
   {
@@ -351,7 +398,7 @@ export const research = [
 
 export const stats = [
   { value: '3 domains', label: 'Retail, health & fintech' },
-  { value: '17+', label: 'Products shipped, idea to live' },
+  { value: '20+', label: 'Products shipped, idea to live' },
   { value: '2 to 5 days', label: 'From idea to working build' },
   { value: 'MS in AI', label: 'Northeastern University' },
 ]

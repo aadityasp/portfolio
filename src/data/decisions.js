@@ -3,8 +3,9 @@
 // a decision here shows a "Case study" button that opens the layer
 // (src/components/DecisionLayer.jsx) with ONLY that project's write-up.
 //
-// Honesty rule for this file: every number here is one that already appears on
-// the resume and has been verified there. Nothing is rounded up, and design
+// Honesty rule for this file: every number here already appears on the resume
+// or on the product's own store listing or site (each entry names its source)
+// and has been verified there. Nothing is rounded up, and design
 // consequences are stated as design consequences, not as measured outcomes.
 
 export const studies = [
@@ -104,7 +105,7 @@ export const studies = [
       {
         label: 'The result',
         body:
-          'Every answer cites the IRS authority behind it and is saved as an audit-ready record. The eval harness caught cases where the engine overstated a deduction, such as travel with a spouse who is not an employee showing the whole bill instead of your own share, and they were fixed before launch. The app is live on the App Store.',
+          'Every answer cites the IRS authority behind it and is saved as an audit-ready record. The eval harness caught cases where the engine overstated a deduction, such as travel with a spouse who is not an employee showing the whole bill instead of your own share, and they were fixed before launch. The app is live on the App Store, and version 1.3 adds a read-only bank and card connection under the same rule: the engine still makes every call on a matched charge, and meals, travel and gifts always get a question.',
       },
     ],
     numbers: [
@@ -188,6 +189,114 @@ export const studies = [
       { value: 'Per retailer', label: 'Store-branded builds' },
     ],
     link: null,
+  },
+  {
+    id: 'part107-sources',
+    project: 'part107',
+    // Source: the App Store and Google Play listings and part107-trainer.vercel.app, read 2026-11-17.
+    headline: 'Why should anyone trust a practice answer?',
+    context:
+      'Part 107 Trainer is a study app for the FAA Part 107 knowledge test, the exam a commercial drone pilot has to pass.',
+    sections: [
+      {
+        label: 'The problem',
+        body:
+          'Someone studying for a federal exam cannot tell a wrong practice answer from a right one. If a prep app teaches a rule wrong, the student learns it wrong and finds out in the test room. Most prep apps also sit behind a subscription that keeps billing after the exam is over.',
+      },
+      {
+        label: 'The decision',
+        body:
+          'Every answer shows its source. All 321 questions carry the CFR section or FAA publication behind the answer, one tap opens it, and anyone who disagrees can press Dispute this. Readiness is shown as an estimate by test area, not as a pass prediction. And it costs one price, once, with no subscription, ads, account or analytics.',
+      },
+      {
+        label: 'The tradeoff',
+        body:
+          'Citing every question is slow, and a dispute button invites people to say the app is wrong. One-time pricing gives up the recurring revenue a subscription would bring from people who study for weeks.',
+      },
+      {
+        label: 'The result',
+        body:
+          'It is live on the App Store and Google Play. All 98 FAA test figures open offline with zoom, and the timed exams run on the real test format of 60 questions in 2 hours with 70 percent to pass.',
+      },
+    ],
+    numbers: [
+      { value: '321', label: 'Practice questions, each citing its FAA or eCFR source' },
+      { value: '98', label: 'FAA test figures, all offline' },
+      { value: 'Once', label: 'One price, with no subscription, ads or account' },
+    ],
+    link: { label: 'See Part 107 Trainer', href: 'https://part107-trainer.vercel.app/' },
+  },
+  {
+    id: 'tinytumbles-fair',
+    project: 'tinytumbles',
+    // Source: the Google Play listing and tiny-tumbles.vercel.app, read 2026-11-17.
+    headline: 'How should a puzzle game make money?',
+    context:
+      'Tiny Tumbles is a casual physics puzzle game: pull back, fling a marble, and topple toy towers without knocking over the little lantern.',
+    sections: [
+      {
+        label: 'The problem',
+        body:
+          'Most casual puzzle games earn by interrupting: ads between levels, energy that runs out, timers that nudge a purchase. And a physics puzzle that plays out differently each time makes a missed shot feel like bad luck instead of something to learn from.',
+      },
+      {
+        label: 'The decision',
+        body:
+          'No ads, no energy, no timers. The first world of 20 levels is free, and one unlock opens the rest. The physics are deterministic, so the same shot always plays out the same way, every puzzle is tested to be beatable, and a hint shows a winning shot.',
+      },
+      {
+        label: 'The tradeoff',
+        body:
+          'Free players bring in nothing, so the first 20 levels have to sell the whole game. And deterministic physics with a known solution means every one of 100 puzzles has to be proven beatable before it ships.',
+      },
+      {
+        label: 'The result',
+        body:
+          'It is live on Google Play, rated for everyone, and plays fully offline.',
+      },
+    ],
+    numbers: [
+      { value: '100', label: 'Puzzles across five worlds' },
+      { value: '20', label: 'Levels free before the one-time unlock' },
+      { value: 'Zero', label: 'Ads, energy meters or timers' },
+    ],
+    link: { label: 'Get Tiny Tumbles on Google Play', href: 'https://play.google.com/store/apps/details?id=com.tinytumbles.app' },
+  },
+  {
+    id: 'blindspots-press',
+    project: 'blindspots',
+    // Source: README in github.com/aadityasp/blind-spots.
+    headline: 'Should the tool act on what it notices?',
+    context:
+      'Blind Spots is an open-source mod for Claude Code. After every reply, a side pane lists the assumptions Claude is making and the scenarios you might have missed.',
+    sections: [
+      {
+        label: 'The problem',
+        body:
+          'A coding agent makes assumptions and skips edge cases without saying so, and you usually find out after the code is written. The agent already knows what it assumed. You just cannot see it.',
+      },
+      {
+        label: 'The decision',
+        body:
+          'Surface it, and leave the call with you. The pane works on a background fork of the conversation, so the main session is not disturbed. Pressing an item sends it as your next message, and it never sends anything on its own.',
+      },
+      {
+        label: 'The tradeoff',
+        body:
+          'Each refresh costs an extra model call. Instead of hiding that, the README says so up front, and one key turns auto refresh off so you refresh only when you want to.',
+      },
+      {
+        label: 'The result',
+        body:
+          'It is open source under MIT and installs from the Claude Code plugin marketplace.',
+      },
+    ],
+    numbers: [
+      { value: '2', label: 'Lists after every reply: assumptions and missed scenarios' },
+      { value: 'Zero', label: 'Messages sent without your press' },
+      { value: '1 key', label: 'Turns auto refresh off' },
+    ],
+    link: { label: 'Blind Spots on GitHub', href: 'https://github.com/aadityasp/blind-spots' },
   },
 ]
 
