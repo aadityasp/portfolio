@@ -136,9 +136,9 @@ export const apps = [
     blurb: 'Study app for the FAA Part 107 drone pilot exam. Every one of the 321 practice questions shows the regulation or FAA source behind its answer, all 98 FAA test figures open offline, and timed exams run on the real test’s 60 questions and 2 hours. One price, no subscription, no ads, no account.',
     stack: ['iOS + Android', 'Offline', 'FAA and eCFR sources'],
     status: 'On the App Store and Google Play',
-    // Real app screens from the product site: a sourced answer, the timed exam, the readiness
-    // estimate and a sectional chart figure. Muted loop; there is no narrated film yet.
-    cover: { type: 'video', src: '/images/part107_demo.mp4', poster: '/images/part107_demo_poster.jpg', fallback: 'graph' },
+    // Cover redraws one real question from the app's bank (q-reg-altitude-002) with its
+    // citation; the case study shows the same question plus a real answer screen.
+    cover: { type: 'svg', variant: 'part107' },
     links: [
       { label: 'App Store', href: 'https://apps.apple.com/us/app/id6820398552' },
       { label: 'Google Play', href: 'https://play.google.com/store/apps/details?id=com.appanaventures.part107trainer' },

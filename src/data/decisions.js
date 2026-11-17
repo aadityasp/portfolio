@@ -224,6 +224,40 @@ export const studies = [
       { value: '98', label: 'FAA test figures, all offline' },
       { value: 'Once', label: 'One price, with no subscription, ads or account' },
     ],
+    // Word for word from the app's question bank (content/questions/regulations.json,
+    // q-reg-altitude-002); the rule text is the app site's own guide to 14 CFR 107.51(b).
+    example: {
+      title: 'An example from the question bank',
+      steps: [
+        {
+          label: 'The question',
+          lines: ['You are inspecting a 900-foot radio tower. Under Part 107, what is the highest altitude you may operate at?'],
+        },
+        {
+          label: 'The choices',
+          choices: [
+            { key: 'A', text: '400 feet AGL, with no exception for structures' },
+            { key: 'B', text: '1,300 feet AGL, provided you stay within a 400-foot radius of the tower', correct: true },
+            { key: 'C', text: '900 feet AGL, matching the top of the structure' },
+          ],
+        },
+        {
+          label: 'Why',
+          prose: 'The 400-foot AGL ceiling is raised near a structure. You may fly up to 400 feet above the structure’s immediate uppermost limit, provided you stay within a 400-foot radius of it. A 900-foot tower plus 400 feet gives 1,300 feet AGL. Both conditions must hold, the radius and the height.',
+        },
+        {
+          label: 'The source',
+          source: {
+            cite: '14 CFR 107.51(b)',
+            text: 'Fly no higher than 400 feet above ground level, unless you stay within a 400-foot radius of a structure and no higher than 400 feet above its immediate uppermost limit.',
+            note: 'One tap opens the regulation. Dispute this sits next to Next question.',
+          },
+        },
+      ],
+      images: [
+        { src: '/images/part107_example.jpg', alt: 'Part 107 Trainer answer screen: the correct choice in green, a plain-English explanation, two source cards (14 CFR 107.51(d) and AC 107-2A) and a Dispute this button.', caption: 'A real answer screen from the app, on a cloud clearance question.' },
+      ],
+    },
     link: { label: 'See Part 107 Trainer', href: 'https://part107-trainer.vercel.app/' },
   },
   {
@@ -260,6 +294,38 @@ export const studies = [
       { value: '20', label: 'Levels free before the one-time unlock' },
       { value: 'Zero', label: 'Ads, energy meters or timers' },
     ],
+    // Level 5 word for word from the game's level file (Data/Levels/Level05.asset) and the
+    // star rules from tiny-tumbles.vercel.app/how-to-play. Images are the store screenshots.
+    example: {
+      title: 'An example level',
+      steps: [
+        {
+          label: 'Level 5',
+          lines: ['Mind the Lantern', 'Clear the blocks. Keep the lantern standing.'],
+          plain: true,
+        },
+        {
+          label: 'The rules',
+          prose: 'Drag back from the marble and let go. Every gold-star block has to leave the table, and if the lantern falls the attempt ends. Par here is 2 shots: clear it in 2 or fewer for three stars, one over par for two stars, any other win for one. Retries are unlimited.',
+        },
+        {
+          label: 'The level’s tip',
+          lines: ['Falling blocks can tip the lantern. The aim ring turns red when it’s in the way.'],
+        },
+        {
+          label: 'Proof it’s fair',
+          source: {
+            cite: 'Solver record in the level file',
+            text: 'Solved in 2 shots, the par. The lantern never falls on its own.',
+            note: 'Physics are deterministic, so the same shot plays out the same way every time, and a hint shows a winning shot.',
+          },
+        },
+      ],
+      images: [
+        { src: '/images/tinytumbles_example_aim.jpg', alt: 'Tiny Tumbles store screenshot: pull back, aim, let go, with star blocks and the lantern on the table.', caption: 'Pull back, aim, let go.' },
+        { src: '/images/tinytumbles_example_clear.jpg', alt: 'Tiny Tumbles store screenshot: Level Clear with three stars, cleared in one shot.', caption: 'Three stars for clearing at par or under.' },
+      ],
+    },
     link: { label: 'Get Tiny Tumbles on the App Store', href: 'https://apps.apple.com/us/app/tiny-tumbles/id6824798215' },
   },
   {
@@ -326,7 +392,7 @@ export const studies = [
           sent: 'Will this API be reachable from the internet, and if so should I add HTTPS and rate limiting to signup before anything else?',
         },
       ],
-      image: { src: '/images/blindspots_example.jpg', alt: 'Claude Code with the Blind Spots pane on the right. Item 1 is checked and its question has been sent as the next message.', caption: 'The same moment in the real recording: item 1 is checked and its question is now Claude’s next prompt.' },
+      images: [{ wide: true, src: '/images/blindspots_example.jpg', alt: 'Claude Code with the Blind Spots pane on the right. Item 1 is checked and its question has been sent as the next message.', caption: 'The same moment in the real recording: item 1 is checked and its question is now Claude’s next prompt.' }],
     },
     link: { label: 'Blind Spots on GitHub', href: 'https://github.com/aadityasp/blind-spots' },
   },

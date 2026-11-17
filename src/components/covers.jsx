@@ -482,6 +482,63 @@ function BlindSpotsCover({ active }) {
   )
 }
 
+function Part107Cover({ active }) {
+  // A real question from the app's bank (q-reg-altitude-002), stem shortened to fit.
+  // The obvious answer is the trap; the right one comes with its regulation.
+  const SANS = 'Inter, system-ui, sans-serif'
+  const MONO = 'ui-monospace, SFMono-Regular, Menlo, monospace'
+  const LOOP = '7s ease-in-out infinite'
+  const GREEN = '#1B7A43'
+  const choices = [
+    ['A', '400 ft AGL, no exception for structures'],
+    ['B', '1,300 ft AGL, within 400 ft of the tower'],
+    ['C', '900 ft AGL, the top of the tower'],
+  ]
+  return (
+    <Frame tint="#EAF1EA" active={active}>
+      <text x="14" y="26" fontFamily={MONO} fontSize="6.8" fill={INK} opacity="0.5">PRACTICE · REGULATIONS</text>
+      <text x="14" y="40" fontFamily={SANS} fontSize="9.6" fontWeight="700" fill={INK}>You are inspecting a 900-foot radio tower.</text>
+      <text x="14" y="52" fontFamily={SANS} fontSize="9.6" fontWeight="700" fill={INK}>What is the highest altitude you may fly?</text>
+      {choices.map(([k, t], i) => {
+        const y = 60 + i * 24
+        const right = k === 'B'
+        return (
+          <g key={k}>
+            <rect x="14" y={y} width="186" height="19" rx="5" fill="#fff" stroke={INK} strokeOpacity="0.14" />
+            {right && (
+              <rect
+                x="14" y={y} width="186" height="19" rx="5" fill={GREEN} fillOpacity="0.12" stroke={GREEN} strokeWidth="1.4"
+                className="pf-run" style={{ animation: `pf-bs-hl ${LOOP}` }}
+              />
+            )}
+            <text x="22" y={y + 12.6} fontFamily={MONO} fontSize="7.6" fontWeight="700" fill={right ? GREEN : INK} opacity={right ? 1 : 0.55}>{k}</text>
+            <text x="34" y={y + 12.6} fontFamily={SANS} fontSize="7.8" fill={INK} opacity={right ? 0.95 : 0.7}>{t}</text>
+            {right && (
+              <text
+                x="193" y={y + 13} fontFamily={SANS} fontSize="9" fontWeight="700" fill={GREEN} textAnchor="end"
+                className="pf-run" style={{ animation: `pf-bs-tick ${LOOP}` }}
+              >✓</text>
+            )}
+          </g>
+        )
+      })}
+      {/* the source, with the rule itself */}
+      <g className="pf-run" style={{ animation: `pf-bs-send ${LOOP}` }}>
+        <rect x="208" y="60" width="98" height="91" rx="7" fill="#fff" stroke={AC} strokeWidth="1.5" />
+        <text x="216" y="73" fontFamily={MONO} fontSize="6.4" fill={AC} fontWeight="700">SOURCE</text>
+        <text x="216" y="85" fontFamily={MONO} fontSize="8" fontWeight="700" fill={INK}>14 CFR 107.51(b)</text>
+        {['400 ft AGL max, unless', 'within a 400-foot radius', 'of a structure and no', 'higher than 400 ft', 'above its top.'].map((t, i) => (
+          <text key={t} x="216" y={99 + i * 10.5} fontFamily={SANS} fontSize="7.2" fill={INK} opacity="0.72">{t}</text>
+        ))}
+      </g>
+      <g className="pf-run" style={{ animation: `pf-bs-send ${LOOP}` }}>
+        <rect x="14" y="158" width="292" height="26" rx="7" fill={INK} />
+        <text x="23" y="174" fontFamily={SANS} fontSize="8.2" fill="#fff">900 ft tower + 400 ft = 1,300 ft AGL. Both conditions must hold.</text>
+      </g>
+    </Frame>
+  )
+}
+
 const COVERS = {
   trading: TradingCover,
   invoice: InvoiceCover,
@@ -493,6 +550,7 @@ const COVERS = {
   blackjack: BlackjackCover,
   agents: AgentsCover,
   blindspots: BlindSpotsCover,
+  part107: Part107Cover,
   pos: POSCover,
   label: LabelCover,
   loyalty: LoyaltyCover,

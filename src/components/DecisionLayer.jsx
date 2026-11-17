@@ -27,9 +27,38 @@ function Example({ ex }) {
               <span className="text-accent font-semibold">{i + 1}</span>&nbsp;&nbsp;{st.label}
             </p>
             <div className="min-w-0">
-              {st.lines && (
+              {st.lines && st.plain && (
+                <div className="rounded-xl bg-white border border-line px-4 py-3">
+                  <p className="display text-xl font-semibold text-ink">{st.lines[0]}</p>
+                  <p className="text-[14px] text-soft mt-1">{st.lines[1]}</p>
+                </div>
+              )}
+              {st.lines && !st.plain && (
                 <div className="rounded-xl bg-white border border-line px-4 py-3 font-mono text-[12.5px] leading-relaxed text-ink/85">
                   {st.lines.map((l) => <p key={l}>{st.lines.length > 1 ? `· ${l}` : `› ${l}`}</p>)}
+                </div>
+              )}
+              {st.prose && <p className="text-[14.5px] leading-relaxed text-ink/85 pt-0.5">{st.prose}</p>}
+              {st.choices && (
+                <ul className="space-y-2">
+                  {st.choices.map((c) => (
+                    <li
+                      key={c.key}
+                      className={`flex items-start gap-3 rounded-xl border px-4 py-2.5 text-[14px] leading-snug ${c.correct ? 'border-[#1B7A43] bg-[#1B7A43]/10 text-ink' : 'border-line bg-white text-ink/70'}`}
+                    >
+                      <span className={`font-mono font-semibold ${c.correct ? 'text-[#1B7A43]' : 'text-soft'}`}>{c.key}</span>
+                      <span className="flex-1">{c.text}</span>
+                      {c.correct && <span className="font-mono text-[11px] uppercase tracking-wider text-[#1B7A43] pt-0.5">Correct</span>}
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {st.source && (
+                <div className="rounded-xl bg-white border-2 border-accent/70 px-4 py-3">
+                  <p className="font-mono text-[10.5px] uppercase tracking-wider text-accent">Source</p>
+                  <p className="font-mono text-[13px] font-semibold text-ink mt-1">{st.source.cite}</p>
+                  <p className="text-[14px] leading-relaxed text-ink/85 mt-1.5">{st.source.text}</p>
+                  {st.source.note && <p className="text-[12.5px] leading-relaxed text-soft mt-2">{st.source.note}</p>}
                 </div>
               )}
               {st.groups && (
@@ -59,11 +88,15 @@ function Example({ ex }) {
           </li>
         ))}
       </ol>
-      {ex.image && (
-        <figure className="mt-7">
-          <img src={ex.image.src} alt={ex.image.alt} loading="lazy" className="w-full rounded-xl border border-line" />
-          <figcaption className="font-mono text-[11px] text-soft mt-2 leading-relaxed">{ex.image.caption}</figcaption>
-        </figure>
+      {ex.images && (
+        <div className={`mt-7 grid gap-5 ${ex.images.some((im) => im.wide) ? '' : 'grid-cols-2 sm:flex sm:justify-center'}`}>
+          {ex.images.map((im) => (
+            <figure key={im.src} className={im.wide ? '' : 'sm:w-[240px]'}>
+              <img src={im.src} alt={im.alt} loading="lazy" className="w-full rounded-xl border border-line" />
+              <figcaption className="font-mono text-[11px] text-soft mt-2 leading-relaxed">{im.caption}</figcaption>
+            </figure>
+          ))}
+        </div>
       )}
     </div>
   )
