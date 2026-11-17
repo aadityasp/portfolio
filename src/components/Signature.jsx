@@ -2,9 +2,9 @@ import { useEffect, useRef, useState } from 'react'
 import { motion, useInView, useMotionValue, useTransform, animate } from 'framer-motion'
 import Particles from './Particles'
 
-// Placeholder floor: Aditya says about 12B in the last month alone (Nov 2026), so the all-time total is higher.
-// Replace with the all-time total from ccusage on his Mac once he sends it.
-const TARGET = 12_000_000_000
+// All-time total from `npx ccusage monthly` on his Mac, 2026-11-17: 33,480,277,926 tokens.
+// Rounded down, never up. Older logs are pruned locally, so the true total is higher.
+const TARGET = 33_000_000_000
 
 export default function Signature() {
   const ref = useRef(null)
