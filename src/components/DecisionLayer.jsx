@@ -16,6 +16,59 @@ function Num({ n }) {
   )
 }
 
+function Example({ ex }) {
+  return (
+    <div className="mt-8 rounded-2xl border border-line bg-paper2/60 p-5 sm:p-7">
+      <p className="eyebrow text-accent">{ex.title}</p>
+      <ol className="mt-5 space-y-5">
+        {ex.steps.map((st, i) => (
+          <li key={st.label} className="grid sm:grid-cols-[130px_1fr] gap-2 sm:gap-8">
+            <p className="font-mono text-[11px] uppercase tracking-wider text-soft pt-1">
+              <span className="text-accent font-semibold">{i + 1}</span>&nbsp;&nbsp;{st.label}
+            </p>
+            <div className="min-w-0">
+              {st.lines && (
+                <div className="rounded-xl bg-white border border-line px-4 py-3 font-mono text-[12.5px] leading-relaxed text-ink/85">
+                  {st.lines.map((l) => <p key={l}>{st.lines.length > 1 ? `· ${l}` : `› ${l}`}</p>)}
+                </div>
+              )}
+              {st.groups && (
+                <div className="rounded-xl bg-white border-2 border-accent/70 px-4 py-3 space-y-3">
+                  {st.groups.map((g, gi) => (
+                    <div key={g.heading}>
+                      <p className={`text-[13px] font-semibold ${gi === 0 ? 'text-accent' : 'text-ink'}`}>{g.heading}</p>
+                      <ul className="mt-1.5 space-y-1">
+                        {g.items.map((it, k) => (
+                          <li key={it} className={`text-[13.5px] leading-snug flex gap-2 ${gi === 0 && k === 0 ? 'text-ink font-medium' : 'text-ink/75'}`}>
+                            <span className={`font-mono shrink-0 ${gi === 0 ? 'text-accent' : 'text-soft'}`}>{gi === 0 ? k + 1 : '›'}</span>
+                            <span>{it}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              )}
+              {st.sent && (
+                <div className="rounded-xl bg-ink px-4 py-3">
+                  <p className="font-mono text-[10.5px] uppercase tracking-wider text-[#9DB0FF]">Sent as your next message</p>
+                  <p className="text-white text-[14.5px] leading-relaxed mt-1">{st.sent}</p>
+                </div>
+              )}
+            </div>
+          </li>
+        ))}
+      </ol>
+      {ex.image && (
+        <figure className="mt-7">
+          <img src={ex.image.src} alt={ex.image.alt} loading="lazy" className="w-full rounded-xl border border-line" />
+          <figcaption className="font-mono text-[11px] text-soft mt-2 leading-relaxed">{ex.image.caption}</figcaption>
+        </figure>
+      )}
+    </div>
+  )
+}
+
 /**
  * The decision layer: a dismissable sheet over the page showing ONLY the
  * decision write-ups attached to one project. Opened from the "Case study"
@@ -88,6 +141,8 @@ export default function DecisionLayer({ projectId, onClose }) {
                   <div className="grid sm:grid-cols-3 gap-5 mt-8">
                     {s.numbers.map((n) => <Num key={n.label} n={n} />)}
                   </div>
+
+                  {s.example && <Example ex={s.example} />}
 
                   <div className="mt-8">
                     {s.sections.map((sec) => (

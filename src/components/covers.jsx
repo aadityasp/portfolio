@@ -31,6 +31,10 @@ const MOTION_CSS = `
 @keyframes pf-lift { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-4px) } }
 @keyframes pf-page { 0%,100% { transform: rotateY(0deg) } 50% { transform: rotateY(-24deg) } }
 
+@keyframes pf-bs-hl { 0%,18% { opacity: 0 } 26%,90% { opacity: 1 } 100% { opacity: 0 } }
+@keyframes pf-bs-send { 0%,34% { opacity: 0; transform: translateY(10px) } 44%,90% { opacity: 1; transform: translateY(0) } 100% { opacity: 0; transform: translateY(0) } }
+@keyframes pf-bs-tick { 0%,46% { opacity: 0 } 52%,90% { opacity: 1 } 100% { opacity: 0 } }
+
 @media (prefers-reduced-motion: reduce) {
   .pf-anim .pf-run { animation: none !important; }
 }
@@ -426,6 +430,58 @@ function LoyaltyCover({ active }) {
   )
 }
 
+function BlindSpotsCover({ active }) {
+  // The real demo from the repo README: asked to plan a user signup, Claude
+  // replies with a plan; the pane lists what it missed and what it assumed.
+  // Pressing item 1 sends the fork's one-line question as the next message.
+  const SANS = 'Inter, system-ui, sans-serif'
+  const MONO = 'ui-monospace, SFMono-Regular, Menlo, monospace'
+  const LOOP = '7s ease-in-out infinite'
+  const scenarios = ['Is this API publicly exposed?', 'Password policy beyond length', 'Email verification first']
+  const assumptions = ['Users kept in memory', 'scrypt instead of bcrypt']
+  return (
+    <Frame tint="#E9ECFA" active={active}>
+      {/* Claude's reply */}
+      <rect x="14" y="18" width="134" height="114" rx="8" fill="#fff" stroke={INK} strokeOpacity="0.12" />
+      <text x="24" y="34" fontFamily={MONO} fontSize="7" fill={INK} opacity="0.5">CLAUDE</text>
+      <text x="24" y="49" fontFamily={SANS} fontSize="10.5" fontWeight="700" fill={INK}>Plan: user signup</text>
+      {['POST /signup', 'Store users in memory', 'Hash with scrypt', 'Test with node:test'].map((t, i) => (
+        <text key={t} x="24" y={66 + i * 15} fontFamily={MONO} fontSize="7.6" fill={INK} opacity="0.62">{`${i + 1}. ${t}`}</text>
+      ))}
+      <rect x="24" y="118" width="80" height="3" rx="1.5" fill={INK} opacity="0.12" />
+
+      {/* the Blind Spots pane */}
+      <rect x="156" y="18" width="150" height="114" rx="8" fill="#fff" stroke={AC} strokeWidth="1.6" />
+      <text x="165" y="33" fontFamily={SANS} fontSize="8.2" fontWeight="700" fill={AC}>Scenarios you might have missed</text>
+      <rect
+        x="161" y="37" width="140" height="13" rx="3.5" fill={AC} fillOpacity="0.14"
+        className="pf-run" style={{ animation: `pf-bs-hl ${LOOP}` }}
+      />
+      {scenarios.map((t, i) => (
+        <text key={t} x="165" y={47 + i * 13} fontFamily={SANS} fontSize="8" fill={INK} opacity={i === 0 ? 0.95 : 0.7}>
+          <tspan fontFamily={MONO} fill={AC} fontWeight="700">{i + 1}</tspan>{`  ${t}`}
+        </text>
+      ))}
+      <text
+        x="294" y="47" fontFamily={SANS} fontSize="9" fontWeight="700" fill={AC} textAnchor="end"
+        className="pf-run" style={{ animation: `pf-bs-tick ${LOOP}` }}
+      >✓</text>
+      <text x="165" y="96" fontFamily={SANS} fontSize="8.2" fontWeight="700" fill={INK} opacity="0.85">Assumptions Claude is making</text>
+      {assumptions.map((t, i) => (
+        <text key={t} x="165" y={109 + i * 12} fontFamily={SANS} fontSize="8" fill={INK} opacity="0.68">{`›  ${t}`}</text>
+      ))}
+
+      {/* pressing 1 sends this as your next message */}
+      <g className="pf-run" style={{ animation: `pf-bs-send ${LOOP}` }}>
+        <rect x="14" y="140" width="292" height="44" rx="8" fill={INK} />
+        <text x="24" y="153" fontFamily={MONO} fontSize="6.8" fill="#9DB0FF">YOU PRESS 1, AND THIS IS SENT AS YOUR NEXT MESSAGE</text>
+        <text x="24" y="166" fontFamily={SANS} fontSize="8.4" fill="#fff">Will this API be reachable from the internet, and if so should I</text>
+        <text x="24" y="177" fontFamily={SANS} fontSize="8.4" fill="#fff">add HTTPS and rate limiting to signup before anything else?</text>
+      </g>
+    </Frame>
+  )
+}
+
 const COVERS = {
   trading: TradingCover,
   invoice: InvoiceCover,
@@ -436,6 +492,7 @@ const COVERS = {
   lifeos: LifeOSCover,
   blackjack: BlackjackCover,
   agents: AgentsCover,
+  blindspots: BlindSpotsCover,
   pos: POSCover,
   label: LabelCover,
   loyalty: LoyaltyCover,

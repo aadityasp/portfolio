@@ -241,11 +241,12 @@ export const apps = [
   {
     id: 'blindspots',
     name: 'Blind Spots',
-    // From the public repo README (github.com/aadityasp/blind-spots). Cover is its own demo recording.
-    blurb: 'A Claude Code mod that keeps a side pane of the assumptions Claude is making and the scenarios you might have missed, refreshed after every reply. Press one and it becomes your next message. It never sends anything on its own.',
+    // From the public repo README (github.com/aadityasp/blind-spots). The cover redraws the README's
+    // own demo at card size: every line on it is taken from that recording, shortened where noted.
+    blurb: 'A Claude Code mod that keeps a side pane of the assumptions Claude is making and the scenarios you might have missed, refreshed after every reply. Ask for a signup plan and it flags "Is this API publicly exposed?" Press it and the question becomes your next message. It never sends anything on its own.',
     stack: ['Claude Code', 'TypeScript', 'Hooks'],
     status: 'Open source',
-    cover: { type: 'video', src: '/images/blindspots_demo.mp4', poster: '/images/blindspots_demo_poster.jpg', fallback: 'agents' },
+    cover: { type: 'svg', variant: 'blindspots' },
     links: [
       { label: 'GitHub', href: 'https://github.com/aadityasp/blind-spots' },
     ],

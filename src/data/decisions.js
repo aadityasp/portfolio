@@ -296,6 +296,38 @@ export const studies = [
       { value: 'Zero', label: 'Messages sent without your press' },
       { value: '1 key', label: 'Turns auto refresh off' },
     ],
+    // A worked example, word for word from the README's demo recording (assets/demo.gif).
+    example: {
+      title: 'An example from the demo',
+      steps: [
+        {
+          label: 'You ask',
+          lines: ['Add user signup to this shop API. Give me a short plan first, no code yet.'],
+        },
+        {
+          label: 'Claude plans',
+          lines: ['POST /signup takes email and password', 'Store users in memory', 'Hash passwords with built-in scrypt', 'Test with node:test and a curl check'],
+        },
+        {
+          label: 'The pane flags',
+          groups: [
+            {
+              heading: 'Scenarios you might have missed',
+              items: ['Is this API publicly exposed?', 'Account enumeration via duplicate check', 'Email verification before activation', 'What will users actually do afterward?', 'Password policy beyond length', 'Extra profile fields at signup'],
+            },
+            {
+              heading: 'Assumptions Claude is making (3 of 11)',
+              items: ['Storing users in an in-memory array is acceptable, with data lost on restart.', 'Built-in crypto.scrypt is preferable to bcrypt to avoid adding a dependency.', 'Login, sessions, JWTs, email verification and rate limiting are out of scope for this task.'],
+            },
+          ],
+        },
+        {
+          label: 'You press 1',
+          sent: 'Will this API be reachable from the internet, and if so should I add HTTPS and rate limiting to signup before anything else?',
+        },
+      ],
+      image: { src: '/images/blindspots_example.jpg', alt: 'Claude Code with the Blind Spots pane on the right. Item 1 is checked and its question has been sent as the next message.', caption: 'The same moment in the real recording: item 1 is checked and its question is now Claude’s next prompt.' },
+    },
     link: { label: 'Blind Spots on GitHub', href: 'https://github.com/aadityasp/blind-spots' },
   },
 ]
