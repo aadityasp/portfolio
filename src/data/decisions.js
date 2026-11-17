@@ -105,7 +105,7 @@ export const studies = [
       {
         label: 'The result',
         body:
-          'Every answer cites the IRS authority behind it and is saved as an audit-ready record. The eval harness caught cases where the engine overstated a deduction, such as travel with a spouse who is not an employee showing the whole bill instead of your own share, and they were fixed before launch. The app is live on the App Store, and version 1.3 adds a read-only bank and card connection under the same rule: the engine still makes every call on a matched charge, and meals, travel and gifts always get a question.',
+          'Every answer cites the IRS authority behind it and is saved as an audit-ready record. The eval harness caught cases where the engine overstated a deduction, such as travel with a spouse who is not an employee showing the whole bill instead of your own share, and they were fixed before launch. The app is live on the App Store and Google Play, and version 1.3 adds a read-only bank and card connection under the same rule: the engine still makes every call on a matched charge, and meals, travel and gifts always get a question.',
       },
     ],
     numbers: [
@@ -229,7 +229,7 @@ export const studies = [
   {
     id: 'tinytumbles-fair',
     project: 'tinytumbles',
-    // Source: the Google Play listing and tiny-tumbles.vercel.app, read 2026-11-17.
+    // Source: the App Store and Google Play listings and tiny-tumbles.vercel.app, all read 2026-11-17.
     headline: 'How should a puzzle game make money?',
     context:
       'Tiny Tumbles is a casual physics puzzle game: pull back, fling a marble, and topple toy towers without knocking over the little lantern.',
@@ -242,17 +242,17 @@ export const studies = [
       {
         label: 'The decision',
         body:
-          'No ads, no energy, no timers. The first world of 20 levels is free, and one unlock opens the rest. The physics are deterministic, so the same shot always plays out the same way, every puzzle is tested to be beatable, and a hint shows a winning shot.',
+          'No ads, no energy, no timers. The first world of 20 levels is free, and one unlock opens the rest, with no subscription. Power-ups are earned in play from a daily scratch card and toy chests, and packs of power-ups and hints are optional extras. The physics are deterministic, so the same shot always plays out the same way, every puzzle is tested to be beatable, and a hint shows a winning shot.',
       },
       {
         label: 'The tradeoff',
         body:
-          'Free players bring in nothing, so the first 20 levels have to sell the whole game. And deterministic physics with a known solution means every one of 100 puzzles has to be proven beatable before it ships.',
+          'With no ads behind it, the free world has to sell the unlock on its own, and the extras have to stay optional. And deterministic physics with a known solution means every one of 100 puzzles has to be proven beatable before it ships.',
       },
       {
         label: 'The result',
         body:
-          'It is live on Google Play, rated for everyone, and plays fully offline.',
+          'It is live on the App Store and Google Play, rated for all ages, and plays fully offline. On iPhone, haptics let you feel each knock and chain reaction.',
       },
     ],
     numbers: [
@@ -260,7 +260,7 @@ export const studies = [
       { value: '20', label: 'Levels free before the one-time unlock' },
       { value: 'Zero', label: 'Ads, energy meters or timers' },
     ],
-    link: { label: 'Get Tiny Tumbles on Google Play', href: 'https://play.google.com/store/apps/details?id=com.tinytumbles.app' },
+    link: { label: 'Get Tiny Tumbles on the App Store', href: 'https://apps.apple.com/us/app/tiny-tumbles/id6824798215' },
   },
   {
     id: 'blindspots-press',

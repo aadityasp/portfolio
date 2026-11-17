@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from 'react'
 import { motion, useInView, useMotionValue, useTransform, animate } from 'framer-motion'
 import Particles from './Particles'
 
-// Aditya's own figure (Nov 2026), not pulled from a usage export.
+// Placeholder floor: Aditya says about 12B in the last month alone (Nov 2026), so the all-time total is higher.
+// Replace with the all-time total from ccusage on his Mac once he sends it.
 const TARGET = 12_000_000_000
 
 export default function Signature() {

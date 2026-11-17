@@ -116,13 +116,15 @@ export const apps = [
     name: 'WriteOff',
     blurb: 'Tells a small-business owner whether an expense is a tax write-off, how much counts, why, and where it goes on Schedule C. Snap a receipt, type it, or connect a bank or card read-only so new charges get checked as they land. A rules engine checked against 1,523 IRS-sourced cases makes every call, and AI only reads the receipt. Meals, travel and gifts always get a question first.',
     stack: ['Expo', 'Fastify', 'Postgres', 'Claude', 'jev'],
-    status: 'On the App Store',
+    status: 'On the App Store and Google Play',
     // The film's problem, verdict and end card, muted; "Watch the product overview" opens it in full with sound.
     cover: { type: 'video', src: '/images/writeoff_demo.mp4', poster: '/images/writeoff_demo_poster.jpg', fallback: 'invoice' },
     // Live on the App Store since 2026-10-06.
     film: { src: '/images/writeoff_film.mp4', seconds: 69.01 },
     links: [
       { label: 'App Store', href: 'https://apps.apple.com/us/app/writeoff-can-i-deduct-it/id6815032980' },
+      // Google Play listing (Appana Labs) read 2026-11-17, updated there 2026-11-04.
+      { label: 'Google Play', href: 'https://play.google.com/store/apps/details?id=com.appanaventures.writeoff' },
       { label: 'Website', href: 'https://writeoff-app-beta.vercel.app' },
     ],
   },
@@ -211,14 +213,14 @@ export const apps = [
   {
     id: 'tinytumbles',
     name: 'Tiny Tumbles: Marble Puzzles',
-    // Google Play listing and tiny-tumbles.vercel.app, read 2026-11-17. The iPhone listing could not
-    // be confirmed, so only the Play link is shown.
-    blurb: 'Cozy physics puzzle game: pull back, fling a marble and topple toy towers without knocking over the little lantern. 100 puzzles across five worlds, every one tested to be beatable, and the same shot always plays out the same way. First world free, then one unlock. No ads, no energy, no timers.',
-    stack: ['Unity', 'Android'],
-    status: 'On Google Play',
+    // App Store listing (Appana Ventures LLC, 4+) and Google Play listing, both read 2026-11-17, plus tiny-tumbles.vercel.app.
+    blurb: 'Cozy physics puzzle game: pull back, fling a marble and topple toy towers without knocking over the little lantern. 100 puzzles across five worlds, every one tested to be beatable, and the same shot always plays out the same way. The first world is free and one unlock opens every world, with no subscription. No ads, no energy, no timers, and it plays fully offline.',
+    stack: ['Unity', 'iOS + Android'],
+    status: 'On the App Store and Google Play',
     // Real footage from the game's site: the title screen, then the five worlds. Muted; no narrated film yet.
     cover: { type: 'video', src: '/images/tinytumbles_demo.mp4', poster: '/images/tinytumbles_demo_poster.jpg', fallback: 'storybook' },
     links: [
+      { label: 'App Store', href: 'https://apps.apple.com/us/app/tiny-tumbles/id6824798215' },
       { label: 'Google Play', href: 'https://play.google.com/store/apps/details?id=com.tinytumbles.app' },
       { label: 'Website', href: 'https://tiny-tumbles.vercel.app' },
     ],
