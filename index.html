@@ -26,6 +26,22 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <!-- Star intro: on every load of the page, never on a deep link, never under
+         reduced motion. Decided here so the first paint is already the night sky
+         and the Earth imagery is on its way before the app bundle parses. -->
+    <script>
+      try {
+        if (!location.hash && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          document.documentElement.setAttribute('data-intro', '')
+          window.__introEarth = ['/intro/earth-' + (innerWidth < 700 ? '2k' : '4k') + '.jpg'].map(function (src) {
+            var img = new Image()
+            img.src = src
+            return img
+          })
+        }
+      } catch (e) {}
+    </script>
+    <style>html[data-intro] body { background: #191510; }</style>
   </head>
   <body>
     <div id="root"></div>

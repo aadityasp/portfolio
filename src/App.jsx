@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import Lenis from 'lenis'
 import { MotionConfig, motion, useScroll, useSpring } from 'framer-motion'
 import Nav from './components/Nav'
@@ -12,6 +12,7 @@ import Signature from './components/Signature'
 import Contact from './components/Contact'
 import DecisionLayer from './components/DecisionLayer'
 import FilmLayer, { filmFor } from './components/FilmLayer'
+import StarIntro from './components/StarIntro'
 import { initTracking } from './lib/track'
 import { LayerProvider, useLayer } from './lib/layer'
 import { setLenis } from './lib/scroll'
@@ -48,6 +49,11 @@ function Layers() {
 export default function App() {
   useEffect(() => { initTracking() }, [])
 
+  // The star intro: index.html decides before first paint whether this visit
+  // gets one and marks <html data-intro>. 'playing' -> 'reveal' (the screen is
+  // all paper, the hero starts its entrance) -> 'done' (overlay unmounted).
+  const [intro, setIntro] = useState(() => (document.documentElement.hasAttribute('data-intro') ? 'playing' : 'off'))
+
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
@@ -81,7 +87,8 @@ export default function App() {
             <ScrollProgress />
             <Nav />
             <main>
-              <Hero />
+              {/* Remounted at the reveal so its entrance plays as the intro lifts. */}
+              <Hero key={intro === 'playing' ? 'held' : 'live'} />
               <Marquee />
               <Projects />
               <Timeline />
@@ -92,6 +99,9 @@ export default function App() {
             </main>
           </Page>
           <Layers />
+          {(intro === 'playing' || intro === 'reveal') && (
+            <StarIntro onReveal={() => setIntro('reveal')} onDone={() => setIntro('done')} />
+          )}
         </div>
       </LayerProvider>
     </MotionConfig>
