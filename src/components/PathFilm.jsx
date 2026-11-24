@@ -1,3 +1,4 @@
+import { useRef } from 'react'
 import { motion } from 'framer-motion'
 import { ChevronRight } from 'lucide-react'
 import { story } from '../data/story'
@@ -18,7 +19,8 @@ import Transcript from './Transcript'
  */
 export default function PathFilm() {
   const { openLayer } = useLayer()
-  const open = (source, t = 0) => openLayer('film', 'story', { source, t })
+  const coverRef = useRef(null)
+  const open = (source, t = 0) => openLayer('film', 'story', { source, t, origin: source === 'card' ? coverRef.current : null })
 
   return (
     <>
@@ -30,7 +32,7 @@ export default function PathFilm() {
           className="group relative bg-paper2 border border-line rounded-2xl overflow-hidden shadow-[0_18px_50px_rgba(25,21,16,0.12)]"
         >
           {/* The cover is clickable but not a tab stop; the credit line below is the control. */}
-          <div className="aspect-video overflow-hidden border-b border-line cursor-pointer" onClick={() => open('card')} aria-hidden>
+          <div ref={coverRef} className="aspect-video overflow-hidden border-b border-line cursor-pointer" onClick={() => open('card')} aria-hidden>
             <img
               src={story.poster} width="1280" height="720" alt="" loading="lazy" decoding="async"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"

@@ -1,4 +1,4 @@
-import { motion, useScroll, useSpring } from 'framer-motion'
+import { motion, useScroll, useSpring, useTransform } from 'framer-motion'
 import { useRef, useState } from 'react'
 import { experience, education, certs, moreCerts } from '../data/profile'
 import PathFilm from './PathFilm'
@@ -6,19 +6,33 @@ import Reveal from './Reveal'
 
 const ease = [0.22, 1, 0.36, 1]
 
+// Each entry inks in as the rail reaches it: the year slides in, the dot pops
+// onto the rail, then the points and tags follow one after another.
+const inkIn = { once: true, margin: '-12% 0px -12% 0px' }
+const rows = { hidden: {}, show: { transition: { staggerChildren: 0.06, delayChildren: 0.15 } } }
+const row = { hidden: { opacity: 0, x: -10 }, show: { opacity: 1, x: 0, transition: { duration: 0.45, ease } } }
+const tag = { hidden: { opacity: 0, scale: 0.85 }, show: { opacity: 1, scale: 1, transition: { duration: 0.3, ease } } }
+
 function Entry({ e, isFirst, showChapter }) {
   return (
     <div className="relative pl-[84px] sm:pl-[200px] pb-14 sm:pb-20">
       {/* year, left of the rail */}
-      <div className="absolute left-0 top-0 w-[60px] sm:w-[150px] text-right pr-3 sm:pr-8">
+      <motion.div
+        initial={{ opacity: 0, x: -14 }} whileInView={{ opacity: 1, x: 0 }} viewport={inkIn} transition={{ duration: 0.5, ease }}
+        className="absolute left-0 top-0 w-[60px] sm:w-[150px] text-right pr-3 sm:pr-8"
+      >
         <span className="font-mono text-xl sm:text-4xl font-medium text-ink tabular-nums">{e.year}</span>
         {e.current && (
           <span className="hidden sm:block font-mono text-[10px] uppercase tracking-[0.15em] text-accent mt-1">Now</span>
         )}
-      </div>
+      </motion.div>
 
       {/* dot on the rail */}
       <span className="absolute left-[64px] sm:left-[168px] top-1.5 -translate-x-1/2 z-10">
+       <motion.span
+         className="block" initial={{ scale: 0 }} whileInView={{ scale: 1 }} viewport={inkIn}
+         transition={{ type: 'spring', stiffness: 420, damping: 16, delay: 0.05 }}
+       >
         {e.current ? (
           <span className="relative flex w-3.5 h-3.5">
             <span className="absolute inline-flex w-full h-full rounded-full bg-accent animate-pulseDot" />
@@ -27,6 +41,7 @@ function Entry({ e, isFirst, showChapter }) {
         ) : (
           <span className="block w-3 h-3 rounded-full bg-paper border-2 border-soft ring-4 ring-paper" />
         )}
+       </motion.span>
       </span>
 
       <motion.div
@@ -47,19 +62,19 @@ function Entry({ e, isFirst, showChapter }) {
             <p className="font-mono text-xs text-soft">{e.company} &middot; {e.location} &middot; {e.range}</p>
           </div>
         </div>
-        <ul className="mt-4 space-y-1.5 text-soft text-[15px] leading-relaxed">
+        <motion.ul variants={rows} initial="hidden" whileInView="show" viewport={inkIn} className="mt-4 space-y-1.5 text-soft text-[15px] leading-relaxed">
           {e.points.map((pt) => (
-            <li key={pt} className="flex gap-2.5">
+            <motion.li key={pt} variants={row} className="flex gap-2.5">
               <span className="text-accent mt-2 w-1 h-1 rounded-full bg-accent shrink-0" />
               <span>{pt}</span>
-            </li>
+            </motion.li>
           ))}
-        </ul>
-        <div className="flex flex-wrap gap-1.5 mt-4">
+        </motion.ul>
+        <motion.div variants={rows} initial="hidden" whileInView="show" viewport={inkIn} className="flex flex-wrap gap-1.5 mt-4">
           {e.tags.map((t) => (
-            <span key={t} className="font-mono text-[11px] text-soft border border-line rounded-full px-2.5 py-1">{t}</span>
+            <motion.span key={t} variants={tag} className="font-mono text-[11px] text-soft border border-line rounded-full px-2.5 py-1">{t}</motion.span>
           ))}
-        </div>
+        </motion.div>
       </motion.div>
     </div>
   )
@@ -69,6 +84,9 @@ export default function Timeline() {
   const ref = useRef(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start center', 'end end'] })
   const fill = useSpring(scrollYProgress, { stiffness: 120, damping: 30 })
+  // The pen at the end of the line: it rides the tip of the fill and lifts off at either end.
+  const tipTop = useTransform(fill, (v) => `${v * 100}%`)
+  const tipOpacity = useTransform(fill, [0, 0.02, 0.97, 1], [0, 1, 1, 0])
   const [certsExpanded, setCertsExpanded] = useState(false)
 
   let prevChapter = null
@@ -98,6 +116,10 @@ export default function Timeline() {
           <motion.div
             style={{ scaleY: fill }}
             className="absolute top-1 left-[64px] sm:left-[168px] w-px h-full bg-accent origin-top"
+          />
+          <motion.span
+            aria-hidden style={{ top: tipTop, opacity: tipOpacity }}
+            className="absolute left-[64px] sm:left-[168px] mt-1 -ml-[3.5px] -translate-y-1/2 w-[7px] h-[7px] rounded-full bg-accent shadow-[0_0_0_4px_rgba(39,66,214,0.16),0_0_14px_rgba(39,66,214,0.7)] motion-reduce:hidden"
           />
           {experience.map((e, i) => {
             const showChapter = e.chapter !== prevChapter

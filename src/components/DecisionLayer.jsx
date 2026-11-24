@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowUpRight, X } from 'lucide-react'
 import { decisionsFor } from '../data/decisions'
 import { getLenis } from '../lib/scroll'
+import { useMorph } from '../lib/morph'
 import { featured, apps } from '../data/projects'
 
 const allProjects = [...featured, ...apps]
@@ -114,6 +115,9 @@ export default function DecisionLayer({ projectId, onClose }) {
   const studies = decisionsFor(projectId)
   const open = Boolean(project && studies.length)
   const closeRef = useRef(null)
+  const sheetRef = useRef(null)
+  // The sheet grows out of the card that opened it and folds back into it.
+  const morph = useMorph(open, sheetRef)
 
   useEffect(() => {
     if (!open) return
@@ -137,19 +141,19 @@ export default function DecisionLayer({ projectId, onClose }) {
   return (
     <AnimatePresence>
       {open && (
-        <motion.div
-          key="decision-layer"
-          className="fixed inset-0 z-[60] flex items-end sm:items-center justify-center sm:p-6"
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.18 }}
-        >
-          <div className="absolute inset-0 bg-ink/40 backdrop-blur-sm" onClick={onClose} aria-hidden />
+        <motion.div key="decision-layer" className="fixed inset-0 z-[60] flex items-end sm:items-center justify-center sm:p-6" initial={{ opacity: 1 }} animate={{ opacity: 1 }} exit={{ opacity: 1 }}>
           <motion.div
+            className="absolute inset-0 bg-ink/40 backdrop-blur-sm" onClick={onClose} aria-hidden
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }}
+          />
+          <motion.div
+            ref={sheetRef}
             role="dialog" aria-modal="true" aria-labelledby="decision-title"
             data-lenis-prevent
-            initial={{ y: 28, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 20, opacity: 0 }}
-            transition={{ type: 'spring', stiffness: 320, damping: 30 }}
+            style={morph.style} variants={morph.variants} exit="exit"
             className="relative w-full sm:max-w-3xl max-h-[92vh] sm:max-h-[88vh] overflow-y-auto bg-paper border border-line rounded-t-3xl sm:rounded-3xl shadow-2xl"
           >
+           <motion.div style={{ opacity: morph.content }}>
             <div className="sticky top-0 z-10 flex items-center justify-between gap-4 px-6 sm:px-9 py-4 bg-paper/95 backdrop-blur border-b border-line">
               <p className="eyebrow text-accent">Case study · {project.name}</p>
               <button
@@ -197,6 +201,7 @@ export default function DecisionLayer({ projectId, onClose }) {
                 </article>
               ))}
             </div>
+           </motion.div>
           </motion.div>
         </motion.div>
       )}

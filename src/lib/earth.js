@@ -5,6 +5,9 @@
 const TAN_FOV = Math.tan((22 * Math.PI) / 180) // half the vertical field of view
 const RAD = Math.PI / 180
 
+// The globe's radius on screen, as a share of half the canvas height, from `altitude` Earth radii up.
+export const limbRadius = (altitude) => 1 / Math.sqrt((1 + altitude) ** 2 - 1) / TAN_FOV
+
 const VERT = 'attribute vec2 p; void main() { gl_Position = vec4(p, 0.0, 1.0); }'
 
 const FRAG = `

@@ -72,3 +72,21 @@ body::before {
 @media (prefers-reduced-motion: reduce) {
   * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; scroll-behavior: auto; }
 }
+
+/* The light that follows the pointer across a project cover (set by the card). */
+.cover-glare {
+  background: radial-gradient(340px circle at var(--gx, 50%) var(--gy, 50%), rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 65%);
+}
+@media (hover: none), (prefers-reduced-motion: reduce) { .cover-glare { display: none; } }
+
+/* A card the command palette just scrolled to. */
+@keyframes cardFlash {
+  0%, 55% { box-shadow: 0 0 0 3px #2742D6, 0 18px 50px rgba(39, 66, 214, 0.22); }
+  100% { box-shadow: 0 0 0 3px rgba(39, 66, 214, 0), 0 18px 50px rgba(39, 66, 214, 0); }
+}
+.card-flash { animation: cardFlash 1.8s ease-out both; }
+
+/* Orbit.jsx: the open slot breathes so it reads as waiting, not broken. */
+@keyframes orbitSlot { 0%, 100% { box-shadow: 0 0 0 0 rgba(157,176,255,0.55); } 60% { box-shadow: 0 0 0 9px rgba(157,176,255,0); } }
+.orbit-slot { animation: orbitSlot 2.4s ease-out infinite; }
+@media (prefers-reduced-motion: reduce) { .orbit-slot { animation: none; } }

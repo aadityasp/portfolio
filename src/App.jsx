@@ -13,6 +13,7 @@ import Contact from './components/Contact'
 import DecisionLayer from './components/DecisionLayer'
 import FilmLayer, { filmFor } from './components/FilmLayer'
 import StarIntro from './components/StarIntro'
+import CommandPalette from './components/CommandPalette'
 import { initTracking } from './lib/track'
 import { LayerProvider, useLayer } from './lib/layer'
 import { setLenis } from './lib/scroll'
@@ -27,9 +28,9 @@ function ScrollProgress() {
 // click, focus or a Tab, and it leaves the accessibility tree, so the dialog
 // is all there is. (React 18 has no `inert` prop; the attribute's presence,
 // an empty string, is what turns it on.)
-function Page({ children }) {
+function Page({ busy, children }) {
   const { layer } = useLayer()
-  return <div inert={layer ? '' : undefined}>{children}</div>
+  return <div inert={layer || busy ? '' : undefined}>{children}</div>
 }
 
 // The one layer that can sit over the page, mounted once for every door
@@ -79,13 +80,26 @@ export default function App() {
     return () => { cancelAnimationFrame(raf); lenis.destroy(); setLenis(null); document.removeEventListener('click', onClick) }
   }, [])
 
+  // The command palette: Cmd/Ctrl+K anywhere, or "/" when not typing in a field.
+  const [palette, setPalette] = useState(false)
+  useEffect(() => {
+    function onKey(e) {
+      const typing = /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName) || e.target.isContentEditable
+      const combo = (e.metaKey || e.ctrlKey) && !e.altKey && !e.shiftKey && e.key.toLowerCase() === 'k'
+      if (combo) { e.preventDefault(); setPalette((v) => !v) }
+      else if (e.key === '/' && !typing && !e.metaKey && !e.ctrlKey && !e.altKey) { e.preventDefault(); setPalette(true) }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [])
+
   return (
     <MotionConfig reducedMotion="user">
       <LayerProvider>
         <div className="relative">
-          <Page>
+          <Page busy={palette}>
             <ScrollProgress />
-            <Nav />
+            <Nav onSearch={() => setPalette(true)} />
             <main>
               {/* Remounted at the reveal so its entrance plays as the intro lifts. */}
               <Hero key={intro === 'playing' ? 'held' : 'live'} />
@@ -99,6 +113,7 @@ export default function App() {
             </main>
           </Page>
           <Layers />
+          <CommandPalette open={palette} onClose={() => setPalette(false)} />
           {(intro === 'playing' || intro === 'reveal') && (
             <StarIntro onReveal={() => setIntro('reveal')} onDone={() => setIntro('done')} />
           )}

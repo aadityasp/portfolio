@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
+import { Menu, Search, X } from 'lucide-react'
 
 const links = [
   { href: '#work', label: 'Work' },
@@ -9,7 +9,9 @@ const links = [
   { href: '#contact', label: 'Contact' },
 ]
 
-export default function Nav() {
+export default function Nav({ onSearch }) {
+  // The shortcut shown on the Search button: the Command key on Apple devices, Ctrl elsewhere.
+  const mod = typeof navigator !== 'undefined' && /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent) ? '⌘' : 'Ctrl'
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
 
@@ -39,15 +41,27 @@ export default function Nav() {
               {l.label}
             </a>
           ))}
+          <button
+            type="button" onClick={onSearch} aria-label="Search this portfolio" aria-keyshortcuts="Meta+K Control+K"
+            className="group inline-flex items-center gap-2 h-9 pl-3 pr-2 rounded-full border border-line bg-paper/60 text-sm text-soft hover:text-ink hover:border-ink/40 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+          >
+            <Search size={14} /> Search
+            <kbd className="font-mono text-[10px] text-soft border border-line rounded px-1.5 py-0.5 group-hover:border-ink/30">{mod} K</kbd>
+          </button>
           <a href="#contact"
             className="text-sm font-medium rounded-full bg-ink text-paper px-4 py-2 hover:bg-accent transition-colors">
             Say hi
           </a>
         </div>
 
-        <button className="md:hidden p-2 -mr-2 text-ink" onClick={() => setOpen((v) => !v)} aria-label="Menu">
-          {open ? <X size={22} /> : <Menu size={22} />}
-        </button>
+        <div className="md:hidden flex items-center gap-1">
+          <button type="button" className="p-2 text-ink rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent" onClick={onSearch} aria-label="Search this portfolio">
+            <Search size={20} />
+          </button>
+          <button className="p-2 -mr-2 text-ink" onClick={() => setOpen((v) => !v)} aria-label="Menu">
+            {open ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
       </nav>
 
       <AnimatePresence>

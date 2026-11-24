@@ -1,5 +1,5 @@
-import { motion, useScroll, useTransform } from 'framer-motion'
-import { useRef } from 'react'
+import { animate, motion, useScroll, useTransform } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
 import { ArrowDown, Play } from 'lucide-react'
 import { story } from '../data/story'
 import { useLayer } from '../lib/layer'
@@ -14,6 +14,20 @@ const proof = [
   ['3 domains', 'retail · health · fintech'],
 ]
 
+// A proof figure whose numbers count up from zero, once, as the hero arrives.
+// Screen readers get the final text straight away.
+function CountUp({ text, delay = 0 }) {
+  const [shown, setShown] = useState(text)
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const at = (v) => text.replace(/\d+/g, (n) => String(Math.round(Number(n) * v)))
+    setShown(at(0))
+    const run = animate(0, 1, { duration: 1.3, delay, ease: [0.16, 1, 0.3, 1], onUpdate: (v) => setShown(at(v)) })
+    return () => run.stop()
+  }, [text, delay])
+  return <><span aria-hidden className="tabular-nums">{shown}</span><span className="sr-only">{text}</span></>
+}
+
 // The first-screen door to the career film: a small chip pinned to the top
 // right of the portrait, diagonal from the name badge. It is a real link to
 // #story (copy-link and middle-click still deep-link) that opens the player
@@ -25,7 +39,7 @@ function StoryChip() {
     <motion.a
       href="#story" aria-haspopup="dialog"
       aria-label={`My story, a film, ${spoken(story.seconds)}. Music only, no narration. Opens a video player.`}
-      onClick={(e) => { e.preventDefault(); openLayer('film', 'story', { source: 'chip' }) }}
+      onClick={(e) => { e.preventDefault(); openLayer('film', 'story', { source: 'chip', origin: e.currentTarget }) }}
       initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.9, ease }}
       className="group absolute z-10 -top-3 -right-2 sm:-top-4 sm:-right-4 inline-flex items-center gap-2 h-9 pl-[7px] pr-3 rounded-full bg-paper border border-line shadow-[0_10px_30px_rgba(25,21,16,0.12)] after:absolute after:-inset-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
     >
@@ -90,7 +104,7 @@ export default function Hero() {
           >
             {proof.map(([v, l]) => (
               <div key={l}>
-                <div className="display text-2xl font-semibold text-ink leading-none">{v}</div>
+                <div className="display text-2xl font-semibold text-ink leading-none"><CountUp text={v} delay={0.7} /></div>
                 <div className="font-mono text-[11px] text-soft mt-1">{l}</div>
               </div>
             ))}

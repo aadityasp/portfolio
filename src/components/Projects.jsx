@@ -1,5 +1,5 @@
-import { useCallback } from 'react'
-import { motion } from 'framer-motion'
+import { useCallback, useRef } from 'react'
+import { motion, useMotionValue, useSpring } from 'framer-motion'
 import { ArrowUpRight, ScrollText } from 'lucide-react'
 import { featured, apps, research } from '../data/projects'
 import { decisionsFor } from '../data/decisions'
@@ -167,6 +167,31 @@ const SIZE = {
 function Card({ p, size = 'md', onOpenFilm, onOpenDecision }) {
   const s = SIZE[size]
   const tall = size === 'lg'
+  const cardRef = useRef(null)
+  const coverRef = useRef(null)
+  // A film grows out of this card's cover, a case study out of the whole card.
+  const openFilm = () => onOpenFilm(p.id, coverRef.current)
+  const openStudy = () => onOpenDecision(p.id, cardRef.current)
+
+  // Under a mouse the card leans a degree or two toward the pointer and a soft
+  // light follows it across the cover. Touch screens and reduced motion get neither.
+  const spring = { stiffness: 220, damping: 22, mass: 0.6 }
+  const rotateX = useSpring(useMotionValue(0), spring)
+  const rotateY = useSpring(useMotionValue(0), spring)
+  const lean = tall ? 2.2 : 3.4
+  const onPointerMove = (e) => {
+    if (e.pointerType !== 'mouse' || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const r = e.currentTarget.getBoundingClientRect()
+    const fx = (e.clientX - r.left) / r.width, fy = (e.clientY - r.top) / r.height
+    rotateY.set((fx - 0.5) * 2 * lean)
+    rotateX.set((0.5 - fy) * 2 * lean)
+    const c = coverRef.current?.getBoundingClientRect()
+    if (c) {
+      coverRef.current.style.setProperty('--gx', `${e.clientX - c.left}px`)
+      coverRef.current.style.setProperty('--gy', `${e.clientY - c.top}px`)
+    }
+  }
+  const onPointerLeave = () => { rotateX.set(0); rotateY.set(0) }
   const studies = decisionsFor(p.id)
   const minutes = studies.length
     ? readMinutes(studies.flatMap((x) => [x.headline, x.context, ...x.sections.map((sec) => sec.body)]))
@@ -177,21 +202,25 @@ function Card({ p, size = 'md', onOpenFilm, onOpenDecision }) {
       <FilmLine
         label="Watch the product overview" shortLabel="Watch the overview" seconds={p.film.seconds} pad={s.pad} tall={tall}
         ariaLabel={`Watch the ${p.name} product overview, ${spoken(p.film.seconds)}, narrated, with sound`}
-        onPlay={() => onOpenFilm(p.id)}
+        onPlay={openFilm}
       />
     )
     : minutes
-      ? <StudyLine p={p} question={studies[0].headline} minutes={minutes} pad={s.pad} tall={tall} onOpen={onOpenDecision} />
+      ? <StudyLine p={p} question={studies[0].headline} minutes={minutes} pad={s.pad} tall={tall} onOpen={openStudy} />
       : <div aria-hidden />
   return (
     <motion.article
+      ref={cardRef} id={`project-${p.id}`}
       variants={item} whileHover={{ y: s.lift }} transition={{ type: 'spring', stiffness: 300, damping: 24 }}
-      className={`group bg-paper2 border border-line ${s.shell} overflow-hidden grid grid-cols-[minmax(0,1fr)] grid-rows-subgrid row-span-6 gap-0 mb-6`}
+      style={{ rotateX, rotateY, transformPerspective: 1100 }}
+      onPointerMove={onPointerMove} onPointerLeave={onPointerLeave}
+      className={`group scroll-mt-24 bg-paper2 border border-line ${s.shell} overflow-hidden grid grid-cols-[minmax(0,1fr)] grid-rows-subgrid row-span-6 gap-0 mb-6`}
     >
-      <div className="relative aspect-video overflow-hidden border-b border-line">
+      <div ref={coverRef} className="relative aspect-video overflow-hidden border-b border-line">
         <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-[1.03]">
           <Media cover={p.cover} alt={p.name} />
         </div>
+        <div aria-hidden className="cover-glare pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
       </div>
 
       {story}
@@ -205,7 +234,7 @@ function Card({ p, size = 'md', onOpenFilm, onOpenDecision }) {
       <div className={`${s.pad} ${s.blurb}`}>
         {p.pdo ? <PDO pdo={p.pdo} size={size} /> : <p className="text-soft leading-relaxed">{p.blurb}</p>}
         {p.film && minutes > 0 && (
-          <StudyTeaser question={studies[0].headline} minutes={minutes} onOpen={() => onOpenDecision(p.id)} />
+          <StudyTeaser question={studies[0].headline} minutes={minutes} onOpen={openStudy} />
         )}
       </div>
 
@@ -214,7 +243,7 @@ function Card({ p, size = 'md', onOpenFilm, onOpenDecision }) {
       </div>
 
       <div className={s.foot}>
-        <Footer p={p} minutes={minutes} studyHere={false} pad={s.pad} bottom={s.bottom} onOpenDecision={onOpenDecision} />
+        <Footer p={p} minutes={minutes} studyHere={false} pad={s.pad} bottom={s.bottom} onOpenDecision={openStudy} />
       </div>
     </motion.article>
   )
@@ -243,8 +272,8 @@ function Grid({ className, children }) {
 // rendered once in App.jsx; the cards only ask for it to open.
 export default function Projects() {
   const { layer, openLayer } = useLayer()
-  const openFilm = useCallback((id) => openLayer('film', id), [openLayer])
-  const openDecision = useCallback((id) => openLayer('decision', id), [openLayer])
+  const openFilm = useCallback((id, origin) => openLayer('film', id, { origin }), [openLayer])
+  const openDecision = useCallback((id, origin) => openLayer('decision', id, { origin }), [openLayer])
 
   const cards = (list, size) =>
     list.map((p) => <Card key={p.id} p={p} size={size} onOpenFilm={openFilm} onOpenDecision={openDecision} />)

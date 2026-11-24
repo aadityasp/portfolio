@@ -6,6 +6,7 @@ import { story } from '../data/story'
 import { getLenis } from '../lib/scroll'
 import { clock } from '../lib/duration'
 import { mark } from '../lib/track'
+import { useMorph } from '../lib/morph'
 import Transcript from './Transcript'
 
 const allProjects = [...featured, ...apps, ...research]
@@ -48,6 +49,9 @@ export default function FilmLayer({ film, start = 0, gesture = false, onClose })
   const open = Boolean(film)
   const isStory = Boolean(film?.chapters)
   const dialogRef = useRef(null)
+  const frameRef = useRef(null)
+  // The player's frame grows out of the cover (or chip) that opened it and folds back into it.
+  const morph = useMorph(open, frameRef)
   const closeRef = useRef(null)
   const videoRef = useRef(null)
   const playRef = useRef(null)
@@ -187,12 +191,11 @@ export default function FilmLayer({ film, start = 0, gesture = false, onClose })
   return (
     <AnimatePresence>
       {open && (
-        <motion.div
-          key="film-layer"
-          className="fixed inset-0 z-[60]"
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}
-        >
-          <div className="absolute inset-0 bg-ink/85 backdrop-blur-md" aria-hidden />
+        <motion.div key="film-layer" className="fixed inset-0 z-[60]" initial={{ opacity: 1 }} animate={{ opacity: 1 }} exit={{ opacity: 1 }}>
+          <motion.div
+            className="absolute inset-0 bg-ink/85 backdrop-blur-md" aria-hidden
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }}
+          />
           {/* The dialog scrolls inside this box when it is taller than a short viewport. */}
           <div
             className="absolute inset-0 max-h-[100svh] overflow-y-auto flex p-4 sm:p-8"
@@ -202,16 +205,14 @@ export default function FilmLayer({ film, start = 0, gesture = false, onClose })
             {/* Width: as wide as a 16:9 frame that leaves room for the title row and
                 chapter row. A landscape phone has little height, so there the frame
                 takes the screen and the rows scroll into view below it. */}
-            <motion.div
+            <div
               ref={dialogRef}
               role="dialog" aria-modal="true" aria-labelledby="film-title"
-              initial={{ y: 24, opacity: 0, scale: 0.98 }} animate={{ y: 0, opacity: 1, scale: 1 }} exit={{ y: 16, opacity: 0 }}
-              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
               className="relative m-auto w-[min(100%,calc((100svh-14rem)*16/9))] [@media(max-height:520px)]:w-[min(100%,calc((100svh-6.5rem)*16/9))] max-w-5xl"
             >
               <span tabIndex={0} data-guard onFocus={() => toEdge('last')} className={guard} />
 
-              <div className="flex items-center justify-between gap-4 mb-3 sm:mb-4">
+              <motion.div style={{ opacity: morph.content }} className="flex items-center justify-between gap-4 mb-3 sm:mb-4">
                 <p id="film-title" className="min-w-0 truncate font-mono text-[11px] uppercase tracking-[0.18em] text-paper/70">
                   <span className="text-paper">{film.name}</span>
                   <span className="mx-2 text-paper/40">·</span>The film
@@ -227,9 +228,12 @@ export default function FilmLayer({ film, start = 0, gesture = false, onClose })
                 >
                   <X size={16} />
                 </button>
-              </div>
+              </motion.div>
 
-              <div className="relative aspect-video rounded-2xl overflow-hidden bg-black shadow-[0_30px_80px_rgba(0,0,0,0.45)] ring-1 ring-paper/10">
+              <motion.div
+                ref={frameRef} style={morph.style} variants={morph.variants} exit="exit"
+                className="relative aspect-video rounded-2xl overflow-hidden bg-black shadow-[0_30px_80px_rgba(0,0,0,0.45)] ring-1 ring-paper/10"
+              >
                 <video
                   ref={videoRef}
                   src={start ? `${film.src}#t=${start}` : film.src}
@@ -264,8 +268,9 @@ export default function FilmLayer({ film, start = 0, gesture = false, onClose })
                     </button>
                   </div>
                 )}
-              </div>
+              </motion.div>
 
+              <motion.div style={{ opacity: morph.content }}>
               {isStory && (
                 // The end of the film is announced; the visible row below carries the same line.
                 <p className="sr-only" aria-live="polite">{ended ? 'That’s the path, so far.' : ''}</p>
@@ -322,9 +327,10 @@ export default function FilmLayer({ film, start = 0, gesture = false, onClose })
                   </div>
                 </details>
               )}
+              </motion.div>
 
               <span tabIndex={0} data-guard onFocus={() => toEdge('first')} className={guard} />
-            </motion.div>
+            </div>
           </div>
         </motion.div>
       )}

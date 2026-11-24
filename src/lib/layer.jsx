@@ -1,5 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import { mark } from './track'
+import { setOrigin } from './morph'
 
 // The one layer that can sit over the page (a project film, a case study, or
 // the career film) lives in the URL hash, so it is deep-linkable and the
@@ -50,9 +51,11 @@ export function LayerProvider({ children }) {
     }
   }, [])
 
-  // `source` says which door opened the story (chip | card | words) for the tracker.
-  const openLayer = useCallback((kind, id, { t = 0, source } = {}) => {
+  // `source` says which door opened the story (chip | card | words | palette) for the
+  // tracker; `origin` is the element the layer grows out of (see src/lib/morph.js).
+  const openLayer = useCallback((kind, id, { t = 0, source, origin } = {}) => {
     const layer = { kind, id, t }
+    setOrigin(origin)
     window.history.pushState({ layer: kind }, '', hashFor(layer))
     setState({ layer, gesture: true })
     if (id === 'story') mark(`story:open:${source || 'link'}`)
